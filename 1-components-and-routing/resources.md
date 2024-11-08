@@ -13,7 +13,6 @@
    1. [VS Code extension: PreviewJS](https://marketplace.visualstudio.com/items?itemName=zenclabs.previewjs) - Preview your component in VS Code.
    2. [LocatorJS](https://www.locatorjs.com/), A browser extension that allows you to click on a Component in your browser, and open the correct file in your editor.
    3. [CSS Modules](https://marketplace.visualstudio.com/items?itemName=clinyong.vscode-css-modules) - Autocomplete for classes/styles written in CSS Modules
-7.
 
 ## Starter template
 
