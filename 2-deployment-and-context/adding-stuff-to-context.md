@@ -20,6 +20,20 @@ export interface RouterContext {
 }
 ```
 
+### Step 1: Alternativ
+
+Alternativt kan vi tilføje ændre vores `export interface RouterContext` linje, så der tilføjes en form for wildcard, til alle fremtidige tilføjelser.
+
+> [!INFO]
+> Så behøver vi ikke at røre ved denne fil igen.
+
+```js
+// Fil: src/routes/__root.tsx
+export interface RouterContext extends Record<any, any> {
+  supabase: any;
+}
+```
+
 ## Step 2: Rette `App.tsx`
 
 I denne fil skal vi så oprette de værdier vi gerne vil dele på tværs af vores applikation.
