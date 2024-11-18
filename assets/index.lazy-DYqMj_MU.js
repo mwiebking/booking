@@ -1,0 +1,1 @@
+import{n as t,j as e}from"./index-66KSh9fa.js";import{u as r}from"./useRouteContext-RTZm3t69.js";const i=t("/")({component:s});function s(){var n;const o=r({from:"/"});return console.log(o),e.jsxs("div",{children:[e.jsx("div",{children:((n=o.userInfo)==null?void 0:n.name)??"No name"}),e.jsx("h3",{children:"Welcome Home!"})]})}export{i as Route};
