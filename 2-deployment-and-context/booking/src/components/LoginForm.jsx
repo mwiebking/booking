@@ -5,6 +5,7 @@ import { useRouteContext } from "@tanstack/react-router";
 
 export default function LoginForm() {
   const context = useRouteContext({ from: "/login" });
+  const [name, setName] = useState("");
   const [errorMessage, setErrorMessage] = useState(""); // State for error messages
 
   const containerProps = {
@@ -73,6 +74,13 @@ export default function LoginForm() {
     <div>
       <Container className={styles.container} {...containerProps}>
         <form onSubmit={handleLogin} id="login-form">
+          <TextInput
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            label="Name"
+            placeholder="John"
+            name="name"
+          />
           <TextInput label="Email" placeholder="email@gmail.com" name="email" />
           <PasswordInput
             label="Password"
