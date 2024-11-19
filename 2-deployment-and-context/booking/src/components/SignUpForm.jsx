@@ -2,6 +2,8 @@ import { TextInput, PasswordInput, Checkbox, Button, Container } from "@mantine/
 import styles from "./sign-up-form.module.css";
 import { useState } from "react";
 import { useRouteContext } from "@tanstack/react-router";
+import bcrypt from "bcrypt"; // Import bcrypt for hashing
+
 
 export default function SignUpForm() {
   const context = useRouteContext({ from: "/signup" });
@@ -16,20 +18,36 @@ export default function SignUpForm() {
     const lastName = formData.get("lastName");
     const email = formData.get("email");
     const password = formData.get("password");
-    const phoneNumber = formData.get("phoneNumber") || null; // Optional
+    const phoneNumber = formData.get("phoneNumber"); // Optional
     const notifyEmail = formData.get("notifyEmail") === "on";
     const notifyText = formData.get("notifyText") === "on";
   
-    if (!password || password.length < 8) {
-      setErrorMessage("Password must be at least 8 characters long.");
-      return;
-    }
-  
-    setErrorMessage("");
-    setSuccessMessage("");
+    setErrorMessage(""); // Clear any previous error messages
+    setSuccessMessage(""); // Clear any previous success messages
   
     try {
-      // Step 1: Sign up the user using Supabase Auth
+      // Step 1: Check if the email is already registered
+      const { data: existingUser, error: existingUserError } = await context.supabase
+        .from("users")
+        .select("email")
+        .eq("email", email)
+        .single();
+  
+      if (existingUserError && existingUserError.code !== "PGRST116") {
+        console.error("Error checking existing user:", existingUserError.message);
+        setErrorMessage("An error occurred while checking user availability. Please try again.");
+        return;
+      }
+  
+      if (existingUser) {
+        setErrorMessage("This email is already registered. Please log in or use a different email.");
+        return;
+      }
+  
+      // Step 2: Hash the password
+      const hashedPassword = await bcrypt.hash(password, 10);
+  
+      // Step 3: Sign up the user in Supabase Auth
       const { data: authData, error: authError } = await context.supabase.auth.signUp({
         email,
         password,
@@ -41,22 +59,22 @@ export default function SignUpForm() {
         return;
       }
   
-      // Step 2: Insert user details into the `users` table
-      const userEmail = authData.user?.email;
-  
+      // Step 4: Insert user details into the `users` table
       const { data: userData, error: userError } = await context.supabase
         .from("users")
         .insert({
           first_name: firstName,
           last_name: lastName,
-          email: userEmail,
-          phone_number: phoneNumber,
+          email,
+          phone_number: phoneNumber || null,
+          role: "student", // Default role
           email_notifications: notifyEmail,
           sms_notifications: notifyText,
+          password_hash: hashedPassword, // Store the hashed password
         });
   
       if (userError) {
-        console.error("Error saving user details:", userError.details || userError.message);
+        console.error("Error saving user details:", userError.message);
         setErrorMessage("Unable to save user details. Please try again.");
         return;
       }
