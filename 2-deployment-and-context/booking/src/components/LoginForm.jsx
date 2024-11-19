@@ -59,9 +59,9 @@ export default function LoginForm() {
 
       // Redirect based on role
       if (userInfo.role === "teacher") {
-        window.location.href = "/teacher-dashboard";
+        window.location.href = "./dashboard-teacher";
       } else {
-        window.location.href = "/student-dashboard";
+        window.location.href = "./dashboard-student";
       }
     } catch (error) {
       console.error("Unexpected error during login:", error.message);

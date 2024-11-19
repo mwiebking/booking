@@ -7,9 +7,9 @@ export const Route = createLazyFileRoute('/dashboard-student')({
 
 function RouteComponent() {
   return (
-    <Container>
+    <div>
       <h1>Welcome to the Student Dashboard</h1>
       {/* Add other components or features specific to the student dashboard here */}
-    </Container>
+    </div>
   );
 }
