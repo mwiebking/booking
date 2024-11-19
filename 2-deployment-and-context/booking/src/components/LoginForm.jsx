@@ -1,11 +1,10 @@
-import { TextInput, PasswordInput, Button, Container } from "@mantine/core";
+import { PasswordInput, Button, Container, TextInput } from "@mantine/core";
 import styles from "./login-form.module.css";
 import { useState } from "react";
 import { useRouteContext } from "@tanstack/react-router";
 
 export default function LoginForm() {
   const context = useRouteContext({ from: "/login" });
-  const [name, setName] = useState("");
   const [errorMessage, setErrorMessage] = useState(""); // State for error messages
 
   const containerProps = {
@@ -74,18 +73,12 @@ export default function LoginForm() {
     <div>
       <Container className={styles.container} {...containerProps}>
         <form onSubmit={handleLogin} id="login-form">
-          <TextInput
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            label="Name"
-            placeholder="John"
-            name="name"
-          />
-          <TextInput label="Email" placeholder="email@gmail.com" name="email" />
+          <TextInput label="Email" placeholder="email@gmail.com" name="email" required />
           <PasswordInput
             label="Password"
             placeholder="Your password"
             name="password"
+            required
           />
           {errorMessage && (
             <div style={{ color: "red", marginTop: "10px" }}>{errorMessage}</div>
