@@ -16,35 +16,20 @@ export default function SignUpForm() {
     const lastName = formData.get("lastName");
     const email = formData.get("email");
     const password = formData.get("password");
-    const phoneNumber = formData.get("phoneNumber"); // Optional
+    const phoneNumber = formData.get("phoneNumber") || null; // Optional
     const notifyEmail = formData.get("notifyEmail") === "on";
     const notifyText = formData.get("notifyText") === "on";
   
-    setErrorMessage(""); // Clear any previous error messages
-    setSuccessMessage(""); // Clear any previous success messages
+    if (!password || password.length < 8) {
+      setErrorMessage("Password must be at least 8 characters long.");
+      return;
+    }
+  
+    setErrorMessage("");
+    setSuccessMessage("");
   
     try {
-      // Step 1: Check if the email is already registered
-      const { data: existingUser, error: existingUserError } = await context.supabase
-        .from('users')
-        .select('email')
-        .eq('email', email)
-        .single(); // Assuming emails are unique
-  
-      if (existingUserError && existingUserError.code !== 'PGRST116') { 
-        // If an unexpected error occurs during the check (not "user not found")
-        console.error("Error checking existing user:", existingUserError.message);
-        setErrorMessage("An error occurred while checking user availability. Please try again.");
-        return;
-      }
-  
-      // If user already exists
-      if (existingUser) {
-        setErrorMessage("This email is already registered. Please log in or use a different email.");
-        return;
-      }
-  
-      // Step 2: Sign up the user if the email is not already taken
+      // Step 1: Sign up the user using Supabase Auth
       const { data: authData, error: authError } = await context.supabase.auth.signUp({
         email,
         password,
@@ -56,21 +41,22 @@ export default function SignUpForm() {
         return;
       }
   
-      // Step 3: Insert user details into the `users` table if sign-up is successful
+      // Step 2: Insert user details into the `users` table
+      const userEmail = authData.user?.email;
+  
       const { data: userData, error: userError } = await context.supabase
         .from("users")
         .insert({
           first_name: firstName,
           last_name: lastName,
-          email,
-          phone_number: phoneNumber || null, // Optional field
-          status: "student", // Default status
+          email: userEmail,
+          phone_number: phoneNumber,
           email_notifications: notifyEmail,
           sms_notifications: notifyText,
         });
   
       if (userError) {
-        console.error("Error saving user details:", userError.message);
+        console.error("Error saving user details:", userError.details || userError.message);
         setErrorMessage("Unable to save user details. Please try again.");
         return;
       }
@@ -80,7 +66,7 @@ export default function SignUpForm() {
       console.error("Unexpected error during sign-up:", error.message);
       setErrorMessage("An unexpected error occurred. Please try again.");
     }
-  }
+  }  
 
 
   return (
