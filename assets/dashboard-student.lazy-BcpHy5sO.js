@@ -1,1 +1,0 @@
-import{n as e,j as t}from"./index-DM522yLc.js";const r=e("/dashboard-student")({component:o});function o(){return t.jsx(Container,{children:t.jsx("h1",{children:"Welcome to the Student Dashboard"})})}export{r as Route};

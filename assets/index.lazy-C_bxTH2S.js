@@ -1,1 +1,0 @@
-import{n as t,j as e}from"./index-DM522yLc.js";import{u as r}from"./useRouteContext-DmqdXshX.js";const i=t("/")({component:s});function s(){var n;const o=r({from:"/"});return console.log(o),e.jsxs("div",{children:[e.jsx("div",{children:((n=o.userInfo)==null?void 0:n.name)??"No name"}),e.jsx("h3",{children:"Welcome Home!"})]})}export{i as Route};
