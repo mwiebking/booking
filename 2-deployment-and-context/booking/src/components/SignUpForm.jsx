@@ -2,8 +2,6 @@ import { TextInput, PasswordInput, Checkbox, Button, Container } from "@mantine/
 import styles from "./sign-up-form.module.css";
 import { useState } from "react";
 import { useRouteContext } from "@tanstack/react-router";
-import bcrypt from "bcrypt"; // Import bcrypt for hashing
-
 
 export default function SignUpForm() {
   const context = useRouteContext({ from: "/signup" });
@@ -44,10 +42,7 @@ export default function SignUpForm() {
         return;
       }
   
-      // Step 2: Hash the password
-      const hashedPassword = await bcrypt.hash(password, 10);
-  
-      // Step 3: Sign up the user in Supabase Auth
+      // Step 2: Sign up the user in Supabase Auth (password will be automatically hashed)
       const { data: authData, error: authError } = await context.supabase.auth.signUp({
         email,
         password,
@@ -59,7 +54,7 @@ export default function SignUpForm() {
         return;
       }
   
-      // Step 4: Insert user details into the `users` table
+      // Step 3: Insert user details into the `users` table (without password hash)
       const { data: userData, error: userError } = await context.supabase
         .from("users")
         .insert({
@@ -70,7 +65,6 @@ export default function SignUpForm() {
           role: "student", // Default role
           email_notifications: notifyEmail,
           sms_notifications: notifyText,
-          password_hash: hashedPassword, // Store the hashed password
         });
   
       if (userError) {
@@ -84,8 +78,7 @@ export default function SignUpForm() {
       console.error("Unexpected error during sign-up:", error.message);
       setErrorMessage("An unexpected error occurred. Please try again.");
     }
-  }  
-
+  }
 
   return (
     <Container className={styles.container}>

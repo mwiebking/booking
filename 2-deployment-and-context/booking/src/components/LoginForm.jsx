@@ -38,7 +38,7 @@ export default function LoginForm() {
       // Fetch the user's role from the database
       const { data: userDetails, error: userError } = await context.supabase
         .from("users")
-        .select("first_name, last_name, status")
+        .select("first_name, last_name, role")
         .eq("email", email)
         .single();
 
@@ -53,7 +53,7 @@ export default function LoginForm() {
         email,
         firstName: userDetails.first_name,
         lastName: userDetails.last_name,
-        role: userDetails.status,
+        role: userDetails.role,
       };
 
       context.setUserInfo(userInfo);
