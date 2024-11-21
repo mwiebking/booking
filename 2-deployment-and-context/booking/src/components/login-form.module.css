@@ -1,3 +1,68 @@
 .container {
-  padding: 50px;
+  padding: 40px;
+  width: 500px;
+  border: 1.7px rgba(128, 128, 128, 0.485) solid;
+  border-radius: 20px;
+  background-color: white !important;
+}
+
+h1 {
+  text-align: center;
+  padding-right: 350px;
+  color: rgba(0, 0, 0, 0.721);
+}
+
+.LoginButton {
+  margin-top: 20px;
+  background-color: #1098ad;
+  width: 400px;
+  border-radius: 20px;
+}
+
+.LoginButton:hover {
+  background-color: #1098ad;
+}
+
+.PasswordInput {
+  margin-top: 20px;
+  border-radius: 20px;
+  border: solid 1.7px rgba(128, 128, 128, 0.485);
+}
+
+.TextWrapper {
+  border-radius: 20px;
+  border: solid 1.7px rgba(128, 128, 128, 0.485);
+}
+
+.textLabel {
+  display: none;
+}
+
+.passwordLabel {
+  display: none;
+}
+
+.forgotButton {
+  padding: 0px;
+  background-color: inherit;
+  color: grey;
+  font-size: 1em;
+}
+
+.forgotButton:hover {
+  background-color: inherit;
+  color: grey;
+}
+
+.registerButton {
+  margin-top: 20px;
+  background-color: white;
+  color: #1098ad;
+  width: 100%;
+  border-radius: 20px;
+}
+
+.registerButton:hover {
+  background-color: white;
+  color: #1098ad;
 }
