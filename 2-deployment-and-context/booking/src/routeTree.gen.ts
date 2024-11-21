@@ -18,7 +18,7 @@ import { Route as rootRoute } from './routes/__root'
 
 const SignupLazyImport = createFileRoute('/signup')()
 const LoginLazyImport = createFileRoute('/login')()
-const DashboardStudentLazyImport = createFileRoute('/dashboard-student')()
+const DashboardLazyImport = createFileRoute('/dashboard')()
 const AboutLazyImport = createFileRoute('/about')()
 const IndexLazyImport = createFileRoute('/')()
 
@@ -36,13 +36,11 @@ const LoginLazyRoute = LoginLazyImport.update({
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/login.lazy').then((d) => d.Route))
 
-const DashboardStudentLazyRoute = DashboardStudentLazyImport.update({
-  id: '/dashboard-student',
-  path: '/dashboard-student',
+const DashboardLazyRoute = DashboardLazyImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
   getParentRoute: () => rootRoute,
-} as any).lazy(() =>
-  import('./routes/dashboard-student.lazy').then((d) => d.Route),
-)
+} as any).lazy(() => import('./routes/dashboard.lazy').then((d) => d.Route))
 
 const AboutLazyRoute = AboutLazyImport.update({
   id: '/about',
@@ -74,11 +72,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutLazyImport
       parentRoute: typeof rootRoute
     }
-    '/dashboard-student': {
-      id: '/dashboard-student'
-      path: '/dashboard-student'
-      fullPath: '/dashboard-student'
-      preLoaderRoute: typeof DashboardStudentLazyImport
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardLazyImport
       parentRoute: typeof rootRoute
     }
     '/login': {
@@ -103,7 +101,7 @@ declare module '@tanstack/react-router' {
 export interface FileRoutesByFullPath {
   '/': typeof IndexLazyRoute
   '/about': typeof AboutLazyRoute
-  '/dashboard-student': typeof DashboardStudentLazyRoute
+  '/dashboard': typeof DashboardLazyRoute
   '/login': typeof LoginLazyRoute
   '/signup': typeof SignupLazyRoute
 }
@@ -111,7 +109,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexLazyRoute
   '/about': typeof AboutLazyRoute
-  '/dashboard-student': typeof DashboardStudentLazyRoute
+  '/dashboard': typeof DashboardLazyRoute
   '/login': typeof LoginLazyRoute
   '/signup': typeof SignupLazyRoute
 }
@@ -120,24 +118,24 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexLazyRoute
   '/about': typeof AboutLazyRoute
-  '/dashboard-student': typeof DashboardStudentLazyRoute
+  '/dashboard': typeof DashboardLazyRoute
   '/login': typeof LoginLazyRoute
   '/signup': typeof SignupLazyRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/dashboard-student' | '/login' | '/signup'
+  fullPaths: '/' | '/about' | '/dashboard' | '/login' | '/signup'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/dashboard-student' | '/login' | '/signup'
-  id: '__root__' | '/' | '/about' | '/dashboard-student' | '/login' | '/signup'
+  to: '/' | '/about' | '/dashboard' | '/login' | '/signup'
+  id: '__root__' | '/' | '/about' | '/dashboard' | '/login' | '/signup'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexLazyRoute: typeof IndexLazyRoute
   AboutLazyRoute: typeof AboutLazyRoute
-  DashboardStudentLazyRoute: typeof DashboardStudentLazyRoute
+  DashboardLazyRoute: typeof DashboardLazyRoute
   LoginLazyRoute: typeof LoginLazyRoute
   SignupLazyRoute: typeof SignupLazyRoute
 }
@@ -145,7 +143,7 @@ export interface RootRouteChildren {
 const rootRouteChildren: RootRouteChildren = {
   IndexLazyRoute: IndexLazyRoute,
   AboutLazyRoute: AboutLazyRoute,
-  DashboardStudentLazyRoute: DashboardStudentLazyRoute,
+  DashboardLazyRoute: DashboardLazyRoute,
   LoginLazyRoute: LoginLazyRoute,
   SignupLazyRoute: SignupLazyRoute,
 }
@@ -162,7 +160,7 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/about",
-        "/dashboard-student",
+        "/dashboard",
         "/login",
         "/signup"
       ]
@@ -173,8 +171,8 @@ export const routeTree = rootRoute
     "/about": {
       "filePath": "about.lazy.jsx"
     },
-    "/dashboard-student": {
-      "filePath": "dashboard-student.lazy.jsx"
+    "/dashboard": {
+      "filePath": "dashboard.lazy.jsx"
     },
     "/login": {
       "filePath": "login.lazy.jsx"
