@@ -21,8 +21,10 @@ export function UserButton() {
           </Text>
         </div>
 
-        <IconChevronRight size={14} stroke={1.5} />
-      </Group>
+{/*         <IconChevronRight size={14} stroke={1.5} /> */}     
+ </Group>
     </UnstyledButton>
   );
 }
+
+export default UserButton;
