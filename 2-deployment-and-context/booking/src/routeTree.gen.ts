@@ -17,9 +17,12 @@ import { Route as rootRoute } from './routes/__root'
 // Create Virtual Routes
 
 const SignupLazyImport = createFileRoute('/signup')()
+const MedialabLazyImport = createFileRoute('/medialab')()
+const MakerlabLazyImport = createFileRoute('/makerlab')()
 const LoginLazyImport = createFileRoute('/login')()
 const ForgotpasswordLazyImport = createFileRoute('/forgotpassword')()
 const DashboardLazyImport = createFileRoute('/dashboard')()
+const AuditoriumLazyImport = createFileRoute('/auditorium')()
 const AboutLazyImport = createFileRoute('/about')()
 const IndexLazyImport = createFileRoute('/')()
 
@@ -30,6 +33,18 @@ const SignupLazyRoute = SignupLazyImport.update({
   path: '/signup',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/signup.lazy').then((d) => d.Route))
+
+const MedialabLazyRoute = MedialabLazyImport.update({
+  id: '/medialab',
+  path: '/medialab',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/medialab.lazy').then((d) => d.Route))
+
+const MakerlabLazyRoute = MakerlabLazyImport.update({
+  id: '/makerlab',
+  path: '/makerlab',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/makerlab.lazy').then((d) => d.Route))
 
 const LoginLazyRoute = LoginLazyImport.update({
   id: '/login',
@@ -50,6 +65,12 @@ const DashboardLazyRoute = DashboardLazyImport.update({
   path: '/dashboard',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/dashboard.lazy').then((d) => d.Route))
+
+const AuditoriumLazyRoute = AuditoriumLazyImport.update({
+  id: '/auditorium',
+  path: '/auditorium',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/auditorium.lazy').then((d) => d.Route))
 
 const AboutLazyRoute = AboutLazyImport.update({
   id: '/about',
@@ -81,6 +102,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutLazyImport
       parentRoute: typeof rootRoute
     }
+    '/auditorium': {
+      id: '/auditorium'
+      path: '/auditorium'
+      fullPath: '/auditorium'
+      preLoaderRoute: typeof AuditoriumLazyImport
+      parentRoute: typeof rootRoute
+    }
     '/dashboard': {
       id: '/dashboard'
       path: '/dashboard'
@@ -102,6 +130,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginLazyImport
       parentRoute: typeof rootRoute
     }
+    '/makerlab': {
+      id: '/makerlab'
+      path: '/makerlab'
+      fullPath: '/makerlab'
+      preLoaderRoute: typeof MakerlabLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/medialab': {
+      id: '/medialab'
+      path: '/medialab'
+      fullPath: '/medialab'
+      preLoaderRoute: typeof MedialabLazyImport
+      parentRoute: typeof rootRoute
+    }
     '/signup': {
       id: '/signup'
       path: '/signup'
@@ -117,18 +159,24 @@ declare module '@tanstack/react-router' {
 export interface FileRoutesByFullPath {
   '/': typeof IndexLazyRoute
   '/about': typeof AboutLazyRoute
+  '/auditorium': typeof AuditoriumLazyRoute
   '/dashboard': typeof DashboardLazyRoute
   '/forgotpassword': typeof ForgotpasswordLazyRoute
   '/login': typeof LoginLazyRoute
+  '/makerlab': typeof MakerlabLazyRoute
+  '/medialab': typeof MedialabLazyRoute
   '/signup': typeof SignupLazyRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexLazyRoute
   '/about': typeof AboutLazyRoute
+  '/auditorium': typeof AuditoriumLazyRoute
   '/dashboard': typeof DashboardLazyRoute
   '/forgotpassword': typeof ForgotpasswordLazyRoute
   '/login': typeof LoginLazyRoute
+  '/makerlab': typeof MakerlabLazyRoute
+  '/medialab': typeof MedialabLazyRoute
   '/signup': typeof SignupLazyRoute
 }
 
@@ -136,9 +184,12 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexLazyRoute
   '/about': typeof AboutLazyRoute
+  '/auditorium': typeof AuditoriumLazyRoute
   '/dashboard': typeof DashboardLazyRoute
   '/forgotpassword': typeof ForgotpasswordLazyRoute
   '/login': typeof LoginLazyRoute
+  '/makerlab': typeof MakerlabLazyRoute
+  '/medialab': typeof MedialabLazyRoute
   '/signup': typeof SignupLazyRoute
 }
 
@@ -147,19 +198,34 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/auditorium'
     | '/dashboard'
     | '/forgotpassword'
     | '/login'
+    | '/makerlab'
+    | '/medialab'
     | '/signup'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/dashboard' | '/forgotpassword' | '/login' | '/signup'
+  to:
+    | '/'
+    | '/about'
+    | '/auditorium'
+    | '/dashboard'
+    | '/forgotpassword'
+    | '/login'
+    | '/makerlab'
+    | '/medialab'
+    | '/signup'
   id:
     | '__root__'
     | '/'
     | '/about'
+    | '/auditorium'
     | '/dashboard'
     | '/forgotpassword'
     | '/login'
+    | '/makerlab'
+    | '/medialab'
     | '/signup'
   fileRoutesById: FileRoutesById
 }
@@ -167,18 +233,24 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexLazyRoute: typeof IndexLazyRoute
   AboutLazyRoute: typeof AboutLazyRoute
+  AuditoriumLazyRoute: typeof AuditoriumLazyRoute
   DashboardLazyRoute: typeof DashboardLazyRoute
   ForgotpasswordLazyRoute: typeof ForgotpasswordLazyRoute
   LoginLazyRoute: typeof LoginLazyRoute
+  MakerlabLazyRoute: typeof MakerlabLazyRoute
+  MedialabLazyRoute: typeof MedialabLazyRoute
   SignupLazyRoute: typeof SignupLazyRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexLazyRoute: IndexLazyRoute,
   AboutLazyRoute: AboutLazyRoute,
+  AuditoriumLazyRoute: AuditoriumLazyRoute,
   DashboardLazyRoute: DashboardLazyRoute,
   ForgotpasswordLazyRoute: ForgotpasswordLazyRoute,
   LoginLazyRoute: LoginLazyRoute,
+  MakerlabLazyRoute: MakerlabLazyRoute,
+  MedialabLazyRoute: MedialabLazyRoute,
   SignupLazyRoute: SignupLazyRoute,
 }
 
@@ -194,9 +266,12 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/about",
+        "/auditorium",
         "/dashboard",
         "/forgotpassword",
         "/login",
+        "/makerlab",
+        "/medialab",
         "/signup"
       ]
     },
@@ -206,6 +281,9 @@ export const routeTree = rootRoute
     "/about": {
       "filePath": "about.lazy.jsx"
     },
+    "/auditorium": {
+      "filePath": "auditorium.lazy.jsx"
+    },
     "/dashboard": {
       "filePath": "dashboard.lazy.jsx"
     },
@@ -214,6 +292,12 @@ export const routeTree = rootRoute
     },
     "/login": {
       "filePath": "login.lazy.jsx"
+    },
+    "/makerlab": {
+      "filePath": "makerlab.lazy.jsx"
+    },
+    "/medialab": {
+      "filePath": "medialab.lazy.jsx"
     },
     "/signup": {
       "filePath": "signup.lazy.jsx"
