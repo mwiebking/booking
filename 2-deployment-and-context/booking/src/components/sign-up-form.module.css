@@ -1,3 +1,65 @@
 .container {
-    padding: 50px;
-  }
+  padding: 20px;
+  width: 400px;
+  border: 1.7px rgba(128, 128, 128, 0.485) solid;
+  border-radius: 20px;
+  background-color: white !important;
+}
+
+.title {
+  color: rgba(0, 0, 0, 0.721);
+}
+
+.FornavnInput {
+  border-radius: 20px;
+  border: solid 1.7px rgba(128, 128, 128, 0.485);
+}
+
+.EfternavnInput {
+  margin-top: 20px;
+  border-radius: 20px;
+  border: solid 1.7px rgba(128, 128, 128, 0.485);
+}
+
+.EmailInput {
+  margin-top: 20px;
+  border-radius: 20px;
+  border: solid 1.7px rgba(128, 128, 128, 0.485);
+}
+
+.PasswordInput {
+  margin-top: 20px;
+  border-radius: 20px;
+  border: solid 1.7px rgba(128, 128, 128, 0.485);
+}
+
+.FornavnLabel {
+  display: none;
+}
+
+.EfternavnLabel {
+  display: none;
+}
+
+.EmailLabel {
+  display: none;
+}
+
+.PasswordLabel {
+  display: none;
+}
+
+.Checkbox {
+  margin-top: 20px;
+}
+
+.button {
+  margin-top: 20px;
+  background-color: #1098ad;
+  width: 100%;
+  border-radius: 20px;
+}
+
+.button:hover {
+  background-color: #0e8597;
+}
