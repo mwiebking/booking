@@ -1,6 +1,8 @@
-import * as React from 'react';
+import React from 'react';
 import { createLazyFileRoute } from '@tanstack/react-router';
+import { Divider } from '@mantine/core';
 import SendRequestForm from '../components/SendRequestForm';
+import MedialabInfo from '../components/MedialabInfo';
 
 export const Route = createLazyFileRoute('/medialab')({
   component: RouteComponent,
@@ -8,16 +10,28 @@ export const Route = createLazyFileRoute('/medialab')({
 
 function RouteComponent() {
   return (
-    <div style={{ padding: '2rem', maxWidth: '800px', margin: '0 auto' }}>
-      {/* Section for the request form */}
-      <div style={{ marginBottom: '2rem' }}>
-        <SendRequestForm />
+    <div
+      style={{
+        display: 'flex',
+        maxWidth: '1200px',
+        margin: '0 auto',
+        paddingTop: '2rem',
+      }}
+    >
+      {/* Left side */}
+      <div style={{ display: 'flex', gap: '0rem', maxWidth: '1200px', margin: '0 auto' }}>
+      {/* Medialab Info Component - 66% width */}
+      <div style={{ flex: 3 }}>
+        <MedialabInfo />
       </div>
 
-      {/* Placeholder for additional components */}
-      <div>
-        <h2>Other Components Coming Soon</h2>
-        <p>Content for other components will be added here.</p>
+      {/* Vertical Divider */}
+      <Divider orientation="vertical" style={{ height: '100%' }} />
+      </div>
+
+      {/* Send Request Form Component - 33% width */}
+      <div style={{ flex: 2 }}>
+        <SendRequestForm />
       </div>
     </div>
   );

@@ -3,7 +3,7 @@ import { TextInput, Textarea, Button, Stack, Title } from '@mantine/core';
 
 const SendRequestForm = () => {
   return (
-    <div style={{ maxWidth: 400, margin: '0 auto', padding: '2rem' }}>
+    <div style={{ maxWidth: 500, margin: '0 auto', padding: '1rem' }}>
       <Title order={2} style={{ marginBottom: '1rem' }}>
         Send forespørgsel
       </Title>
