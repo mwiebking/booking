@@ -1,10 +1,38 @@
-//import { IconChevronRight } from '@tabler/icons-react';
-import { Avatar, Group, Text, UnstyledButton } from '@mantine/core';
-import classes from './UserButton.module.css';
+import { IconChevronRight } from '@tabler/icons-react';
+import { Avatar, Group, Text, UnstyledButton, Space } from '@mantine/core';
+import { useNavigate } from '@tanstack/react-router';
+import PropTypes from 'prop-types';
 
-export function UserButton() {
+export function UserButton({ active, setActive }) {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    setActive(-1); // Use a unique value (-1) to represent the UserButton being active
+    navigate('/profilepage'); // Navigate to the profile page
+  };
+
   return (
-    <UnstyledButton className={classes.user}>
+    <UnstyledButton
+      onClick={handleClick}
+      style={{
+        display: 'block',
+        width: '100%',
+        padding: 'var(--mantine-spacing-sm)',
+        color: 'white',
+        backgroundColor: active === -1 ? 'var(--mantine-color-dark-4)' : 'transparent', // Active state color
+        transition: 'background-color 0.2s ease',
+      }}
+      onMouseEnter={(e) => {
+        if (active !== -1) {
+          e.currentTarget.style.backgroundColor = 'var(--mantine-color-dark-4)'; // Hover color
+        }
+      }}
+      onMouseLeave={(e) => {
+        if (active !== -1) {
+          e.currentTarget.style.backgroundColor = 'transparent'; // Reset hover color if not active
+        }
+      }}
+    >
       <Group>
         <Avatar
           src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-8.png"
@@ -12,7 +40,7 @@ export function UserButton() {
         />
 
         <div style={{ flex: 1 }}>
-          <Text size="sm" fw={500}>
+          <Text size="sm" fw={600}>
             Harriette Spoonlicker
           </Text>
 
@@ -21,10 +49,16 @@ export function UserButton() {
           </Text>
         </div>
 
-{/*         <IconChevronRight size={14} stroke={1.5} /> */}     
- </Group>
+        <IconChevronRight size={16} stroke={2} />
+      </Group>
+      <Space h="xl" /> {/* space for userbutton to be pushed above tanstack button, to be removed */}
     </UnstyledButton>
   );
 }
+
+UserButton.propTypes = {
+  active: PropTypes.number.isRequired,
+  setActive: PropTypes.func.isRequired,
+};
 
 export default UserButton;

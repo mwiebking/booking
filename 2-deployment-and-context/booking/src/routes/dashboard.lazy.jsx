@@ -1,7 +1,8 @@
 import React from "react";
 import { createLazyFileRoute, useRouter } from "@tanstack/react-router";
-import BasicAppShell from "../components/Navbar"
 import RoomBar from "../components/FindRoomBar"
+import NavbarNested from "../components/NavbarNested.jsx"
+
 
 export const Route = createLazyFileRoute('/dashboard')({
   component: RouteComponent,
@@ -23,7 +24,7 @@ function RouteComponent() {
     <div>
       
       <RoomBar/>
-      <BasicAppShell/>
+      <NavbarNested/>
      {/* <h1>
         Welcome to the {userInfo.role === "teacher" ? "Teacher" : "Student"} Dashboard
       </h1> */}
