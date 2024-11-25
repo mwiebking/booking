@@ -1,16 +1,20 @@
 import React from "react";
 import { createLazyFileRoute, useRouter } from "@tanstack/react-router";
+import NavbarNested from '../components/NavbarNested';
 
 export const Route = createLazyFileRoute('/dashboard')({
   component: RouteComponent,
 });
+
 
 function RouteComponent() {
   const { context } = useRouter();
 
   if (!context || !context.userInfo) {
     // Redirect to login or show a loading state if context is undefined
-    return <div>Loading...</div>;
+    return <div>
+      <NavbarNested/>
+    </div>;
   }
 
   const { userInfo } = context;

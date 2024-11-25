@@ -1,73 +1,89 @@
-/*import {
-  IconAdjustments,
-  IconCalendarStats,
-  IconFileAnalytics,
-  IconGauge,
-  IconLock,
-  IconNotes,
-  IconPresentationAnalytics,
-} from '@tabler/icons-react';*/
-import { Code, Group, ScrollArea } from '@mantine/core';
-//import { LinksGroup } from '../NavbarLinksGroup/NavbarLinksGroup';
-import { UserButton } from './UserButton';
-//import { Logo } from './Logo';
-import classes from './NavbarNested.module.css';
+import { useState } from 'react';
+import { AppShell, NavLink, Box, useMantineTheme } from '@mantine/core';
+import { IconHome2, IconBox, IconCalendarMonth, IconCamera, IconVolume, IconMap, IconBookmark} from '@tabler/icons-react';
+import UserButton from './UserButton';
+import styles from './NavbarNested.module.css';
+import PropTypes from 'prop-types';
 
-const mockdata = [
-  { label: 'Dashboard', icon: IconGauge },
-  {
-    label: 'Market news',
-    icon: IconNotes,
-    initiallyOpened: true,
-    links: [
-      { label: 'Overview', link: '/' },
-      { label: 'Forecasts', link: '/' },
-      { label: 'Outlook', link: '/' },
-      { label: 'Real time', link: '/' },
-    ],
-  },
-  {
-    label: 'Releases',
-    icon: IconCalendarStats,
-    links: [
-      { label: 'Upcoming releases', link: '/' },
-      { label: 'Previous releases', link: '/' },
-      { label: 'Releases schedule', link: '/' },
-    ],
-  },
-  { label: 'Analytics', icon: IconPresentationAnalytics },
-  { label: 'Contracts', icon: IconFileAnalytics },
-  { label: 'Settings', icon: IconAdjustments },
-  {
-    label: 'Security',
-    icon: IconLock,
-    links: [
-      { label: 'Enable 2FA', link: '/' },
-      { label: 'Change password', link: '/' },
-      { label: 'Recovery codes', link: '/' },
-    ],
-  },
+function NavbarContent({ active, setActive }) {
+  const theme = useMantineTheme(); // Access Mantine theme
+
+const data = [
+  { icon: IconHome2, label: 'Dashboard', iconBackgroundColor: theme.colors.green[4], navBackgroundColor: theme.colors.dark[5] },
+  { icon: IconBookmark, label: 'Book lokale', iconBackgroundColor: theme.colors.pink[4], navBackgroundColor: theme.colors.dark[5] },
+  { icon: IconCalendarMonth, label: 'Mine bookninger', iconBackgroundColor: theme.colors.teal[4], navBackgroundColor: theme.colors.dark[5] },
+  { icon: IconMap, label: 'Lokale oversigt', iconBackgroundColor: theme.colors.cyan[4], navBackgroundColor: theme.colors.dark[5] },
+  { icon: IconCamera, label: 'Medialab', iconBackgroundColor: theme.colors.grape[4], navBackgroundColor: theme.colors.dark[5] },
+  { icon: IconBox, label: 'Makerlab', iconBackgroundColor: theme.colors.blue[4], navBackgroundColor: theme.colors.dark[5] },
+  { icon: IconVolume, label: 'Auditorium', iconBackgroundColor: theme.colors.orange[4], navBackgroundColor: theme.colors.dark[5] },
 ];
 
-export function NavbarNested() {
-  const links = mockdata.map((item) => <LinksGroup {...item} key={item.label} />);
 
+  const items = data.map((item, index) => (
+    <NavLink
+    /* href="/dashboard" */
+    key={item.label}
+    active={index === active} // Active state logic
+    label={item.label}
+    leftSection={
+      <div
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '30px',
+        height: '30px',
+        borderRadius: '20%', // rounded corners
+        backgroundColor: item.iconBackgroundColor, // Active background color
+      }}
+    >
+      <item.icon size="1.2rem" stroke={1.5} />
+    </div>}
+    onClick={() => setActive(index)}
+    //this style is from GPT
+    style={{ 
+      backgroundColor: index === active ? item.navBackgroundColor : 'transparent', // Active background color
+      transition: 'background-color 0.3s ease', // Smooth transition for background color
+      color: 'inherit', // Inherit color from parent to avoid default mantine blue for active text/icon
+    }}
+    onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = item.navBackgroundColor)} // Hover background color appears
+    onMouseLeave={(e) => 
+      (e.currentTarget.style.backgroundColor = index === active ? item.navBackgroundColor : 'transparent') // removes hover color
+    }
+    />
+  ));
+  
   return (
-    <nav className={classes.navbar}>
-      <div className={classes.header}>
-        <Group justify="space-between">
-          <Logo style={{ width: 120 }} />
-          <Code fw={700}>v3.1.2</Code>
-        </Group>
-      </div>
+  <Box className={styles.navbar}> {/* Use the navbar style */}
+  <div className={styles.links}>
+    <div className={styles.linksInner}>{items}</div>
+  </div>
+  <div className={styles.footer}>
 
-      <ScrollArea className={classes.links}>
-        <div className={classes.linksInner}>{links}</div>
-      </ScrollArea>
-
-      <div className={classes.footer}>
-        <UserButton />
-      </div>
-    </nav>
+  <UserButton active={active} setActive={setActive}/> {/* Render UserButton in the Navbar */}
+  </div>
+  </Box>
   );
+  }
+
+  NavbarContent.propTypes = {
+    active: PropTypes.number.isRequired,
+    setActive: PropTypes.func.isRequired,
+  };
+
+
+export function BasicAppShell() {
+  const [active, setActive] = useState(0); // Manage active state of navbar links
+
+  return (<AppShell 
+          header={{ height: 35 }} 
+          navbar={{ width: 300, breakpoint: 'xs' }} 
+          >
+      <AppShell.Navbar p="sm" style={{ backgroundColor: '#2C2E33'}}>
+        <NavbarContent active={active} setActive={setActive} /> {/* Pass active and setActive to NavbarContent */}
+      </AppShell.Navbar>
+    </AppShell>);
 }
+
+export default BasicAppShell;
+
