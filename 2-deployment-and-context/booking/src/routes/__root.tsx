@@ -5,6 +5,7 @@ import {
   Outlet,
 } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/router-devtools";
+import Layout from "../components/Layout";
 
 export interface RouterContext extends Record<any, any> {
   supabase: any;
@@ -15,8 +16,10 @@ export const Route = createRootRouteWithContext<RouterContext>()({
 });
 
 function RootRouteWithLayout() {
+  const excludedRoutes = ["/login", "/signup", "/forgotpassword"];
+
   return (
-    <>
+    <Layout excludedRoutes={excludedRoutes}>
       <div>
         <Link to="/">Home</Link>
         <Link to="/about">About</Link>
@@ -27,6 +30,6 @@ function RootRouteWithLayout() {
       <hr />
       <Outlet />
       <TanStackRouterDevtools />
-    </>
+    </Layout>
   );
 }
