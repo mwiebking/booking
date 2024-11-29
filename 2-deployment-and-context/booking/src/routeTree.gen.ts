@@ -17,6 +17,7 @@ import { Route as rootRoute } from './routes/__root'
 // Create Virtual Routes
 
 const SignupLazyImport = createFileRoute('/signup')()
+const OversigtLazyImport = createFileRoute('/oversigt')()
 const MedialabLazyImport = createFileRoute('/medialab')()
 const MakerlabLazyImport = createFileRoute('/makerlab')()
 const LoginLazyImport = createFileRoute('/login')()
@@ -33,6 +34,12 @@ const SignupLazyRoute = SignupLazyImport.update({
   path: '/signup',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/signup.lazy').then((d) => d.Route))
+
+const OversigtLazyRoute = OversigtLazyImport.update({
+  id: '/oversigt',
+  path: '/oversigt',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/oversigt.lazy').then((d) => d.Route))
 
 const MedialabLazyRoute = MedialabLazyImport.update({
   id: '/medialab',
@@ -144,6 +151,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MedialabLazyImport
       parentRoute: typeof rootRoute
     }
+    '/oversigt': {
+      id: '/oversigt'
+      path: '/oversigt'
+      fullPath: '/oversigt'
+      preLoaderRoute: typeof OversigtLazyImport
+      parentRoute: typeof rootRoute
+    }
     '/signup': {
       id: '/signup'
       path: '/signup'
@@ -165,6 +179,7 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginLazyRoute
   '/makerlab': typeof MakerlabLazyRoute
   '/medialab': typeof MedialabLazyRoute
+  '/oversigt': typeof OversigtLazyRoute
   '/signup': typeof SignupLazyRoute
 }
 
@@ -177,6 +192,7 @@ export interface FileRoutesByTo {
   '/login': typeof LoginLazyRoute
   '/makerlab': typeof MakerlabLazyRoute
   '/medialab': typeof MedialabLazyRoute
+  '/oversigt': typeof OversigtLazyRoute
   '/signup': typeof SignupLazyRoute
 }
 
@@ -190,6 +206,7 @@ export interface FileRoutesById {
   '/login': typeof LoginLazyRoute
   '/makerlab': typeof MakerlabLazyRoute
   '/medialab': typeof MedialabLazyRoute
+  '/oversigt': typeof OversigtLazyRoute
   '/signup': typeof SignupLazyRoute
 }
 
@@ -204,6 +221,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/makerlab'
     | '/medialab'
+    | '/oversigt'
     | '/signup'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -215,6 +233,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/makerlab'
     | '/medialab'
+    | '/oversigt'
     | '/signup'
   id:
     | '__root__'
@@ -226,6 +245,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/makerlab'
     | '/medialab'
+    | '/oversigt'
     | '/signup'
   fileRoutesById: FileRoutesById
 }
@@ -239,6 +259,7 @@ export interface RootRouteChildren {
   LoginLazyRoute: typeof LoginLazyRoute
   MakerlabLazyRoute: typeof MakerlabLazyRoute
   MedialabLazyRoute: typeof MedialabLazyRoute
+  OversigtLazyRoute: typeof OversigtLazyRoute
   SignupLazyRoute: typeof SignupLazyRoute
 }
 
@@ -251,6 +272,7 @@ const rootRouteChildren: RootRouteChildren = {
   LoginLazyRoute: LoginLazyRoute,
   MakerlabLazyRoute: MakerlabLazyRoute,
   MedialabLazyRoute: MedialabLazyRoute,
+  OversigtLazyRoute: OversigtLazyRoute,
   SignupLazyRoute: SignupLazyRoute,
 }
 
@@ -272,6 +294,7 @@ export const routeTree = rootRoute
         "/login",
         "/makerlab",
         "/medialab",
+        "/oversigt",
         "/signup"
       ]
     },
@@ -298,6 +321,9 @@ export const routeTree = rootRoute
     },
     "/medialab": {
       "filePath": "medialab.lazy.jsx"
+    },
+    "/oversigt": {
+      "filePath": "oversigt.lazy.jsx"
     },
     "/signup": {
       "filePath": "signup.lazy.jsx"
