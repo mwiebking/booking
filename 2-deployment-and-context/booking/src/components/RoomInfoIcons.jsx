@@ -1,6 +1,6 @@
 import React from 'react';
 import { Group, Text } from '@mantine/core';
-import { IconUser, IconDeviceDesktop, IconChalkboard } from '@tabler/icons-react';
+import { PersonIcon, DesktopIcon, Pencil2Icon } from '@radix-ui/react-icons';
 
 const RoomIfnoIcons = () => {
   return (
@@ -18,19 +18,19 @@ const RoomIfnoIcons = () => {
       <Group gap="xl" align="center">
         {/* Number of people */}
         <Group gap="xs" align="center"> {/* Smaller gap between icon and text */}
-          <IconUser size={20} />
+          <PersonIcon size={20} />
           <Text>2-8 pers.</Text>
         </Group>
 
         {/* Screen */}
         <Group gap="xs" align="center"> {/* Smaller gap between icon and text */}
-          <IconDeviceDesktop size={20} />
+          <DesktopIcon size={20} />
           <Text>Skærm</Text>
         </Group>
 
         {/* Chalkboard */}
         <Group gap="xs" align="center"> {/* Smaller gap between icon and text */}
-          <IconChalkboard size={20} />
+          <Pencil2Icon size={20} />
           <Text>Tavle</Text>
         </Group>
       </Group>
