@@ -1,15 +1,13 @@
-import React from "react";
-import { createLazyFileRoute, useRouter } from "@tanstack/react-router";
-import RoomBar from "../components/FindRoomBar"
-import NavbarNested from "../components/NavbarNested.jsx"
+import React from 'react'
+import { createLazyFileRoute, useRouter } from '@tanstack/react-router'
+import RoomBar from '../components/FindRoomBar.jsx'
 
-
-export const Route = createLazyFileRoute('/dashboard')({
+export const Route = createLazyFileRoute('/_layout/dashboard')({
   component: RouteComponent,
-});
+})
 
 function RouteComponent() {
- /* const { context } = useRouter();
+  /* const { context } = useRouter();
 
   if (!context || !context.userInfo) {
     // Redirect to login or show a loading state if context is undefined
@@ -22,10 +20,8 @@ function RouteComponent() {
 
   return (
     <div>
-      
-      <RoomBar/>
-      <NavbarNested/>
-     {/* <h1>
+      <RoomBar />
+      {/* <h1>
         Welcome to the {userInfo.role === "teacher" ? "Teacher" : "Student"} Dashboard
       </h1> */}
       {/* Role-specific content */}
@@ -35,5 +31,5 @@ function RouteComponent() {
         <p>Here is the student-specific content.</p>
       )*/}
     </div>
-  );
+  )
 }

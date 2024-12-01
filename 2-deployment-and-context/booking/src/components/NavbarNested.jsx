@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { AppShell, NavLink, Box, useMantineTheme } from '@mantine/core';
-import { IconHome2, IconBox, IconCalendarMonth, IconCamera, IconVolume, IconMap, IconBookmark} from '@tabler/icons-react';
+import { HomeIcon, BookmarkIcon, CalendarIcon, SewingPinFilledIcon, CameraIcon, CubeIcon, c  } from '@radix-ui/react-icons';
 import UserButton from './UserButton';
 import styles from './NavbarNested.module.css';
 import PropTypes from 'prop-types';
@@ -9,13 +9,13 @@ function NavbarContent({ active, setActive }) {
   const theme = useMantineTheme(); // Access Mantine theme
 
 const data = [
-  { icon: IconHome2, label: 'Dashboard', iconBackgroundColor: theme.colors.green[4], navBackgroundColor: theme.colors.dark[5] },
-  { icon: IconBookmark, label: 'Book lokale', iconBackgroundColor: theme.colors.pink[4], navBackgroundColor: theme.colors.dark[5] },
-  { icon: IconCalendarMonth, label: 'Mine bookninger', iconBackgroundColor: theme.colors.teal[4], navBackgroundColor: theme.colors.dark[5] },
-  { icon: IconMap, label: 'Lokale oversigt', iconBackgroundColor: theme.colors.cyan[4], navBackgroundColor: theme.colors.dark[5] },
-  { icon: IconCamera, label: 'Medialab', iconBackgroundColor: theme.colors.grape[4], navBackgroundColor: theme.colors.dark[5] },
-  { icon: IconBox, label: 'Makerlab', iconBackgroundColor: theme.colors.blue[4], navBackgroundColor: theme.colors.dark[5] },
-  { icon: IconVolume, label: 'Auditorium', iconBackgroundColor: theme.colors.orange[4], navBackgroundColor: theme.colors.dark[5] },
+  { icon: HomeIcon, label: 'Dashboard', iconBackgroundColor: theme.colors.green[4], navBackgroundColor: theme.colors.dark[5] },
+  { icon: BookmarkIcon, label: 'Book lokale', iconBackgroundColor: theme.colors.pink[4], navBackgroundColor: theme.colors.dark[5] },
+  { icon: CalendarIcon, label: 'Mine bookninger', iconBackgroundColor: theme.colors.teal[4], navBackgroundColor: theme.colors.dark[5] },
+  { icon: SewingPinFilledIcon, label: 'Lokale oversigt', iconBackgroundColor: theme.colors.cyan[4], navBackgroundColor: theme.colors.dark[5] },
+  { icon: CameraIcon, label: 'Medialab', iconBackgroundColor: theme.colors.grape[4], navBackgroundColor: theme.colors.dark[5] },
+  { icon: CubeIcon, label: 'Makerlab', iconBackgroundColor: theme.colors.blue[4], navBackgroundColor: theme.colors.dark[5] },
+  { icon: SpeakerLoudIcon, label: 'Auditorium', iconBackgroundColor: theme.colors.orange[4], navBackgroundColor: theme.colors.dark[5] },
 ];
 
 

@@ -1,3 +1,31 @@
 .container > * {
   padding: 15px 0px;
 }
+
+* {
+  box-sizing: border-box;
+}
+
+.layout {
+  display: flex;
+  height: 100vh; /* Full viewport height */
+  width: 100%; /* Full viewport width */
+}
+
+.navbar {
+  width: 300px; /* Set a fixed width for the navbar */
+  height: 100%; /* Full height */
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box; /* Include padding/borders in dimensions */
+  background-color: #2c2e33; /* Example background color */
+}
+
+.main-content {
+  flex: 1; /* Take up the remaining space */
+  overflow-y: auto; /* Add scrolling for long content */
+  padding: 20px; /* Optional padding for content */
+}
+
+
+

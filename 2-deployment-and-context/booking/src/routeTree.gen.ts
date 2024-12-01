@@ -13,20 +13,22 @@ import { createFileRoute } from '@tanstack/react-router'
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as LoginImport } from './routes/_login'
+import { Route as LayoutImport } from './routes/_layout'
 
 // Create Virtual Routes
 
 const SignupLazyImport = createFileRoute('/signup')()
-const ProfilepageLazyImport = createFileRoute('/profilepage')()
-const OversigtLazyImport = createFileRoute('/oversigt')()
-const MedialabLazyImport = createFileRoute('/medialab')()
-const MakerlabLazyImport = createFileRoute('/makerlab')()
 const LoginLazyImport = createFileRoute('/login')()
 const ForgotpasswordLazyImport = createFileRoute('/forgotpassword')()
-const DashboardLazyImport = createFileRoute('/dashboard')()
-const AuditoriumLazyImport = createFileRoute('/auditorium')()
-const AboutLazyImport = createFileRoute('/about')()
-const IndexLazyImport = createFileRoute('/')()
+const LayoutIndexLazyImport = createFileRoute('/_layout/')()
+const LayoutProfilepageLazyImport = createFileRoute('/_layout/profilepage')()
+const LayoutOversigtLazyImport = createFileRoute('/_layout/oversigt')()
+const LayoutMedialabLazyImport = createFileRoute('/_layout/medialab')()
+const LayoutMakerlabLazyImport = createFileRoute('/_layout/makerlab')()
+const LayoutDashboardLazyImport = createFileRoute('/_layout/dashboard')()
+const LayoutAuditoriumLazyImport = createFileRoute('/_layout/auditorium')()
+const LayoutAboutLazyImport = createFileRoute('/_layout/about')()
 
 // Create/Update Routes
 
@@ -35,30 +37,6 @@ const SignupLazyRoute = SignupLazyImport.update({
   path: '/signup',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/signup.lazy').then((d) => d.Route))
-
-const ProfilepageLazyRoute = ProfilepageLazyImport.update({
-  id: '/profilepage',
-  path: '/profilepage',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/profilepage.lazy').then((d) => d.Route))
-
-const OversigtLazyRoute = OversigtLazyImport.update({
-  id: '/oversigt',
-  path: '/oversigt',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/oversigt.lazy').then((d) => d.Route))
-
-const MedialabLazyRoute = MedialabLazyImport.update({
-  id: '/medialab',
-  path: '/medialab',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/medialab.lazy').then((d) => d.Route))
-
-const MakerlabLazyRoute = MakerlabLazyImport.update({
-  id: '/makerlab',
-  path: '/makerlab',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/makerlab.lazy').then((d) => d.Route))
 
 const LoginLazyRoute = LoginLazyImport.update({
   id: '/login',
@@ -74,60 +52,92 @@ const ForgotpasswordLazyRoute = ForgotpasswordLazyImport.update({
   import('./routes/forgotpassword.lazy').then((d) => d.Route),
 )
 
-const DashboardLazyRoute = DashboardLazyImport.update({
-  id: '/dashboard',
-  path: '/dashboard',
+const LoginRoute = LoginImport.update({
+  id: '/_login',
   getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/dashboard.lazy').then((d) => d.Route))
+} as any)
 
-const AuditoriumLazyRoute = AuditoriumLazyImport.update({
-  id: '/auditorium',
-  path: '/auditorium',
+const LayoutRoute = LayoutImport.update({
+  id: '/_layout',
   getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/auditorium.lazy').then((d) => d.Route))
+} as any)
 
-const AboutLazyRoute = AboutLazyImport.update({
-  id: '/about',
-  path: '/about',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/about.lazy').then((d) => d.Route))
-
-const IndexLazyRoute = IndexLazyImport.update({
+const LayoutIndexLazyRoute = LayoutIndexLazyImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
+  getParentRoute: () => LayoutRoute,
+} as any).lazy(() => import('./routes/_layout.index.lazy').then((d) => d.Route))
+
+const LayoutProfilepageLazyRoute = LayoutProfilepageLazyImport.update({
+  id: '/profilepage',
+  path: '/profilepage',
+  getParentRoute: () => LayoutRoute,
+} as any).lazy(() =>
+  import('./routes/_layout.profilepage.lazy').then((d) => d.Route),
+)
+
+const LayoutOversigtLazyRoute = LayoutOversigtLazyImport.update({
+  id: '/oversigt',
+  path: '/oversigt',
+  getParentRoute: () => LayoutRoute,
+} as any).lazy(() =>
+  import('./routes/_layout.oversigt.lazy').then((d) => d.Route),
+)
+
+const LayoutMedialabLazyRoute = LayoutMedialabLazyImport.update({
+  id: '/medialab',
+  path: '/medialab',
+  getParentRoute: () => LayoutRoute,
+} as any).lazy(() =>
+  import('./routes/_layout.medialab.lazy').then((d) => d.Route),
+)
+
+const LayoutMakerlabLazyRoute = LayoutMakerlabLazyImport.update({
+  id: '/makerlab',
+  path: '/makerlab',
+  getParentRoute: () => LayoutRoute,
+} as any).lazy(() =>
+  import('./routes/_layout.makerlab.lazy').then((d) => d.Route),
+)
+
+const LayoutDashboardLazyRoute = LayoutDashboardLazyImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => LayoutRoute,
+} as any).lazy(() =>
+  import('./routes/_layout.dashboard.lazy').then((d) => d.Route),
+)
+
+const LayoutAuditoriumLazyRoute = LayoutAuditoriumLazyImport.update({
+  id: '/auditorium',
+  path: '/auditorium',
+  getParentRoute: () => LayoutRoute,
+} as any).lazy(() =>
+  import('./routes/_layout.auditorium.lazy').then((d) => d.Route),
+)
+
+const LayoutAboutLazyRoute = LayoutAboutLazyImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => LayoutRoute,
+} as any).lazy(() => import('./routes/_layout.about.lazy').then((d) => d.Route))
 
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexLazyImport
+    '/_layout': {
+      id: '/_layout'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof LayoutImport
       parentRoute: typeof rootRoute
     }
-    '/about': {
-      id: '/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AboutLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/auditorium': {
-      id: '/auditorium'
-      path: '/auditorium'
-      fullPath: '/auditorium'
-      preLoaderRoute: typeof AuditoriumLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/dashboard': {
-      id: '/dashboard'
-      path: '/dashboard'
-      fullPath: '/dashboard'
-      preLoaderRoute: typeof DashboardLazyImport
+    '/_login': {
+      id: '/_login'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof LoginImport
       parentRoute: typeof rootRoute
     }
     '/forgotpassword': {
@@ -144,34 +154,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginLazyImport
       parentRoute: typeof rootRoute
     }
-    '/makerlab': {
-      id: '/makerlab'
-      path: '/makerlab'
-      fullPath: '/makerlab'
-      preLoaderRoute: typeof MakerlabLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/medialab': {
-      id: '/medialab'
-      path: '/medialab'
-      fullPath: '/medialab'
-      preLoaderRoute: typeof MedialabLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/oversigt': {
-      id: '/oversigt'
-      path: '/oversigt'
-      fullPath: '/oversigt'
-      preLoaderRoute: typeof OversigtLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/profilepage': {
-      id: '/profilepage'
-      path: '/profilepage'
-      fullPath: '/profilepage'
-      preLoaderRoute: typeof ProfilepageLazyImport
-      parentRoute: typeof rootRoute
-    }
     '/signup': {
       id: '/signup'
       path: '/signup'
@@ -179,122 +161,199 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SignupLazyImport
       parentRoute: typeof rootRoute
     }
+    '/_layout/about': {
+      id: '/_layout/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof LayoutAboutLazyImport
+      parentRoute: typeof LayoutImport
+    }
+    '/_layout/auditorium': {
+      id: '/_layout/auditorium'
+      path: '/auditorium'
+      fullPath: '/auditorium'
+      preLoaderRoute: typeof LayoutAuditoriumLazyImport
+      parentRoute: typeof LayoutImport
+    }
+    '/_layout/dashboard': {
+      id: '/_layout/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof LayoutDashboardLazyImport
+      parentRoute: typeof LayoutImport
+    }
+    '/_layout/makerlab': {
+      id: '/_layout/makerlab'
+      path: '/makerlab'
+      fullPath: '/makerlab'
+      preLoaderRoute: typeof LayoutMakerlabLazyImport
+      parentRoute: typeof LayoutImport
+    }
+    '/_layout/medialab': {
+      id: '/_layout/medialab'
+      path: '/medialab'
+      fullPath: '/medialab'
+      preLoaderRoute: typeof LayoutMedialabLazyImport
+      parentRoute: typeof LayoutImport
+    }
+    '/_layout/oversigt': {
+      id: '/_layout/oversigt'
+      path: '/oversigt'
+      fullPath: '/oversigt'
+      preLoaderRoute: typeof LayoutOversigtLazyImport
+      parentRoute: typeof LayoutImport
+    }
+    '/_layout/profilepage': {
+      id: '/_layout/profilepage'
+      path: '/profilepage'
+      fullPath: '/profilepage'
+      preLoaderRoute: typeof LayoutProfilepageLazyImport
+      parentRoute: typeof LayoutImport
+    }
+    '/_layout/': {
+      id: '/_layout/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof LayoutIndexLazyImport
+      parentRoute: typeof LayoutImport
+    }
   }
 }
 
 // Create and export the route tree
 
+interface LayoutRouteChildren {
+  LayoutAboutLazyRoute: typeof LayoutAboutLazyRoute
+  LayoutAuditoriumLazyRoute: typeof LayoutAuditoriumLazyRoute
+  LayoutDashboardLazyRoute: typeof LayoutDashboardLazyRoute
+  LayoutMakerlabLazyRoute: typeof LayoutMakerlabLazyRoute
+  LayoutMedialabLazyRoute: typeof LayoutMedialabLazyRoute
+  LayoutOversigtLazyRoute: typeof LayoutOversigtLazyRoute
+  LayoutProfilepageLazyRoute: typeof LayoutProfilepageLazyRoute
+  LayoutIndexLazyRoute: typeof LayoutIndexLazyRoute
+}
+
+const LayoutRouteChildren: LayoutRouteChildren = {
+  LayoutAboutLazyRoute: LayoutAboutLazyRoute,
+  LayoutAuditoriumLazyRoute: LayoutAuditoriumLazyRoute,
+  LayoutDashboardLazyRoute: LayoutDashboardLazyRoute,
+  LayoutMakerlabLazyRoute: LayoutMakerlabLazyRoute,
+  LayoutMedialabLazyRoute: LayoutMedialabLazyRoute,
+  LayoutOversigtLazyRoute: LayoutOversigtLazyRoute,
+  LayoutProfilepageLazyRoute: LayoutProfilepageLazyRoute,
+  LayoutIndexLazyRoute: LayoutIndexLazyRoute,
+}
+
+const LayoutRouteWithChildren =
+  LayoutRoute._addFileChildren(LayoutRouteChildren)
+
 export interface FileRoutesByFullPath {
-  '/': typeof IndexLazyRoute
-  '/about': typeof AboutLazyRoute
-  '/auditorium': typeof AuditoriumLazyRoute
-  '/dashboard': typeof DashboardLazyRoute
+  '': typeof LoginRoute
   '/forgotpassword': typeof ForgotpasswordLazyRoute
   '/login': typeof LoginLazyRoute
-  '/makerlab': typeof MakerlabLazyRoute
-  '/medialab': typeof MedialabLazyRoute
-  '/oversigt': typeof OversigtLazyRoute
-  '/profilepage': typeof ProfilepageLazyRoute
   '/signup': typeof SignupLazyRoute
+  '/about': typeof LayoutAboutLazyRoute
+  '/auditorium': typeof LayoutAuditoriumLazyRoute
+  '/dashboard': typeof LayoutDashboardLazyRoute
+  '/makerlab': typeof LayoutMakerlabLazyRoute
+  '/medialab': typeof LayoutMedialabLazyRoute
+  '/oversigt': typeof LayoutOversigtLazyRoute
+  '/profilepage': typeof LayoutProfilepageLazyRoute
+  '/': typeof LayoutIndexLazyRoute
 }
 
 export interface FileRoutesByTo {
-  '/': typeof IndexLazyRoute
-  '/about': typeof AboutLazyRoute
-  '/auditorium': typeof AuditoriumLazyRoute
-  '/dashboard': typeof DashboardLazyRoute
+  '': typeof LoginRoute
   '/forgotpassword': typeof ForgotpasswordLazyRoute
   '/login': typeof LoginLazyRoute
-  '/makerlab': typeof MakerlabLazyRoute
-  '/medialab': typeof MedialabLazyRoute
-  '/oversigt': typeof OversigtLazyRoute
-  '/profilepage': typeof ProfilepageLazyRoute
   '/signup': typeof SignupLazyRoute
+  '/about': typeof LayoutAboutLazyRoute
+  '/auditorium': typeof LayoutAuditoriumLazyRoute
+  '/dashboard': typeof LayoutDashboardLazyRoute
+  '/makerlab': typeof LayoutMakerlabLazyRoute
+  '/medialab': typeof LayoutMedialabLazyRoute
+  '/oversigt': typeof LayoutOversigtLazyRoute
+  '/profilepage': typeof LayoutProfilepageLazyRoute
+  '/': typeof LayoutIndexLazyRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
-  '/': typeof IndexLazyRoute
-  '/about': typeof AboutLazyRoute
-  '/auditorium': typeof AuditoriumLazyRoute
-  '/dashboard': typeof DashboardLazyRoute
+  '/_layout': typeof LayoutRouteWithChildren
+  '/_login': typeof LoginRoute
   '/forgotpassword': typeof ForgotpasswordLazyRoute
   '/login': typeof LoginLazyRoute
-  '/makerlab': typeof MakerlabLazyRoute
-  '/medialab': typeof MedialabLazyRoute
-  '/oversigt': typeof OversigtLazyRoute
-  '/profilepage': typeof ProfilepageLazyRoute
   '/signup': typeof SignupLazyRoute
+  '/_layout/about': typeof LayoutAboutLazyRoute
+  '/_layout/auditorium': typeof LayoutAuditoriumLazyRoute
+  '/_layout/dashboard': typeof LayoutDashboardLazyRoute
+  '/_layout/makerlab': typeof LayoutMakerlabLazyRoute
+  '/_layout/medialab': typeof LayoutMedialabLazyRoute
+  '/_layout/oversigt': typeof LayoutOversigtLazyRoute
+  '/_layout/profilepage': typeof LayoutProfilepageLazyRoute
+  '/_layout/': typeof LayoutIndexLazyRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    | '/'
+    | ''
+    | '/forgotpassword'
+    | '/login'
+    | '/signup'
     | '/about'
     | '/auditorium'
     | '/dashboard'
-    | '/forgotpassword'
-    | '/login'
     | '/makerlab'
     | '/medialab'
     | '/oversigt'
     | '/profilepage'
-    | '/signup'
+    | '/'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/'
+    | ''
+    | '/forgotpassword'
+    | '/login'
+    | '/signup'
     | '/about'
     | '/auditorium'
     | '/dashboard'
-    | '/forgotpassword'
-    | '/login'
     | '/makerlab'
     | '/medialab'
     | '/oversigt'
     | '/profilepage'
-    | '/signup'
+    | '/'
   id:
     | '__root__'
-    | '/'
-    | '/about'
-    | '/auditorium'
-    | '/dashboard'
+    | '/_layout'
+    | '/_login'
     | '/forgotpassword'
     | '/login'
-    | '/makerlab'
-    | '/medialab'
-    | '/oversigt'
-    | '/profilepage'
     | '/signup'
+    | '/_layout/about'
+    | '/_layout/auditorium'
+    | '/_layout/dashboard'
+    | '/_layout/makerlab'
+    | '/_layout/medialab'
+    | '/_layout/oversigt'
+    | '/_layout/profilepage'
+    | '/_layout/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
-  IndexLazyRoute: typeof IndexLazyRoute
-  AboutLazyRoute: typeof AboutLazyRoute
-  AuditoriumLazyRoute: typeof AuditoriumLazyRoute
-  DashboardLazyRoute: typeof DashboardLazyRoute
+  LayoutRoute: typeof LayoutRouteWithChildren
+  LoginRoute: typeof LoginRoute
   ForgotpasswordLazyRoute: typeof ForgotpasswordLazyRoute
   LoginLazyRoute: typeof LoginLazyRoute
-  MakerlabLazyRoute: typeof MakerlabLazyRoute
-  MedialabLazyRoute: typeof MedialabLazyRoute
-  OversigtLazyRoute: typeof OversigtLazyRoute
-  ProfilepageLazyRoute: typeof ProfilepageLazyRoute
   SignupLazyRoute: typeof SignupLazyRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexLazyRoute: IndexLazyRoute,
-  AboutLazyRoute: AboutLazyRoute,
-  AuditoriumLazyRoute: AuditoriumLazyRoute,
-  DashboardLazyRoute: DashboardLazyRoute,
+  LayoutRoute: LayoutRouteWithChildren,
+  LoginRoute: LoginRoute,
   ForgotpasswordLazyRoute: ForgotpasswordLazyRoute,
   LoginLazyRoute: LoginLazyRoute,
-  MakerlabLazyRoute: MakerlabLazyRoute,
-  MedialabLazyRoute: MedialabLazyRoute,
-  OversigtLazyRoute: OversigtLazyRoute,
-  ProfilepageLazyRoute: ProfilepageLazyRoute,
   SignupLazyRoute: SignupLazyRoute,
 }
 
@@ -308,30 +367,28 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/",
-        "/about",
-        "/auditorium",
-        "/dashboard",
+        "/_layout",
+        "/_login",
         "/forgotpassword",
         "/login",
-        "/makerlab",
-        "/medialab",
-        "/oversigt",
-        "/profilepage",
         "/signup"
       ]
     },
-    "/": {
-      "filePath": "index.lazy.jsx"
+    "/_layout": {
+      "filePath": "_layout.jsx",
+      "children": [
+        "/_layout/about",
+        "/_layout/auditorium",
+        "/_layout/dashboard",
+        "/_layout/makerlab",
+        "/_layout/medialab",
+        "/_layout/oversigt",
+        "/_layout/profilepage",
+        "/_layout/"
+      ]
     },
-    "/about": {
-      "filePath": "about.lazy.jsx"
-    },
-    "/auditorium": {
-      "filePath": "auditorium.lazy.jsx"
-    },
-    "/dashboard": {
-      "filePath": "dashboard.lazy.jsx"
+    "/_login": {
+      "filePath": "_login.jsx"
     },
     "/forgotpassword": {
       "filePath": "forgotpassword.lazy.jsx"
@@ -339,20 +396,40 @@ export const routeTree = rootRoute
     "/login": {
       "filePath": "login.lazy.jsx"
     },
-    "/makerlab": {
-      "filePath": "makerlab.lazy.jsx"
-    },
-    "/medialab": {
-      "filePath": "medialab.lazy.jsx"
-    },
-    "/oversigt": {
-      "filePath": "oversigt.lazy.jsx"
-    },
-    "/profilepage": {
-      "filePath": "profilepage.lazy.jsx"
-    },
     "/signup": {
       "filePath": "signup.lazy.jsx"
+    },
+    "/_layout/about": {
+      "filePath": "_layout.about.lazy.jsx",
+      "parent": "/_layout"
+    },
+    "/_layout/auditorium": {
+      "filePath": "_layout.auditorium.lazy.jsx",
+      "parent": "/_layout"
+    },
+    "/_layout/dashboard": {
+      "filePath": "_layout.dashboard.lazy.jsx",
+      "parent": "/_layout"
+    },
+    "/_layout/makerlab": {
+      "filePath": "_layout.makerlab.lazy.jsx",
+      "parent": "/_layout"
+    },
+    "/_layout/medialab": {
+      "filePath": "_layout.medialab.lazy.jsx",
+      "parent": "/_layout"
+    },
+    "/_layout/oversigt": {
+      "filePath": "_layout.oversigt.lazy.jsx",
+      "parent": "/_layout"
+    },
+    "/_layout/profilepage": {
+      "filePath": "_layout.profilepage.lazy.jsx",
+      "parent": "/_layout"
+    },
+    "/_layout/": {
+      "filePath": "_layout.index.lazy.jsx",
+      "parent": "/_layout"
     }
   }
 }

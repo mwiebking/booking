@@ -6,12 +6,10 @@ export const Route = createLazyFileRoute('/forgotpassword')({
   component: RouteComponent,
 })
 
-
-
 function RouteComponent() {
   return (
     <div>
-    <ForgotPassword />
-  </div>
+      <ForgotPassword />
+    </div>
   )
 }
