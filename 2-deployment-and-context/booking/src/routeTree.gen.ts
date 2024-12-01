@@ -27,6 +27,7 @@ const LayoutOversigtLazyImport = createFileRoute('/_layout/oversigt')()
 const LayoutMedialabLazyImport = createFileRoute('/_layout/medialab')()
 const LayoutMakerlabLazyImport = createFileRoute('/_layout/makerlab')()
 const LayoutDashboardLazyImport = createFileRoute('/_layout/dashboard')()
+const LayoutBooklokaleLazyImport = createFileRoute('/_layout/booklokale')()
 const LayoutAuditoriumLazyImport = createFileRoute('/_layout/auditorium')()
 const LayoutAboutLazyImport = createFileRoute('/_layout/about')()
 
@@ -108,6 +109,14 @@ const LayoutDashboardLazyRoute = LayoutDashboardLazyImport.update({
   import('./routes/_layout.dashboard.lazy').then((d) => d.Route),
 )
 
+const LayoutBooklokaleLazyRoute = LayoutBooklokaleLazyImport.update({
+  id: '/booklokale',
+  path: '/booklokale',
+  getParentRoute: () => LayoutRoute,
+} as any).lazy(() =>
+  import('./routes/_layout.booklokale.lazy').then((d) => d.Route),
+)
+
 const LayoutAuditoriumLazyRoute = LayoutAuditoriumLazyImport.update({
   id: '/auditorium',
   path: '/auditorium',
@@ -175,6 +184,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutAuditoriumLazyImport
       parentRoute: typeof LayoutImport
     }
+    '/_layout/booklokale': {
+      id: '/_layout/booklokale'
+      path: '/booklokale'
+      fullPath: '/booklokale'
+      preLoaderRoute: typeof LayoutBooklokaleLazyImport
+      parentRoute: typeof LayoutImport
+    }
     '/_layout/dashboard': {
       id: '/_layout/dashboard'
       path: '/dashboard'
@@ -225,6 +241,7 @@ declare module '@tanstack/react-router' {
 interface LayoutRouteChildren {
   LayoutAboutLazyRoute: typeof LayoutAboutLazyRoute
   LayoutAuditoriumLazyRoute: typeof LayoutAuditoriumLazyRoute
+  LayoutBooklokaleLazyRoute: typeof LayoutBooklokaleLazyRoute
   LayoutDashboardLazyRoute: typeof LayoutDashboardLazyRoute
   LayoutMakerlabLazyRoute: typeof LayoutMakerlabLazyRoute
   LayoutMedialabLazyRoute: typeof LayoutMedialabLazyRoute
@@ -236,6 +253,7 @@ interface LayoutRouteChildren {
 const LayoutRouteChildren: LayoutRouteChildren = {
   LayoutAboutLazyRoute: LayoutAboutLazyRoute,
   LayoutAuditoriumLazyRoute: LayoutAuditoriumLazyRoute,
+  LayoutBooklokaleLazyRoute: LayoutBooklokaleLazyRoute,
   LayoutDashboardLazyRoute: LayoutDashboardLazyRoute,
   LayoutMakerlabLazyRoute: LayoutMakerlabLazyRoute,
   LayoutMedialabLazyRoute: LayoutMedialabLazyRoute,
@@ -254,6 +272,7 @@ export interface FileRoutesByFullPath {
   '/signup': typeof SignupLazyRoute
   '/about': typeof LayoutAboutLazyRoute
   '/auditorium': typeof LayoutAuditoriumLazyRoute
+  '/booklokale': typeof LayoutBooklokaleLazyRoute
   '/dashboard': typeof LayoutDashboardLazyRoute
   '/makerlab': typeof LayoutMakerlabLazyRoute
   '/medialab': typeof LayoutMedialabLazyRoute
@@ -269,6 +288,7 @@ export interface FileRoutesByTo {
   '/signup': typeof SignupLazyRoute
   '/about': typeof LayoutAboutLazyRoute
   '/auditorium': typeof LayoutAuditoriumLazyRoute
+  '/booklokale': typeof LayoutBooklokaleLazyRoute
   '/dashboard': typeof LayoutDashboardLazyRoute
   '/makerlab': typeof LayoutMakerlabLazyRoute
   '/medialab': typeof LayoutMedialabLazyRoute
@@ -286,6 +306,7 @@ export interface FileRoutesById {
   '/signup': typeof SignupLazyRoute
   '/_layout/about': typeof LayoutAboutLazyRoute
   '/_layout/auditorium': typeof LayoutAuditoriumLazyRoute
+  '/_layout/booklokale': typeof LayoutBooklokaleLazyRoute
   '/_layout/dashboard': typeof LayoutDashboardLazyRoute
   '/_layout/makerlab': typeof LayoutMakerlabLazyRoute
   '/_layout/medialab': typeof LayoutMedialabLazyRoute
@@ -303,6 +324,7 @@ export interface FileRouteTypes {
     | '/signup'
     | '/about'
     | '/auditorium'
+    | '/booklokale'
     | '/dashboard'
     | '/makerlab'
     | '/medialab'
@@ -317,6 +339,7 @@ export interface FileRouteTypes {
     | '/signup'
     | '/about'
     | '/auditorium'
+    | '/booklokale'
     | '/dashboard'
     | '/makerlab'
     | '/medialab'
@@ -332,6 +355,7 @@ export interface FileRouteTypes {
     | '/signup'
     | '/_layout/about'
     | '/_layout/auditorium'
+    | '/_layout/booklokale'
     | '/_layout/dashboard'
     | '/_layout/makerlab'
     | '/_layout/medialab'
@@ -379,6 +403,7 @@ export const routeTree = rootRoute
       "children": [
         "/_layout/about",
         "/_layout/auditorium",
+        "/_layout/booklokale",
         "/_layout/dashboard",
         "/_layout/makerlab",
         "/_layout/medialab",
@@ -405,6 +430,10 @@ export const routeTree = rootRoute
     },
     "/_layout/auditorium": {
       "filePath": "_layout.auditorium.lazy.jsx",
+      "parent": "/_layout"
+    },
+    "/_layout/booklokale": {
+      "filePath": "_layout.booklokale.lazy.jsx",
       "parent": "/_layout"
     },
     "/_layout/dashboard": {

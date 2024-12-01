@@ -1,4 +1,4 @@
-import { IconChevronRight } from '@tabler/icons-react';
+import { ChevronRightIcon } from '@radix-ui/react-icons';
 import { Avatar, Group, Text, UnstyledButton, Space } from '@mantine/core';
 import { useNavigate } from '@tanstack/react-router';
 import PropTypes from 'prop-types';
@@ -49,7 +49,7 @@ export function UserButton({ active, setActive }) {
           </Text>
         </div>
 
-        <IconChevronRight size={16} stroke={2} />
+        <ChevronRightIcon size={16} stroke={2} />
       </Group>
       <Space h="xl" /> {/* space for userbutton to be pushed above tanstack button, to be removed */}
     </UnstyledButton>
