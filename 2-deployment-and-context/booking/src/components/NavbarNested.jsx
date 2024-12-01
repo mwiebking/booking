@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { AppShell, NavLink, Box, useMantineTheme } from '@mantine/core';
-import { HomeIcon, BookmarkIcon, CalendarIcon, SewingPinFilledIcon, CameraIcon, CubeIcon, c  } from '@radix-ui/react-icons';
+import { HomeIcon, BookmarkIcon, CalendarIcon, SewingPinFilledIcon, CameraIcon, CubeIcon, SpeakerLoudIcon } from '@radix-ui/react-icons';
 import UserButton from './UserButton';
 import styles from './NavbarNested.module.css';
 import PropTypes from 'prop-types';
