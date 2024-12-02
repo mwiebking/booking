@@ -48,7 +48,7 @@ return (
             </Group>
         </Group>
         <Button color="cyan" mt="md" radius="xl" onClick={() => setModalOpened(true)} /* Open modal on click */>
-            Book Her
+            Book 
         </Button>
         </div>
     </Card>

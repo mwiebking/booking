@@ -58,11 +58,37 @@ h1 {
   margin-top: 20px;
   background-color: white;
   color: #1098ad;
-  width: 100%;
+  width: 400px;
+  height: 30px;
   border-radius: 20px;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
+.registerButton1 {
+  margin-top: 20px;
+  background-color: white;
+  color: #1098ad;
+  width: 400px;
+  height: 34.4px;
+  border-radius: 20px;
+  margin-top: 5px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
 
 .registerButton:hover {
   background-color: white;
   color: #1098ad;
+}
+
+.registerButton1:hover {
+  background-color: #1098ad;
+  color: white;
 }

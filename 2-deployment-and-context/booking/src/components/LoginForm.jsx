@@ -1,7 +1,7 @@
 import { PasswordInput, Button, Container, TextInput, Checkbox } from "@mantine/core";
 import { useState } from "react";
 import { useRouteContext } from "@tanstack/react-router";
-import { useRouter } from "@tanstack/react-router"; // <-- Import useRouter for navigation
+import { useRouter, Link } from "@tanstack/react-router"; // <-- Import useRouter for navigation
 import styles from "./login-form.module.css";
 
 export default function LoginForm() {
@@ -56,27 +56,12 @@ export default function LoginForm() {
       context.setUserInfo(userInfo);
 
       // Redirect to the dashboard using the router's navigate function
-      router.navigate("/..dashboard"); // <-- Navigate to the dashboard route
+      router.navigate("../dashboard"); // <-- Navigate to the dashboard route
     } catch (error) {
       console.error("Unexpected error during login:", error.message);
       setErrorMessage("An unexpected error occurred. Please try again.");
     }
   }
-
-  function handleCreateProfile() {
-    // Navigate to the login page
-    router.navigate("../login");
-  }
-
-  function handleForgotPassword() {
-    // Navigate to the forgot password page
-    router.navigate("../forgotpassword");
-  }
-  
-  const handleButtonClick = () => {
-    console.log('Button clicked');
-    // Other logic here...
-  };
   
 
   return (
@@ -88,9 +73,11 @@ export default function LoginForm() {
           <PasswordInput label="Password" placeholder="Adgangskode" classNames={{ input: styles.PasswordInput, label: styles.passwordLabel }} name="password" required />
           {errorMessage && <div style={{ color: "red", marginTop: "10px" }}>{errorMessage}</div>}
           
-          <Button type="button" className={styles.forgotButton} onClick={handleForgotPassword}>
-            Glemt adgangskode?
-          </Button>
+          
+
+          <Link className={styles.forgotButton} to="/forgotpassword">
+          <div> <p style={{ fontWeight: "500" }}>Glemt adgangskode?</p></div>
+          </Link>
           
           <Checkbox label="Husk mig" color="#1098ad" />
           
@@ -98,11 +85,14 @@ export default function LoginForm() {
             LOG IND
           </Button>
           
-          <Button type="button" className={styles.registerButton} onClick={handleCreateProfile}>
-            OPRET PROFIL
-          </Button>
+          
+          
+          <Link className={styles.registerButton} to="/signup">
+          <div className={styles.registerButton1}> <p style={{ fontWeight: "500" }}>OPRET PROFIL</p></div>
+          </Link>
+          
 
-          <button onClick={handleButtonClick}>Click me</button>
+          
 
         </form>
       </Container>
