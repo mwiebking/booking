@@ -22,7 +22,7 @@ const SignupLazyImport = createFileRoute('/signup')()
 const OversigtLazyImport = createFileRoute('/oversigt')()
 const LoginLazyImport = createFileRoute('/login')()
 const ForgotpasswordLazyImport = createFileRoute('/forgotpassword')()
-const LayoutIndexLazyImport = createFileRoute('/_layout/')()
+const IndexLazyImport = createFileRoute('/')()
 const LayoutProfilepageLazyImport = createFileRoute('/_layout/profilepage')()
 const LayoutMinebookingerLazyImport = createFileRoute(
   '/_layout/minebookinger',
@@ -72,11 +72,11 @@ const LayoutRoute = LayoutImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const LayoutIndexLazyRoute = LayoutIndexLazyImport.update({
+const IndexLazyRoute = IndexLazyImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => LayoutRoute,
-} as any).lazy(() => import('./routes/_layout.index.lazy').then((d) => d.Route))
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
 
 const LayoutProfilepageLazyRoute = LayoutProfilepageLazyImport.update({
   id: '/profilepage',
@@ -144,6 +144,13 @@ const LayoutAboutLazyRoute = LayoutAboutLazyImport.update({
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexLazyImport
+      parentRoute: typeof rootRoute
+    }
     '/_layout': {
       id: '/_layout'
       path: ''
@@ -242,13 +249,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutProfilepageLazyImport
       parentRoute: typeof LayoutImport
     }
-    '/_layout/': {
-      id: '/_layout/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof LayoutIndexLazyImport
-      parentRoute: typeof LayoutImport
-    }
   }
 }
 
@@ -263,7 +263,6 @@ interface LayoutRouteChildren {
   LayoutMedialabLazyRoute: typeof LayoutMedialabLazyRoute
   LayoutMinebookingerLazyRoute: typeof LayoutMinebookingerLazyRoute
   LayoutProfilepageLazyRoute: typeof LayoutProfilepageLazyRoute
-  LayoutIndexLazyRoute: typeof LayoutIndexLazyRoute
 }
 
 const LayoutRouteChildren: LayoutRouteChildren = {
@@ -275,13 +274,13 @@ const LayoutRouteChildren: LayoutRouteChildren = {
   LayoutMedialabLazyRoute: LayoutMedialabLazyRoute,
   LayoutMinebookingerLazyRoute: LayoutMinebookingerLazyRoute,
   LayoutProfilepageLazyRoute: LayoutProfilepageLazyRoute,
-  LayoutIndexLazyRoute: LayoutIndexLazyRoute,
 }
 
 const LayoutRouteWithChildren =
   LayoutRoute._addFileChildren(LayoutRouteChildren)
 
 export interface FileRoutesByFullPath {
+  '/': typeof IndexLazyRoute
   '': typeof LoginRoute
   '/forgotpassword': typeof ForgotpasswordLazyRoute
   '/login': typeof LoginLazyRoute
@@ -295,10 +294,10 @@ export interface FileRoutesByFullPath {
   '/medialab': typeof LayoutMedialabLazyRoute
   '/minebookinger': typeof LayoutMinebookingerLazyRoute
   '/profilepage': typeof LayoutProfilepageLazyRoute
-  '/': typeof LayoutIndexLazyRoute
 }
 
 export interface FileRoutesByTo {
+  '/': typeof IndexLazyRoute
   '': typeof LoginRoute
   '/forgotpassword': typeof ForgotpasswordLazyRoute
   '/login': typeof LoginLazyRoute
@@ -312,11 +311,11 @@ export interface FileRoutesByTo {
   '/medialab': typeof LayoutMedialabLazyRoute
   '/minebookinger': typeof LayoutMinebookingerLazyRoute
   '/profilepage': typeof LayoutProfilepageLazyRoute
-  '/': typeof LayoutIndexLazyRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
+  '/': typeof IndexLazyRoute
   '/_layout': typeof LayoutRouteWithChildren
   '/_login': typeof LoginRoute
   '/forgotpassword': typeof ForgotpasswordLazyRoute
@@ -331,12 +330,12 @@ export interface FileRoutesById {
   '/_layout/medialab': typeof LayoutMedialabLazyRoute
   '/_layout/minebookinger': typeof LayoutMinebookingerLazyRoute
   '/_layout/profilepage': typeof LayoutProfilepageLazyRoute
-  '/_layout/': typeof LayoutIndexLazyRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
+    | '/'
     | ''
     | '/forgotpassword'
     | '/login'
@@ -350,9 +349,9 @@ export interface FileRouteTypes {
     | '/medialab'
     | '/minebookinger'
     | '/profilepage'
-    | '/'
   fileRoutesByTo: FileRoutesByTo
   to:
+    | '/'
     | ''
     | '/forgotpassword'
     | '/login'
@@ -366,9 +365,9 @@ export interface FileRouteTypes {
     | '/medialab'
     | '/minebookinger'
     | '/profilepage'
-    | '/'
   id:
     | '__root__'
+    | '/'
     | '/_layout'
     | '/_login'
     | '/forgotpassword'
@@ -383,11 +382,11 @@ export interface FileRouteTypes {
     | '/_layout/medialab'
     | '/_layout/minebookinger'
     | '/_layout/profilepage'
-    | '/_layout/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
+  IndexLazyRoute: typeof IndexLazyRoute
   LayoutRoute: typeof LayoutRouteWithChildren
   LoginRoute: typeof LoginRoute
   ForgotpasswordLazyRoute: typeof ForgotpasswordLazyRoute
@@ -397,6 +396,7 @@ export interface RootRouteChildren {
 }
 
 const rootRouteChildren: RootRouteChildren = {
+  IndexLazyRoute: IndexLazyRoute,
   LayoutRoute: LayoutRouteWithChildren,
   LoginRoute: LoginRoute,
   ForgotpasswordLazyRoute: ForgotpasswordLazyRoute,
@@ -415,6 +415,7 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
+        "/",
         "/_layout",
         "/_login",
         "/forgotpassword",
@@ -422,6 +423,9 @@ export const routeTree = rootRoute
         "/oversigt",
         "/signup"
       ]
+    },
+    "/": {
+      "filePath": "index.lazy.jsx"
     },
     "/_layout": {
       "filePath": "_layout.jsx",
@@ -433,8 +437,7 @@ export const routeTree = rootRoute
         "/_layout/makerlab",
         "/_layout/medialab",
         "/_layout/minebookinger",
-        "/_layout/profilepage",
-        "/_layout/"
+        "/_layout/profilepage"
       ]
     },
     "/_login": {
@@ -482,10 +485,6 @@ export const routeTree = rootRoute
     },
     "/_layout/profilepage": {
       "filePath": "_layout.profilepage.lazy.jsx",
-      "parent": "/_layout"
-    },
-    "/_layout/": {
-      "filePath": "_layout.index.lazy.jsx",
       "parent": "/_layout"
     }
   }

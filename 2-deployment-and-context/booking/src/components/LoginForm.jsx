@@ -1,11 +1,13 @@
-import { PasswordInput, Button, Container, TextInput, resolveClassNames, Checkbox } from "@mantine/core";
-import styles from "./login-form.module.css";
+import { PasswordInput, Button, Container, TextInput, Checkbox } from "@mantine/core";
 import { useState } from "react";
 import { useRouteContext } from "@tanstack/react-router";
+import { useRouter } from "@tanstack/react-router"; // <-- Import useRouter for navigation
+import styles from "./login-form.module.css";
 
 export default function LoginForm() {
   const context = useRouteContext({ from: "/login" });
   const [errorMessage, setErrorMessage] = useState(""); // State for error messages
+  const router = useRouter(); // <-- Initialize useRouter for navigation
 
   const containerProps = {
     bg: "var(--mantine-color-blue-light)",
@@ -13,7 +15,7 @@ export default function LoginForm() {
   };
 
   async function handleLogin(e) {
-    e.preventDefault();
+    e.preventDefault(); // Prevent default form submission
 
     const formData = new FormData(document.querySelector("#login-form"));
     const email = formData.get("email");
@@ -53,13 +55,29 @@ export default function LoginForm() {
 
       context.setUserInfo(userInfo);
 
-      // Redirect to the dashboard
-      window.location.href = "./dashboard";
+      // Redirect to the dashboard using the router's navigate function
+      router.navigate("/..dashboard"); // <-- Navigate to the dashboard route
     } catch (error) {
       console.error("Unexpected error during login:", error.message);
       setErrorMessage("An unexpected error occurred. Please try again.");
     }
   }
+
+  function handleCreateProfile() {
+    // Navigate to the login page
+    router.navigate("../login");
+  }
+
+  function handleForgotPassword() {
+    // Navigate to the forgot password page
+    router.navigate("../forgotpassword");
+  }
+  
+  const handleButtonClick = () => {
+    console.log('Button clicked');
+    // Other logic here...
+  };
+  
 
   return (
     <div>
@@ -69,14 +87,23 @@ export default function LoginForm() {
           <TextInput label="Email" classNames={{ input: styles.TextWrapper, label: styles.textLabel }} placeholder="Email" name="email" required />
           <PasswordInput label="Password" placeholder="Adgangskode" classNames={{ input: styles.PasswordInput, label: styles.passwordLabel }} name="password" required />
           {errorMessage && <div style={{ color: "red", marginTop: "10px" }}>{errorMessage}</div>}
-          <Button type="button" className={styles.forgotButton}>
+          
+          <Button type="button" className={styles.forgotButton} onClick={handleForgotPassword}>
             Glemt adgangskode?
           </Button>
+          
           <Checkbox label="Husk mig" color="#1098ad" />
+          
           <Button type="submit" className={styles.LoginButton}>
             LOG IND
           </Button>
-          <Button className={styles.registerButton}>OPRET PROFIL</Button>
+          
+          <Button type="button" className={styles.registerButton} onClick={handleCreateProfile}>
+            OPRET PROFIL
+          </Button>
+
+          <button onClick={handleButtonClick}>Click me</button>
+
         </form>
       </Container>
     </div>

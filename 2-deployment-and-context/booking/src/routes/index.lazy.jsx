@@ -1,7 +1,7 @@
 import { createLazyFileRoute, useRouteContext } from '@tanstack/react-router'
 import SearchBar from '../components/SearchBar' // Adjust path accordingly
 
-export const Route = createLazyFileRoute('/_layout/')({
+export const Route = createLazyFileRoute('/')({
   component: Index,
 })
 
