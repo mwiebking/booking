@@ -1,1 +1,0 @@
-import{d as o,a5 as r,a6 as v}from"./index-DA0SvMbs.js";function i({classNames:a,styles:l,props:e,stylesCtx:s}){const t=o();return{resolvedClassNames:r({theme:t,classNames:a,props:e,stylesCtx:s||void 0}),resolvedStyles:v({theme:t,styles:l,props:e,stylesCtx:s||void 0})}}export{i as u};
