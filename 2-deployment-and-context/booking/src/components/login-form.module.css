@@ -55,7 +55,7 @@ h1 {
 }
 
 .registerButton {
-  margin-top: 20px;
+  margin-top: 10px;
   background-color: white;
   color: #1098ad;
   width: 400px;
@@ -83,12 +83,5 @@ h1 {
 
 
 
-.registerButton:hover {
-  background-color: white;
-  color: #1098ad;
-}
 
-.registerButton1:hover {
-  background-color: #1098ad;
-  color: white;
-}
+

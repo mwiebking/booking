@@ -7,11 +7,17 @@ import {
 } from "@mantine/core";
 import { useState } from "react";
 import { useRouteContext } from "@tanstack/react-router";
-import { useRouter } from "@tanstack/react-router"; // <-- Import useRouter for navigation
+import { useRouter } from "@tanstack/react-router";
 
 export default function SignUpForm() {
   const context = useRouteContext({ from: "/signup" });
-  const [errorMessage, setErrorMessage] = useState("");
+  const [formErrors, setFormErrors] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
   const [successMessage, setSuccessMessage] = useState("");
   const router = useRouter();
 
@@ -27,11 +33,55 @@ export default function SignUpForm() {
     const notifyEmail = formData.get("notifyEmail") === "on";
     const notifyText = formData.get("notifyText") === "on";
 
-    setErrorMessage("");
+    // Reset errors
+    setFormErrors({
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    });
     setSuccessMessage("");
 
+    // Validation checks
+    let isValid = true;
+    const errors = {};
+
+    if (!firstName) {
+      errors.firstName = "Udfyld venligst dit fornavn";
+      isValid = false;
+    }
+
+    if (!lastName) {
+      errors.lastName = "Udfyld venligst dit efternavn";
+      isValid = false;
+    }
+
+    if (!email) {
+      errors.email = "Udfyld venligst din email";
+      isValid = false;
+    } else if (!email.endsWith("@cphbusiness.dk")) {
+      errors.email = "Kun brugere med @cphbusiness.dk kan tilmelde sig";
+      isValid = false;
+    }
+
+    if (!password) {
+      errors.password = "Udfyld venligst din adgangskode";
+      isValid = false;
+    }
+
+    if (!confirmPassword) {
+      errors.confirmPassword = "Tjek om kodeord matcher";
+      isValid = false;
+    }
+
     if (password !== confirmPassword) {
-      setErrorMessage("Passwords do not match. Please try again.");
+      errors.confirmPassword = "Kodeordet matcher ikke";
+      isValid = false;
+    }
+
+    if (!isValid) {
+      setFormErrors(errors);
       return;
     }
 
@@ -43,7 +93,7 @@ export default function SignUpForm() {
         .single();
 
       if (existingUser) {
-        setErrorMessage("This email is already registered. Please log in.");
+        setFormErrors({ ...errors, email: "This email is already registered. Please log in." });
         return;
       }
 
@@ -53,7 +103,7 @@ export default function SignUpForm() {
       });
 
       if (authError) {
-        setErrorMessage("Sign-up failed. Please try again.");
+        setFormErrors({ ...errors, password: "Sign-up failed. Please try again." });
         return;
       }
 
@@ -68,9 +118,13 @@ export default function SignUpForm() {
 
       setSuccessMessage("Account created successfully! Please log in.");
     } catch (error) {
-      setErrorMessage("An unexpected error occurred. Please try again.");
+      setFormErrors({ ...errors, general: "An unexpected error occurred. Please try again." });
     }
   }
+
+  const handleInputChange = (field) => {
+    setFormErrors((prev) => ({ ...prev, [field]: "" }));
+  };
 
   return (
     <Container
@@ -93,43 +147,83 @@ export default function SignUpForm() {
         }}
         onSubmit={handleSignUp}
       >
-        <h1 style={{ marginBottom: "20px", textAlign: "center" }}>Opret Profil</h1>
+        <h1 style={{ marginBottom: "20px" }}>Opret Profil</h1>
 
         <TextInput
           placeholder="Fornavn"
           name="firstName"
-          required
           radius="xl"
-          style={{ marginBottom: "20px" }}
+          style={{
+            marginBottom: "10px",
+            borderColor: formErrors.firstName ? "red" : "#ddd",
+            borderWidth: formErrors.firstName ? "2px" : "1px",
+          }}
+          onChange={() => handleInputChange("firstName")}
         />
+        {formErrors.firstName && (
+          <div style={{ color: "red", marginBottom: "20px" }}>{formErrors.firstName}</div>
+        )}
+
         <TextInput
           placeholder="Efternavn"
           name="lastName"
-          required
           radius="xl"
-          style={{ marginBottom: "20px" }}
+          style={{
+            marginBottom: "10px",
+            borderColor: formErrors.lastName ? "red" : "#ddd",
+            borderWidth: formErrors.lastName ? "2px" : "1px",
+          }}
+          onChange={() => handleInputChange("lastName")}
         />
+        {formErrors.lastName && (
+          <div style={{ color: "red", marginBottom: "20px" }}>{formErrors.lastName}</div>
+        )}
+
         <TextInput
           placeholder="Email"
           name="email"
-          required
           radius="xl"
-          style={{ marginBottom: "20px" }}
+          style={{
+            marginBottom: "10px",
+            borderColor: formErrors.email ? "red" : "#ddd",
+            borderWidth: formErrors.email ? "2px" : "1px",
+          }}
+          onChange={() => handleInputChange("email")}
         />
+        {formErrors.email && (
+          <div style={{ color: "red", marginBottom: "20px" }}>{formErrors.email}</div>
+        )}
+
         <PasswordInput
           placeholder="Adgangskode"
           name="password"
-          required
           radius="xl"
-          style={{ marginBottom: "20px" }}
+          style={{
+            marginBottom: "10px",
+            borderColor: formErrors.password ? "red" : "#ddd",
+            borderWidth: formErrors.password ? "2px" : "1px",
+          }}
+          onChange={() => handleInputChange("password")}
         />
+        {formErrors.password && (
+          <div style={{ color: "red", marginBottom: "20px" }}>{formErrors.password}</div>
+        )}
+
         <PasswordInput
           placeholder="Bekræft adgangskode"
           name="confirmPassword"
-          required
           radius="xl"
-          style={{ marginBottom: "20px" }}
+          style={{
+            marginBottom: "10px",
+            borderColor: formErrors.confirmPassword ? "red" : "#ddd",
+            borderWidth: formErrors.confirmPassword ? "2px" : "1px",
+          }}
+          onChange={() => handleInputChange("confirmPassword")}
         />
+        {formErrors.confirmPassword && (
+          <div style={{ color: "red", marginBottom: "20px" }}>{formErrors.confirmPassword}</div>
+        )}
+
         <Checkbox
           label="Vil gerne modtage notifikationer på SMS"
           name="notifyText"
@@ -142,7 +236,11 @@ export default function SignUpForm() {
           radius="md"
           style={{ marginBottom: "20px" }}
         />
-        {errorMessage && <div style={{ color: "red", marginBottom: "20px" }}>{errorMessage}</div>}
+        
+        {formErrors.general && (
+          <div style={{ color: "red", marginBottom: "20px" }}>{formErrors.general}</div>
+        )}
+
         {successMessage && (
           <div style={{ color: "green", marginBottom: "20px" }}>{successMessage}</div>
         )}

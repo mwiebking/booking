@@ -4,14 +4,21 @@ import { useNavigate } from "@tanstack/react-router"; // Import from TanStack
 
 export function ForgotPassword() {
   const [email, setEmail] = useState(""); // Track email input value
-  const [error, setError] = useState(false); // Track validation error
+  const [formError, setFormError] = useState(""); // Track validation error message
   const navigate = useNavigate(); // TanStack's navigation hook
 
   const handleResetPassword = () => {
+    // Reset error messages
+    setFormError("");
+
     if (!email) {
-      setError(true); // Show error if the input is empty
+      setFormError("Udfyld venligst din email"); // Show error if the input is empty
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
+      // Check for valid email format
+      setFormError("Indtast venligst en gyldig emailadresse");
     } else {
-      setError(false); // Clear error if input is valid
+      // Clear error if input is valid
+      setFormError("");
       // Add your password reset logic here
       console.log("Password reset link sent to:", email);
     }
@@ -29,7 +36,7 @@ export function ForgotPassword() {
             required
             value={email}
             onChange={(event) => setEmail(event.currentTarget.value)}
-            error={error ? "You did something wrong!" : null} // Conditional error message
+            error={formError ? formError : null} // Conditional error message
             radius="xl"
           />
           <Space h="sm" />
@@ -43,11 +50,11 @@ export function ForgotPassword() {
           <Space h="xs" />
           <Anchor
             onClick={() => {
-            console.log("Navigating to /login...");  // Log the navigation attempt
-            navigate("/login");
+              console.log("Navigating to /login...");  // Log the navigation attempt
+              navigate("/login");
             }}
             style={{ display: "block", textAlign: "center", color: "#1098AD" }}
-            >
+          >
             ANNULLER
           </Anchor>
         </Paper>
