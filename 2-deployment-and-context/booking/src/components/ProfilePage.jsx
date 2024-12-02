@@ -3,25 +3,25 @@ import NavbarNested from './NavbarNested'; // Import Navbar
 import {
   Button, Container, Paper, TextInput, Title, Space, Center, Checkbox, Avatar, Group, FileInput, Anchor,
 } from "@mantine/core";
-import { useNavigate } from "@tanstack/react-router";
+import { useNavigate, Link } from "@tanstack/react-router";
 
 export function ProfileInfo() {
   const navigate = useNavigate();
 
   // Mocked profile data
   const [profile, setProfile] = useState({
-    firstName: "John",
-    lastName: "Doe",
-    email: "john.doe@example.com",
-    phone: "123-456-7890",
-    role: "User",
+    firstName: "Henriette",
+    lastName: "Jakobsen",
+    email: "hrjakobsen@cphbusiness.dk",
+    phone: "56 74 64 83",
+    role: "Studerende",
     avatar: null,
     notifications: true,
   });
 
   // Simulate saving the profile data locally
   const handleSave = () => {
-    alert("Profile information saved successfully!");
+    alert("Dine nye profil oplysninger er blevet gemt!");
     console.log("Saved profile:", profile);
   };
 
@@ -123,12 +123,13 @@ export function ProfileInfo() {
             />
           </Group>
           <Space h="md" />
-          <Anchor
-            onClick={() => alert("Redirecting to change password page...")}
+          <Link to="/changepassword">
+           <Anchor
             style={{ display: "block", textAlign: "left", color: "#1098AD" }}
-          >
+           >
             Skift Adgangskode
-          </Anchor>
+           </Anchor>
+          </Link>
           <Space h="md" />
   
           <Checkbox
@@ -149,7 +150,7 @@ export function ProfileInfo() {
             style={{ height: "33px" }}
           >
             GEM OPDATERING
-          </Button>
+          </Button> 
           <Space h="xs" />
           <Anchor
             onClick={() => navigate("/dashboard")}

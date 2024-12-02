@@ -1,6 +1,6 @@
 import { ChevronRightIcon } from '@radix-ui/react-icons';
 import { Avatar, Group, Text, UnstyledButton, Space } from '@mantine/core';
-import { useNavigate } from '@tanstack/react-router';
+import { Link, useNavigate } from '@tanstack/react-router';
 import PropTypes from 'prop-types';
 
 export function UserButton({ active, setActive }) {
@@ -12,6 +12,7 @@ export function UserButton({ active, setActive }) {
   };
 
   return (
+    <Link to="/profilepage">
     <UnstyledButton
       onClick={handleClick}
       style={{
@@ -41,11 +42,11 @@ export function UserButton({ active, setActive }) {
 
         <div style={{ flex: 1 }}>
           <Text size="sm" fw={600}>
-            Harriette Spoonlicker
+            Henriette Jakobsen
           </Text>
 
           <Text c="dimmed" size="xs">
-            hspoonlicker@outlook.com
+            hrjakobsen@cphbusiness.dk
           </Text>
         </div>
 
@@ -53,6 +54,7 @@ export function UserButton({ active, setActive }) {
       </Group>
       <Space h="xl" /> {/* space for userbutton to be pushed above tanstack button, to be removed */}
     </UnstyledButton>
+    </Link>
   );
 }
 

@@ -13,7 +13,6 @@ import { createFileRoute } from '@tanstack/react-router'
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as MybookingsImport } from './routes/mybookings'
 import { Route as LoginImport } from './routes/_login'
 import { Route as LayoutImport } from './routes/_layout'
 
@@ -22,10 +21,12 @@ import { Route as LayoutImport } from './routes/_layout'
 const SignupLazyImport = createFileRoute('/signup')()
 const ProfilepageLazyImport = createFileRoute('/profilepage')()
 const OversigtLazyImport = createFileRoute('/oversigt')()
+const MybookingsLazyImport = createFileRoute('/mybookings')()
 const MedialabLazyImport = createFileRoute('/medialab')()
 const MakerlabLazyImport = createFileRoute('/makerlab')()
 const LoginLazyImport = createFileRoute('/login')()
 const ForgotpasswordLazyImport = createFileRoute('/forgotpassword')()
+const ChangepasswordLazyImport = createFileRoute('/changepassword')()
 const BooklokaleLazyImport = createFileRoute('/booklokale')()
 const AuditoriumLazyImport = createFileRoute('/auditorium')()
 const IndexLazyImport = createFileRoute('/')()
@@ -55,6 +56,12 @@ const OversigtLazyRoute = OversigtLazyImport.update({
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/oversigt.lazy').then((d) => d.Route))
 
+const MybookingsLazyRoute = MybookingsLazyImport.update({
+  id: '/mybookings',
+  path: '/mybookings',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/mybookings.lazy').then((d) => d.Route))
+
 const MedialabLazyRoute = MedialabLazyImport.update({
   id: '/medialab',
   path: '/medialab',
@@ -81,6 +88,14 @@ const ForgotpasswordLazyRoute = ForgotpasswordLazyImport.update({
   import('./routes/forgotpassword.lazy').then((d) => d.Route),
 )
 
+const ChangepasswordLazyRoute = ChangepasswordLazyImport.update({
+  id: '/changepassword',
+  path: '/changepassword',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/changepassword.lazy').then((d) => d.Route),
+)
+
 const BooklokaleLazyRoute = BooklokaleLazyImport.update({
   id: '/booklokale',
   path: '/booklokale',
@@ -92,12 +107,6 @@ const AuditoriumLazyRoute = AuditoriumLazyImport.update({
   path: '/auditorium',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/auditorium.lazy').then((d) => d.Route))
-
-const MybookingsRoute = MybookingsImport.update({
-  id: '/mybookings',
-  path: '/mybookings',
-  getParentRoute: () => rootRoute,
-} as any)
 
 const LoginRoute = LoginImport.update({
   id: '/_login',
@@ -162,13 +171,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginImport
       parentRoute: typeof rootRoute
     }
-    '/mybookings': {
-      id: '/mybookings'
-      path: '/mybookings'
-      fullPath: '/mybookings'
-      preLoaderRoute: typeof MybookingsImport
-      parentRoute: typeof rootRoute
-    }
     '/auditorium': {
       id: '/auditorium'
       path: '/auditorium'
@@ -181,6 +183,13 @@ declare module '@tanstack/react-router' {
       path: '/booklokale'
       fullPath: '/booklokale'
       preLoaderRoute: typeof BooklokaleLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/changepassword': {
+      id: '/changepassword'
+      path: '/changepassword'
+      fullPath: '/changepassword'
+      preLoaderRoute: typeof ChangepasswordLazyImport
       parentRoute: typeof rootRoute
     }
     '/forgotpassword': {
@@ -209,6 +218,13 @@ declare module '@tanstack/react-router' {
       path: '/medialab'
       fullPath: '/medialab'
       preLoaderRoute: typeof MedialabLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/mybookings': {
+      id: '/mybookings'
+      path: '/mybookings'
+      fullPath: '/mybookings'
+      preLoaderRoute: typeof MybookingsLazyImport
       parentRoute: typeof rootRoute
     }
     '/oversigt': {
@@ -276,13 +292,14 @@ const LayoutRouteWithChildren =
 export interface FileRoutesByFullPath {
   '/': typeof IndexLazyRoute
   '': typeof LoginRoute
-  '/mybookings': typeof MybookingsRoute
   '/auditorium': typeof AuditoriumLazyRoute
   '/booklokale': typeof BooklokaleLazyRoute
+  '/changepassword': typeof ChangepasswordLazyRoute
   '/forgotpassword': typeof ForgotpasswordLazyRoute
   '/login': typeof LoginLazyRoute
   '/makerlab': typeof MakerlabLazyRoute
   '/medialab': typeof MedialabLazyRoute
+  '/mybookings': typeof MybookingsLazyRoute
   '/oversigt': typeof OversigtLazyRoute
   '/profilepage': typeof ProfilepageLazyRoute
   '/signup': typeof SignupLazyRoute
@@ -294,13 +311,14 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexLazyRoute
   '': typeof LoginRoute
-  '/mybookings': typeof MybookingsRoute
   '/auditorium': typeof AuditoriumLazyRoute
   '/booklokale': typeof BooklokaleLazyRoute
+  '/changepassword': typeof ChangepasswordLazyRoute
   '/forgotpassword': typeof ForgotpasswordLazyRoute
   '/login': typeof LoginLazyRoute
   '/makerlab': typeof MakerlabLazyRoute
   '/medialab': typeof MedialabLazyRoute
+  '/mybookings': typeof MybookingsLazyRoute
   '/oversigt': typeof OversigtLazyRoute
   '/profilepage': typeof ProfilepageLazyRoute
   '/signup': typeof SignupLazyRoute
@@ -314,13 +332,14 @@ export interface FileRoutesById {
   '/': typeof IndexLazyRoute
   '/_layout': typeof LayoutRouteWithChildren
   '/_login': typeof LoginRoute
-  '/mybookings': typeof MybookingsRoute
   '/auditorium': typeof AuditoriumLazyRoute
   '/booklokale': typeof BooklokaleLazyRoute
+  '/changepassword': typeof ChangepasswordLazyRoute
   '/forgotpassword': typeof ForgotpasswordLazyRoute
   '/login': typeof LoginLazyRoute
   '/makerlab': typeof MakerlabLazyRoute
   '/medialab': typeof MedialabLazyRoute
+  '/mybookings': typeof MybookingsLazyRoute
   '/oversigt': typeof OversigtLazyRoute
   '/profilepage': typeof ProfilepageLazyRoute
   '/signup': typeof SignupLazyRoute
@@ -334,13 +353,14 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | ''
-    | '/mybookings'
     | '/auditorium'
     | '/booklokale'
+    | '/changepassword'
     | '/forgotpassword'
     | '/login'
     | '/makerlab'
     | '/medialab'
+    | '/mybookings'
     | '/oversigt'
     | '/profilepage'
     | '/signup'
@@ -351,13 +371,14 @@ export interface FileRouteTypes {
   to:
     | '/'
     | ''
-    | '/mybookings'
     | '/auditorium'
     | '/booklokale'
+    | '/changepassword'
     | '/forgotpassword'
     | '/login'
     | '/makerlab'
     | '/medialab'
+    | '/mybookings'
     | '/oversigt'
     | '/profilepage'
     | '/signup'
@@ -369,13 +390,14 @@ export interface FileRouteTypes {
     | '/'
     | '/_layout'
     | '/_login'
-    | '/mybookings'
     | '/auditorium'
     | '/booklokale'
+    | '/changepassword'
     | '/forgotpassword'
     | '/login'
     | '/makerlab'
     | '/medialab'
+    | '/mybookings'
     | '/oversigt'
     | '/profilepage'
     | '/signup'
@@ -389,13 +411,14 @@ export interface RootRouteChildren {
   IndexLazyRoute: typeof IndexLazyRoute
   LayoutRoute: typeof LayoutRouteWithChildren
   LoginRoute: typeof LoginRoute
-  MybookingsRoute: typeof MybookingsRoute
   AuditoriumLazyRoute: typeof AuditoriumLazyRoute
   BooklokaleLazyRoute: typeof BooklokaleLazyRoute
+  ChangepasswordLazyRoute: typeof ChangepasswordLazyRoute
   ForgotpasswordLazyRoute: typeof ForgotpasswordLazyRoute
   LoginLazyRoute: typeof LoginLazyRoute
   MakerlabLazyRoute: typeof MakerlabLazyRoute
   MedialabLazyRoute: typeof MedialabLazyRoute
+  MybookingsLazyRoute: typeof MybookingsLazyRoute
   OversigtLazyRoute: typeof OversigtLazyRoute
   ProfilepageLazyRoute: typeof ProfilepageLazyRoute
   SignupLazyRoute: typeof SignupLazyRoute
@@ -405,13 +428,14 @@ const rootRouteChildren: RootRouteChildren = {
   IndexLazyRoute: IndexLazyRoute,
   LayoutRoute: LayoutRouteWithChildren,
   LoginRoute: LoginRoute,
-  MybookingsRoute: MybookingsRoute,
   AuditoriumLazyRoute: AuditoriumLazyRoute,
   BooklokaleLazyRoute: BooklokaleLazyRoute,
+  ChangepasswordLazyRoute: ChangepasswordLazyRoute,
   ForgotpasswordLazyRoute: ForgotpasswordLazyRoute,
   LoginLazyRoute: LoginLazyRoute,
   MakerlabLazyRoute: MakerlabLazyRoute,
   MedialabLazyRoute: MedialabLazyRoute,
+  MybookingsLazyRoute: MybookingsLazyRoute,
   OversigtLazyRoute: OversigtLazyRoute,
   ProfilepageLazyRoute: ProfilepageLazyRoute,
   SignupLazyRoute: SignupLazyRoute,
@@ -430,13 +454,14 @@ export const routeTree = rootRoute
         "/",
         "/_layout",
         "/_login",
-        "/mybookings",
         "/auditorium",
         "/booklokale",
+        "/changepassword",
         "/forgotpassword",
         "/login",
         "/makerlab",
         "/medialab",
+        "/mybookings",
         "/oversigt",
         "/profilepage",
         "/signup"
@@ -456,14 +481,14 @@ export const routeTree = rootRoute
     "/_login": {
       "filePath": "_login.jsx"
     },
-    "/mybookings": {
-      "filePath": "mybookings.jsx"
-    },
     "/auditorium": {
       "filePath": "auditorium.lazy.jsx"
     },
     "/booklokale": {
       "filePath": "booklokale.lazy.jsx"
+    },
+    "/changepassword": {
+      "filePath": "changepassword.lazy.jsx"
     },
     "/forgotpassword": {
       "filePath": "forgotpassword.lazy.jsx"
@@ -476,6 +501,9 @@ export const routeTree = rootRoute
     },
     "/medialab": {
       "filePath": "medialab.lazy.jsx"
+    },
+    "/mybookings": {
+      "filePath": "mybookings.lazy.jsx"
     },
     "/oversigt": {
       "filePath": "oversigt.lazy.jsx"
