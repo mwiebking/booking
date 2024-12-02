@@ -19,11 +19,11 @@ import { Route as LayoutImport } from './routes/_layout'
 // Create Virtual Routes
 
 const SignupLazyImport = createFileRoute('/signup')()
+const OversigtLazyImport = createFileRoute('/oversigt')()
 const LoginLazyImport = createFileRoute('/login')()
 const ForgotpasswordLazyImport = createFileRoute('/forgotpassword')()
 const LayoutIndexLazyImport = createFileRoute('/_layout/')()
 const LayoutProfilepageLazyImport = createFileRoute('/_layout/profilepage')()
-const LayoutOversigtLazyImport = createFileRoute('/_layout/oversigt')()
 const LayoutMedialabLazyImport = createFileRoute('/_layout/medialab')()
 const LayoutMakerlabLazyImport = createFileRoute('/_layout/makerlab')()
 const LayoutDashboardLazyImport = createFileRoute('/_layout/dashboard')()
@@ -38,6 +38,12 @@ const SignupLazyRoute = SignupLazyImport.update({
   path: '/signup',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/signup.lazy').then((d) => d.Route))
+
+const OversigtLazyRoute = OversigtLazyImport.update({
+  id: '/oversigt',
+  path: '/oversigt',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/oversigt.lazy').then((d) => d.Route))
 
 const LoginLazyRoute = LoginLazyImport.update({
   id: '/login',
@@ -75,14 +81,6 @@ const LayoutProfilepageLazyRoute = LayoutProfilepageLazyImport.update({
   getParentRoute: () => LayoutRoute,
 } as any).lazy(() =>
   import('./routes/_layout.profilepage.lazy').then((d) => d.Route),
-)
-
-const LayoutOversigtLazyRoute = LayoutOversigtLazyImport.update({
-  id: '/oversigt',
-  path: '/oversigt',
-  getParentRoute: () => LayoutRoute,
-} as any).lazy(() =>
-  import('./routes/_layout.oversigt.lazy').then((d) => d.Route),
 )
 
 const LayoutMedialabLazyRoute = LayoutMedialabLazyImport.update({
@@ -163,6 +161,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginLazyImport
       parentRoute: typeof rootRoute
     }
+    '/oversigt': {
+      id: '/oversigt'
+      path: '/oversigt'
+      fullPath: '/oversigt'
+      preLoaderRoute: typeof OversigtLazyImport
+      parentRoute: typeof rootRoute
+    }
     '/signup': {
       id: '/signup'
       path: '/signup'
@@ -212,13 +217,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutMedialabLazyImport
       parentRoute: typeof LayoutImport
     }
-    '/_layout/oversigt': {
-      id: '/_layout/oversigt'
-      path: '/oversigt'
-      fullPath: '/oversigt'
-      preLoaderRoute: typeof LayoutOversigtLazyImport
-      parentRoute: typeof LayoutImport
-    }
     '/_layout/profilepage': {
       id: '/_layout/profilepage'
       path: '/profilepage'
@@ -245,7 +243,6 @@ interface LayoutRouteChildren {
   LayoutDashboardLazyRoute: typeof LayoutDashboardLazyRoute
   LayoutMakerlabLazyRoute: typeof LayoutMakerlabLazyRoute
   LayoutMedialabLazyRoute: typeof LayoutMedialabLazyRoute
-  LayoutOversigtLazyRoute: typeof LayoutOversigtLazyRoute
   LayoutProfilepageLazyRoute: typeof LayoutProfilepageLazyRoute
   LayoutIndexLazyRoute: typeof LayoutIndexLazyRoute
 }
@@ -257,7 +254,6 @@ const LayoutRouteChildren: LayoutRouteChildren = {
   LayoutDashboardLazyRoute: LayoutDashboardLazyRoute,
   LayoutMakerlabLazyRoute: LayoutMakerlabLazyRoute,
   LayoutMedialabLazyRoute: LayoutMedialabLazyRoute,
-  LayoutOversigtLazyRoute: LayoutOversigtLazyRoute,
   LayoutProfilepageLazyRoute: LayoutProfilepageLazyRoute,
   LayoutIndexLazyRoute: LayoutIndexLazyRoute,
 }
@@ -269,6 +265,7 @@ export interface FileRoutesByFullPath {
   '': typeof LoginRoute
   '/forgotpassword': typeof ForgotpasswordLazyRoute
   '/login': typeof LoginLazyRoute
+  '/oversigt': typeof OversigtLazyRoute
   '/signup': typeof SignupLazyRoute
   '/about': typeof LayoutAboutLazyRoute
   '/auditorium': typeof LayoutAuditoriumLazyRoute
@@ -276,7 +273,6 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof LayoutDashboardLazyRoute
   '/makerlab': typeof LayoutMakerlabLazyRoute
   '/medialab': typeof LayoutMedialabLazyRoute
-  '/oversigt': typeof LayoutOversigtLazyRoute
   '/profilepage': typeof LayoutProfilepageLazyRoute
   '/': typeof LayoutIndexLazyRoute
 }
@@ -285,6 +281,7 @@ export interface FileRoutesByTo {
   '': typeof LoginRoute
   '/forgotpassword': typeof ForgotpasswordLazyRoute
   '/login': typeof LoginLazyRoute
+  '/oversigt': typeof OversigtLazyRoute
   '/signup': typeof SignupLazyRoute
   '/about': typeof LayoutAboutLazyRoute
   '/auditorium': typeof LayoutAuditoriumLazyRoute
@@ -292,7 +289,6 @@ export interface FileRoutesByTo {
   '/dashboard': typeof LayoutDashboardLazyRoute
   '/makerlab': typeof LayoutMakerlabLazyRoute
   '/medialab': typeof LayoutMedialabLazyRoute
-  '/oversigt': typeof LayoutOversigtLazyRoute
   '/profilepage': typeof LayoutProfilepageLazyRoute
   '/': typeof LayoutIndexLazyRoute
 }
@@ -303,6 +299,7 @@ export interface FileRoutesById {
   '/_login': typeof LoginRoute
   '/forgotpassword': typeof ForgotpasswordLazyRoute
   '/login': typeof LoginLazyRoute
+  '/oversigt': typeof OversigtLazyRoute
   '/signup': typeof SignupLazyRoute
   '/_layout/about': typeof LayoutAboutLazyRoute
   '/_layout/auditorium': typeof LayoutAuditoriumLazyRoute
@@ -310,7 +307,6 @@ export interface FileRoutesById {
   '/_layout/dashboard': typeof LayoutDashboardLazyRoute
   '/_layout/makerlab': typeof LayoutMakerlabLazyRoute
   '/_layout/medialab': typeof LayoutMedialabLazyRoute
-  '/_layout/oversigt': typeof LayoutOversigtLazyRoute
   '/_layout/profilepage': typeof LayoutProfilepageLazyRoute
   '/_layout/': typeof LayoutIndexLazyRoute
 }
@@ -321,6 +317,7 @@ export interface FileRouteTypes {
     | ''
     | '/forgotpassword'
     | '/login'
+    | '/oversigt'
     | '/signup'
     | '/about'
     | '/auditorium'
@@ -328,7 +325,6 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/makerlab'
     | '/medialab'
-    | '/oversigt'
     | '/profilepage'
     | '/'
   fileRoutesByTo: FileRoutesByTo
@@ -336,6 +332,7 @@ export interface FileRouteTypes {
     | ''
     | '/forgotpassword'
     | '/login'
+    | '/oversigt'
     | '/signup'
     | '/about'
     | '/auditorium'
@@ -343,7 +340,6 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/makerlab'
     | '/medialab'
-    | '/oversigt'
     | '/profilepage'
     | '/'
   id:
@@ -352,6 +348,7 @@ export interface FileRouteTypes {
     | '/_login'
     | '/forgotpassword'
     | '/login'
+    | '/oversigt'
     | '/signup'
     | '/_layout/about'
     | '/_layout/auditorium'
@@ -359,7 +356,6 @@ export interface FileRouteTypes {
     | '/_layout/dashboard'
     | '/_layout/makerlab'
     | '/_layout/medialab'
-    | '/_layout/oversigt'
     | '/_layout/profilepage'
     | '/_layout/'
   fileRoutesById: FileRoutesById
@@ -370,6 +366,7 @@ export interface RootRouteChildren {
   LoginRoute: typeof LoginRoute
   ForgotpasswordLazyRoute: typeof ForgotpasswordLazyRoute
   LoginLazyRoute: typeof LoginLazyRoute
+  OversigtLazyRoute: typeof OversigtLazyRoute
   SignupLazyRoute: typeof SignupLazyRoute
 }
 
@@ -378,6 +375,7 @@ const rootRouteChildren: RootRouteChildren = {
   LoginRoute: LoginRoute,
   ForgotpasswordLazyRoute: ForgotpasswordLazyRoute,
   LoginLazyRoute: LoginLazyRoute,
+  OversigtLazyRoute: OversigtLazyRoute,
   SignupLazyRoute: SignupLazyRoute,
 }
 
@@ -395,6 +393,7 @@ export const routeTree = rootRoute
         "/_login",
         "/forgotpassword",
         "/login",
+        "/oversigt",
         "/signup"
       ]
     },
@@ -407,7 +406,6 @@ export const routeTree = rootRoute
         "/_layout/dashboard",
         "/_layout/makerlab",
         "/_layout/medialab",
-        "/_layout/oversigt",
         "/_layout/profilepage",
         "/_layout/"
       ]
@@ -420,6 +418,9 @@ export const routeTree = rootRoute
     },
     "/login": {
       "filePath": "login.lazy.jsx"
+    },
+    "/oversigt": {
+      "filePath": "oversigt.lazy.jsx"
     },
     "/signup": {
       "filePath": "signup.lazy.jsx"
@@ -446,10 +447,6 @@ export const routeTree = rootRoute
     },
     "/_layout/medialab": {
       "filePath": "_layout.medialab.lazy.jsx",
-      "parent": "/_layout"
-    },
-    "/_layout/oversigt": {
-      "filePath": "_layout.oversigt.lazy.jsx",
       "parent": "/_layout"
     },
     "/_layout/profilepage": {
