@@ -1,1 +1,0 @@
-import{c as t,j as e}from"./index-hqYhYQDt.js";import{u}from"./useRouteContext-BBAj2M1X.js";const c=t("/_layout/about")({component:n});function n(){const o=u({from:"/about"});return console.log(o),e.jsx("div",{children:"Hello from About!"})}export{c as Route};
