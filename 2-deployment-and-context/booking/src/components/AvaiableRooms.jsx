@@ -61,7 +61,7 @@ export default function AvailableRooms() {
 
   return (
     <Container style={{ display: "flex", flexDirection: "column", alignItems: "center", marginLeft: "auto", marginRight: "auto" }}>
-      <h1 style={{ fontSize: "2rem", marginBottom: "20px" }}>Ledige Lokaler</h1>
+      <h1 className='start' style={{ fontSize: "2rem", marginBottom: "20px" }}>Ledige Lokaler</h1>
 
       {/* Display user info */}
       {userInfo && (
@@ -77,21 +77,21 @@ export default function AvailableRooms() {
       {/* Display message if no rooms are available */}
       {rooms.length === 0 ? (
         <Box
-          style={{
+          /*style={{
             backgroundColor: "#e0e0e0",
             padding: "20px",
             borderRadius: "10px",
             textAlign: "center",
             width: "100%",
             marginTop: "20px"
-          }}
+          }}*/
         >
-          <Text weight={700} style={{ fontSize: "1.2rem" }}>
+          {/*<Text weight={700} style={{ fontSize: "1.2rem" }}>
             Ingen ledige lokaler på nuværende tidspunkt
           </Text>
           <Text style={{ fontSize: "1rem" }}>
             Søg en anden dato eller tidspunkt, for at finde ledige lokaler du kan booke.
-          </Text>
+          </Text>*/}
         </Box>
       ) : (
         // Rooms list

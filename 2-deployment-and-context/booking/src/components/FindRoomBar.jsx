@@ -6,7 +6,7 @@ function RoomBar() {
   return (
 <div style={{ display: 'flex', flexDirection: 'column', gap: '40px',}}>
     <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', justifyContent: 'start' }}>
-        <h1 style={{ margin: '0px'}}>Find lokale</h1>
+        <h1 className='start' style={{ margin: '0px'}}>Find lokale</h1>
         <div style={{ display: 'flex', gap: '20px', justifyContent: 'start', marginLeft: '0px' }}>
       <DatePickerInput styles={{input: { borderRadius: '32px', width: '300px' },
         }} placeholder="Dato" />

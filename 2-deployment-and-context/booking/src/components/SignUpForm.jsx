@@ -6,7 +6,7 @@ import {
   Anchor,
 } from "@mantine/core";
 import { useState } from "react";
-import { useRouteContext } from "@tanstack/react-router";
+import { Link, useRouteContext } from "@tanstack/react-router";
 import { useRouter } from "@tanstack/react-router"; // <-- Import useRouter for navigation
 
 export default function SignUpForm() {
@@ -163,7 +163,7 @@ export default function SignUpForm() {
         >
           OPRET BRUGER
         </button>
-
+       <Link to="/login">
         <Anchor
           onClick={() => router.navigate("../login")}
           style={{
@@ -175,6 +175,7 @@ export default function SignUpForm() {
         >
           Allerede en bruger? Log ind
         </Anchor>
+       </Link>
       </form>
     </Container>
   );

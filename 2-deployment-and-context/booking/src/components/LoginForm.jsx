@@ -81,9 +81,11 @@ export default function LoginForm() {
           
           <Checkbox label="Husk mig" color="#1098ad" />
           
+          <Link to="/dashboard">
           <Button type="submit" className={styles.LoginButton}>
             LOG IND
           </Button>
+          </Link>
           
           
           
