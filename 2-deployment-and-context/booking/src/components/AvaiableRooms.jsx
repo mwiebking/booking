@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { Container, Button, Text, Card, Box } from "@mantine/core";
-import supabase from '../supabase/getSupabaseClient'; // Adjust the path to your Supabase client
 import RoomCard from "./RoomCard";
 
 export default function AvailableRooms() {

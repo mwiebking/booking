@@ -19,19 +19,19 @@ import { Route as LayoutImport } from './routes/_layout'
 // Create Virtual Routes
 
 const SignupLazyImport = createFileRoute('/signup')()
+const ProfilepageLazyImport = createFileRoute('/profilepage')()
 const OversigtLazyImport = createFileRoute('/oversigt')()
+const MedialabLazyImport = createFileRoute('/medialab')()
+const MakerlabLazyImport = createFileRoute('/makerlab')()
 const LoginLazyImport = createFileRoute('/login')()
 const ForgotpasswordLazyImport = createFileRoute('/forgotpassword')()
+const BooklokaleLazyImport = createFileRoute('/booklokale')()
+const AuditoriumLazyImport = createFileRoute('/auditorium')()
 const IndexLazyImport = createFileRoute('/')()
-const LayoutProfilepageLazyImport = createFileRoute('/_layout/profilepage')()
 const LayoutMinebookingerLazyImport = createFileRoute(
   '/_layout/minebookinger',
 )()
-const LayoutMedialabLazyImport = createFileRoute('/_layout/medialab')()
-const LayoutMakerlabLazyImport = createFileRoute('/_layout/makerlab')()
 const LayoutDashboardLazyImport = createFileRoute('/_layout/dashboard')()
-const LayoutBooklokaleLazyImport = createFileRoute('/_layout/booklokale')()
-const LayoutAuditoriumLazyImport = createFileRoute('/_layout/auditorium')()
 const LayoutAboutLazyImport = createFileRoute('/_layout/about')()
 
 // Create/Update Routes
@@ -42,11 +42,29 @@ const SignupLazyRoute = SignupLazyImport.update({
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/signup.lazy').then((d) => d.Route))
 
+const ProfilepageLazyRoute = ProfilepageLazyImport.update({
+  id: '/profilepage',
+  path: '/profilepage',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/profilepage.lazy').then((d) => d.Route))
+
 const OversigtLazyRoute = OversigtLazyImport.update({
   id: '/oversigt',
   path: '/oversigt',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/oversigt.lazy').then((d) => d.Route))
+
+const MedialabLazyRoute = MedialabLazyImport.update({
+  id: '/medialab',
+  path: '/medialab',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/medialab.lazy').then((d) => d.Route))
+
+const MakerlabLazyRoute = MakerlabLazyImport.update({
+  id: '/makerlab',
+  path: '/makerlab',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/makerlab.lazy').then((d) => d.Route))
 
 const LoginLazyRoute = LoginLazyImport.update({
   id: '/login',
@@ -61,6 +79,18 @@ const ForgotpasswordLazyRoute = ForgotpasswordLazyImport.update({
 } as any).lazy(() =>
   import('./routes/forgotpassword.lazy').then((d) => d.Route),
 )
+
+const BooklokaleLazyRoute = BooklokaleLazyImport.update({
+  id: '/booklokale',
+  path: '/booklokale',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/booklokale.lazy').then((d) => d.Route))
+
+const AuditoriumLazyRoute = AuditoriumLazyImport.update({
+  id: '/auditorium',
+  path: '/auditorium',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/auditorium.lazy').then((d) => d.Route))
 
 const LoginRoute = LoginImport.update({
   id: '/_login',
@@ -78,14 +108,6 @@ const IndexLazyRoute = IndexLazyImport.update({
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
 
-const LayoutProfilepageLazyRoute = LayoutProfilepageLazyImport.update({
-  id: '/profilepage',
-  path: '/profilepage',
-  getParentRoute: () => LayoutRoute,
-} as any).lazy(() =>
-  import('./routes/_layout.profilepage.lazy').then((d) => d.Route),
-)
-
 const LayoutMinebookingerLazyRoute = LayoutMinebookingerLazyImport.update({
   id: '/minebookinger',
   path: '/minebookinger',
@@ -94,44 +116,12 @@ const LayoutMinebookingerLazyRoute = LayoutMinebookingerLazyImport.update({
   import('./routes/_layout.minebookinger.lazy').then((d) => d.Route),
 )
 
-const LayoutMedialabLazyRoute = LayoutMedialabLazyImport.update({
-  id: '/medialab',
-  path: '/medialab',
-  getParentRoute: () => LayoutRoute,
-} as any).lazy(() =>
-  import('./routes/_layout.medialab.lazy').then((d) => d.Route),
-)
-
-const LayoutMakerlabLazyRoute = LayoutMakerlabLazyImport.update({
-  id: '/makerlab',
-  path: '/makerlab',
-  getParentRoute: () => LayoutRoute,
-} as any).lazy(() =>
-  import('./routes/_layout.makerlab.lazy').then((d) => d.Route),
-)
-
 const LayoutDashboardLazyRoute = LayoutDashboardLazyImport.update({
   id: '/dashboard',
   path: '/dashboard',
   getParentRoute: () => LayoutRoute,
 } as any).lazy(() =>
   import('./routes/_layout.dashboard.lazy').then((d) => d.Route),
-)
-
-const LayoutBooklokaleLazyRoute = LayoutBooklokaleLazyImport.update({
-  id: '/booklokale',
-  path: '/booklokale',
-  getParentRoute: () => LayoutRoute,
-} as any).lazy(() =>
-  import('./routes/_layout.booklokale.lazy').then((d) => d.Route),
-)
-
-const LayoutAuditoriumLazyRoute = LayoutAuditoriumLazyImport.update({
-  id: '/auditorium',
-  path: '/auditorium',
-  getParentRoute: () => LayoutRoute,
-} as any).lazy(() =>
-  import('./routes/_layout.auditorium.lazy').then((d) => d.Route),
 )
 
 const LayoutAboutLazyRoute = LayoutAboutLazyImport.update({
@@ -165,6 +155,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginImport
       parentRoute: typeof rootRoute
     }
+    '/auditorium': {
+      id: '/auditorium'
+      path: '/auditorium'
+      fullPath: '/auditorium'
+      preLoaderRoute: typeof AuditoriumLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/booklokale': {
+      id: '/booklokale'
+      path: '/booklokale'
+      fullPath: '/booklokale'
+      preLoaderRoute: typeof BooklokaleLazyImport
+      parentRoute: typeof rootRoute
+    }
     '/forgotpassword': {
       id: '/forgotpassword'
       path: '/forgotpassword'
@@ -179,11 +183,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginLazyImport
       parentRoute: typeof rootRoute
     }
+    '/makerlab': {
+      id: '/makerlab'
+      path: '/makerlab'
+      fullPath: '/makerlab'
+      preLoaderRoute: typeof MakerlabLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/medialab': {
+      id: '/medialab'
+      path: '/medialab'
+      fullPath: '/medialab'
+      preLoaderRoute: typeof MedialabLazyImport
+      parentRoute: typeof rootRoute
+    }
     '/oversigt': {
       id: '/oversigt'
       path: '/oversigt'
       fullPath: '/oversigt'
       preLoaderRoute: typeof OversigtLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/profilepage': {
+      id: '/profilepage'
+      path: '/profilepage'
+      fullPath: '/profilepage'
+      preLoaderRoute: typeof ProfilepageLazyImport
       parentRoute: typeof rootRoute
     }
     '/signup': {
@@ -200,39 +225,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutAboutLazyImport
       parentRoute: typeof LayoutImport
     }
-    '/_layout/auditorium': {
-      id: '/_layout/auditorium'
-      path: '/auditorium'
-      fullPath: '/auditorium'
-      preLoaderRoute: typeof LayoutAuditoriumLazyImport
-      parentRoute: typeof LayoutImport
-    }
-    '/_layout/booklokale': {
-      id: '/_layout/booklokale'
-      path: '/booklokale'
-      fullPath: '/booklokale'
-      preLoaderRoute: typeof LayoutBooklokaleLazyImport
-      parentRoute: typeof LayoutImport
-    }
     '/_layout/dashboard': {
       id: '/_layout/dashboard'
       path: '/dashboard'
       fullPath: '/dashboard'
       preLoaderRoute: typeof LayoutDashboardLazyImport
-      parentRoute: typeof LayoutImport
-    }
-    '/_layout/makerlab': {
-      id: '/_layout/makerlab'
-      path: '/makerlab'
-      fullPath: '/makerlab'
-      preLoaderRoute: typeof LayoutMakerlabLazyImport
-      parentRoute: typeof LayoutImport
-    }
-    '/_layout/medialab': {
-      id: '/_layout/medialab'
-      path: '/medialab'
-      fullPath: '/medialab'
-      preLoaderRoute: typeof LayoutMedialabLazyImport
       parentRoute: typeof LayoutImport
     }
     '/_layout/minebookinger': {
@@ -242,13 +239,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutMinebookingerLazyImport
       parentRoute: typeof LayoutImport
     }
-    '/_layout/profilepage': {
-      id: '/_layout/profilepage'
-      path: '/profilepage'
-      fullPath: '/profilepage'
-      preLoaderRoute: typeof LayoutProfilepageLazyImport
-      parentRoute: typeof LayoutImport
-    }
   }
 }
 
@@ -256,24 +246,14 @@ declare module '@tanstack/react-router' {
 
 interface LayoutRouteChildren {
   LayoutAboutLazyRoute: typeof LayoutAboutLazyRoute
-  LayoutAuditoriumLazyRoute: typeof LayoutAuditoriumLazyRoute
-  LayoutBooklokaleLazyRoute: typeof LayoutBooklokaleLazyRoute
   LayoutDashboardLazyRoute: typeof LayoutDashboardLazyRoute
-  LayoutMakerlabLazyRoute: typeof LayoutMakerlabLazyRoute
-  LayoutMedialabLazyRoute: typeof LayoutMedialabLazyRoute
   LayoutMinebookingerLazyRoute: typeof LayoutMinebookingerLazyRoute
-  LayoutProfilepageLazyRoute: typeof LayoutProfilepageLazyRoute
 }
 
 const LayoutRouteChildren: LayoutRouteChildren = {
   LayoutAboutLazyRoute: LayoutAboutLazyRoute,
-  LayoutAuditoriumLazyRoute: LayoutAuditoriumLazyRoute,
-  LayoutBooklokaleLazyRoute: LayoutBooklokaleLazyRoute,
   LayoutDashboardLazyRoute: LayoutDashboardLazyRoute,
-  LayoutMakerlabLazyRoute: LayoutMakerlabLazyRoute,
-  LayoutMedialabLazyRoute: LayoutMedialabLazyRoute,
   LayoutMinebookingerLazyRoute: LayoutMinebookingerLazyRoute,
-  LayoutProfilepageLazyRoute: LayoutProfilepageLazyRoute,
 }
 
 const LayoutRouteWithChildren =
@@ -282,35 +262,35 @@ const LayoutRouteWithChildren =
 export interface FileRoutesByFullPath {
   '/': typeof IndexLazyRoute
   '': typeof LoginRoute
+  '/auditorium': typeof AuditoriumLazyRoute
+  '/booklokale': typeof BooklokaleLazyRoute
   '/forgotpassword': typeof ForgotpasswordLazyRoute
   '/login': typeof LoginLazyRoute
+  '/makerlab': typeof MakerlabLazyRoute
+  '/medialab': typeof MedialabLazyRoute
   '/oversigt': typeof OversigtLazyRoute
+  '/profilepage': typeof ProfilepageLazyRoute
   '/signup': typeof SignupLazyRoute
   '/about': typeof LayoutAboutLazyRoute
-  '/auditorium': typeof LayoutAuditoriumLazyRoute
-  '/booklokale': typeof LayoutBooklokaleLazyRoute
   '/dashboard': typeof LayoutDashboardLazyRoute
-  '/makerlab': typeof LayoutMakerlabLazyRoute
-  '/medialab': typeof LayoutMedialabLazyRoute
   '/minebookinger': typeof LayoutMinebookingerLazyRoute
-  '/profilepage': typeof LayoutProfilepageLazyRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexLazyRoute
   '': typeof LoginRoute
+  '/auditorium': typeof AuditoriumLazyRoute
+  '/booklokale': typeof BooklokaleLazyRoute
   '/forgotpassword': typeof ForgotpasswordLazyRoute
   '/login': typeof LoginLazyRoute
+  '/makerlab': typeof MakerlabLazyRoute
+  '/medialab': typeof MedialabLazyRoute
   '/oversigt': typeof OversigtLazyRoute
+  '/profilepage': typeof ProfilepageLazyRoute
   '/signup': typeof SignupLazyRoute
   '/about': typeof LayoutAboutLazyRoute
-  '/auditorium': typeof LayoutAuditoriumLazyRoute
-  '/booklokale': typeof LayoutBooklokaleLazyRoute
   '/dashboard': typeof LayoutDashboardLazyRoute
-  '/makerlab': typeof LayoutMakerlabLazyRoute
-  '/medialab': typeof LayoutMedialabLazyRoute
   '/minebookinger': typeof LayoutMinebookingerLazyRoute
-  '/profilepage': typeof LayoutProfilepageLazyRoute
 }
 
 export interface FileRoutesById {
@@ -318,18 +298,18 @@ export interface FileRoutesById {
   '/': typeof IndexLazyRoute
   '/_layout': typeof LayoutRouteWithChildren
   '/_login': typeof LoginRoute
+  '/auditorium': typeof AuditoriumLazyRoute
+  '/booklokale': typeof BooklokaleLazyRoute
   '/forgotpassword': typeof ForgotpasswordLazyRoute
   '/login': typeof LoginLazyRoute
+  '/makerlab': typeof MakerlabLazyRoute
+  '/medialab': typeof MedialabLazyRoute
   '/oversigt': typeof OversigtLazyRoute
+  '/profilepage': typeof ProfilepageLazyRoute
   '/signup': typeof SignupLazyRoute
   '/_layout/about': typeof LayoutAboutLazyRoute
-  '/_layout/auditorium': typeof LayoutAuditoriumLazyRoute
-  '/_layout/booklokale': typeof LayoutBooklokaleLazyRoute
   '/_layout/dashboard': typeof LayoutDashboardLazyRoute
-  '/_layout/makerlab': typeof LayoutMakerlabLazyRoute
-  '/_layout/medialab': typeof LayoutMedialabLazyRoute
   '/_layout/minebookinger': typeof LayoutMinebookingerLazyRoute
-  '/_layout/profilepage': typeof LayoutProfilepageLazyRoute
 }
 
 export interface FileRouteTypes {
@@ -337,51 +317,51 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | ''
-    | '/forgotpassword'
-    | '/login'
-    | '/oversigt'
-    | '/signup'
-    | '/about'
     | '/auditorium'
     | '/booklokale'
-    | '/dashboard'
+    | '/forgotpassword'
+    | '/login'
     | '/makerlab'
     | '/medialab'
-    | '/minebookinger'
+    | '/oversigt'
     | '/profilepage'
+    | '/signup'
+    | '/about'
+    | '/dashboard'
+    | '/minebookinger'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | ''
-    | '/forgotpassword'
-    | '/login'
-    | '/oversigt'
-    | '/signup'
-    | '/about'
     | '/auditorium'
     | '/booklokale'
-    | '/dashboard'
+    | '/forgotpassword'
+    | '/login'
     | '/makerlab'
     | '/medialab'
-    | '/minebookinger'
+    | '/oversigt'
     | '/profilepage'
+    | '/signup'
+    | '/about'
+    | '/dashboard'
+    | '/minebookinger'
   id:
     | '__root__'
     | '/'
     | '/_layout'
     | '/_login'
+    | '/auditorium'
+    | '/booklokale'
     | '/forgotpassword'
     | '/login'
+    | '/makerlab'
+    | '/medialab'
     | '/oversigt'
+    | '/profilepage'
     | '/signup'
     | '/_layout/about'
-    | '/_layout/auditorium'
-    | '/_layout/booklokale'
     | '/_layout/dashboard'
-    | '/_layout/makerlab'
-    | '/_layout/medialab'
     | '/_layout/minebookinger'
-    | '/_layout/profilepage'
   fileRoutesById: FileRoutesById
 }
 
@@ -389,9 +369,14 @@ export interface RootRouteChildren {
   IndexLazyRoute: typeof IndexLazyRoute
   LayoutRoute: typeof LayoutRouteWithChildren
   LoginRoute: typeof LoginRoute
+  AuditoriumLazyRoute: typeof AuditoriumLazyRoute
+  BooklokaleLazyRoute: typeof BooklokaleLazyRoute
   ForgotpasswordLazyRoute: typeof ForgotpasswordLazyRoute
   LoginLazyRoute: typeof LoginLazyRoute
+  MakerlabLazyRoute: typeof MakerlabLazyRoute
+  MedialabLazyRoute: typeof MedialabLazyRoute
   OversigtLazyRoute: typeof OversigtLazyRoute
+  ProfilepageLazyRoute: typeof ProfilepageLazyRoute
   SignupLazyRoute: typeof SignupLazyRoute
 }
 
@@ -399,9 +384,14 @@ const rootRouteChildren: RootRouteChildren = {
   IndexLazyRoute: IndexLazyRoute,
   LayoutRoute: LayoutRouteWithChildren,
   LoginRoute: LoginRoute,
+  AuditoriumLazyRoute: AuditoriumLazyRoute,
+  BooklokaleLazyRoute: BooklokaleLazyRoute,
   ForgotpasswordLazyRoute: ForgotpasswordLazyRoute,
   LoginLazyRoute: LoginLazyRoute,
+  MakerlabLazyRoute: MakerlabLazyRoute,
+  MedialabLazyRoute: MedialabLazyRoute,
   OversigtLazyRoute: OversigtLazyRoute,
+  ProfilepageLazyRoute: ProfilepageLazyRoute,
   SignupLazyRoute: SignupLazyRoute,
 }
 
@@ -418,9 +408,14 @@ export const routeTree = rootRoute
         "/",
         "/_layout",
         "/_login",
+        "/auditorium",
+        "/booklokale",
         "/forgotpassword",
         "/login",
+        "/makerlab",
+        "/medialab",
         "/oversigt",
+        "/profilepage",
         "/signup"
       ]
     },
@@ -431,17 +426,18 @@ export const routeTree = rootRoute
       "filePath": "_layout.jsx",
       "children": [
         "/_layout/about",
-        "/_layout/auditorium",
-        "/_layout/booklokale",
         "/_layout/dashboard",
-        "/_layout/makerlab",
-        "/_layout/medialab",
-        "/_layout/minebookinger",
-        "/_layout/profilepage"
+        "/_layout/minebookinger"
       ]
     },
     "/_login": {
       "filePath": "_login.jsx"
+    },
+    "/auditorium": {
+      "filePath": "auditorium.lazy.jsx"
+    },
+    "/booklokale": {
+      "filePath": "booklokale.lazy.jsx"
     },
     "/forgotpassword": {
       "filePath": "forgotpassword.lazy.jsx"
@@ -449,8 +445,17 @@ export const routeTree = rootRoute
     "/login": {
       "filePath": "login.lazy.jsx"
     },
+    "/makerlab": {
+      "filePath": "makerlab.lazy.jsx"
+    },
+    "/medialab": {
+      "filePath": "medialab.lazy.jsx"
+    },
     "/oversigt": {
       "filePath": "oversigt.lazy.jsx"
+    },
+    "/profilepage": {
+      "filePath": "profilepage.lazy.jsx"
     },
     "/signup": {
       "filePath": "signup.lazy.jsx"
@@ -459,32 +464,12 @@ export const routeTree = rootRoute
       "filePath": "_layout.about.lazy.jsx",
       "parent": "/_layout"
     },
-    "/_layout/auditorium": {
-      "filePath": "_layout.auditorium.lazy.jsx",
-      "parent": "/_layout"
-    },
-    "/_layout/booklokale": {
-      "filePath": "_layout.booklokale.lazy.jsx",
-      "parent": "/_layout"
-    },
     "/_layout/dashboard": {
       "filePath": "_layout.dashboard.lazy.jsx",
       "parent": "/_layout"
     },
-    "/_layout/makerlab": {
-      "filePath": "_layout.makerlab.lazy.jsx",
-      "parent": "/_layout"
-    },
-    "/_layout/medialab": {
-      "filePath": "_layout.medialab.lazy.jsx",
-      "parent": "/_layout"
-    },
     "/_layout/minebookinger": {
       "filePath": "_layout.minebookinger.lazy.jsx",
-      "parent": "/_layout"
-    },
-    "/_layout/profilepage": {
-      "filePath": "_layout.profilepage.lazy.jsx",
       "parent": "/_layout"
     }
   }

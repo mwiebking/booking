@@ -88,7 +88,7 @@ const FilterSearch = () => {
     });
 
     return (
-    <Container size="lg" style={{ height: "100vh", display: "flex" }}>
+    <Container size="lg" style={{ height: "100vh", }}>
         <Center style={{ flex: 0 }}>
         <Paper
             withBorder
