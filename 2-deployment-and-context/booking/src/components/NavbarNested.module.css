@@ -24,3 +24,20 @@
     margin-left: calc(var(--mantine-spacing-md) * -1);
     margin-right: calc(var(--mantine-spacing-md) * -1);
   }
+
+  /* Navbar inline styles */
+
+  a {
+    color: inherit; /* Inherit text color from parent */
+    text-decoration: none; /* Remove underline from links */
+    
+  }
+  
+  .linkbox:hover {
+    background-color: #2d3748; /* Example hover background color (adjust to your theme) */
+  }
+  
+  /* Apply active state styles */
+  .linkbox:active {
+    background-color: #2d3748; /* Example active background color (adjust to your theme) */
+  }

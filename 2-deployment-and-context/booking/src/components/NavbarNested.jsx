@@ -1,76 +1,79 @@
+import { Link } from '@tanstack/react-router'; // Import Link from TanStack Router
 import { useState } from 'react';
-import { AppShell, NavLink, Box, useMantineTheme } from '@mantine/core';
+import { AppShell, Box, useMantineTheme } from '@mantine/core';
 import { HomeIcon, BookmarkIcon, CalendarIcon, SewingPinFilledIcon, CameraIcon, CubeIcon, SpeakerLoudIcon } from '@radix-ui/react-icons';
 import UserButton from './UserButton';
 import styles from './NavbarNested.module.css';
 import PropTypes from 'prop-types';
 
-function NavbarContent({ active, setActive }) {
-  const theme = useMantineTheme(); // Access Mantine theme
+function NavbarContent() {
+  const theme = useMantineTheme();
+  const routes = [
+    { icon: HomeIcon, label: 'Dashboard', to: '/dashboard', iconBackgroundColor: theme.colors.green[4] },
+    { icon: BookmarkIcon, label: 'Book lokale', to: '/booklokale', iconBackgroundColor: theme.colors.pink[4] },
+    { icon: CalendarIcon, label: 'Mine bookninger', to: '/minebookninger', iconBackgroundColor: theme.colors.teal[4] },
+    { icon: SewingPinFilledIcon, label: 'Lokale oversigt', to: '/oversigt', iconBackgroundColor: theme.colors.cyan[4] },
+    { icon: CameraIcon, label: 'Medialab', to: '/medialab', iconBackgroundColor: theme.colors.grape[4] },
+    { icon: CubeIcon, label: 'Makerlab', to: '/makerlab', iconBackgroundColor: theme.colors.blue[4] },
+    { icon: SpeakerLoudIcon, label: 'Auditorium', to: '/auditorium', iconBackgroundColor: theme.colors.orange[4] },
+  ];
 
-const data = [
-  { icon: HomeIcon, label: 'Dashboard', iconBackgroundColor: theme.colors.green[4], navBackgroundColor: theme.colors.dark[5] },
-  { icon: BookmarkIcon, label: 'Book lokale', iconBackgroundColor: theme.colors.pink[4], navBackgroundColor: theme.colors.dark[5] },
-  { icon: CalendarIcon, label: 'Mine bookninger', iconBackgroundColor: theme.colors.teal[4], navBackgroundColor: theme.colors.dark[5] },
-  { icon: SewingPinFilledIcon, label: 'Lokale oversigt', iconBackgroundColor: theme.colors.cyan[4], navBackgroundColor: theme.colors.dark[5] },
-  { icon: CameraIcon, label: 'Medialab', iconBackgroundColor: theme.colors.grape[4], navBackgroundColor: theme.colors.dark[5] },
-  { icon: CubeIcon, label: 'Makerlab', iconBackgroundColor: theme.colors.blue[4], navBackgroundColor: theme.colors.dark[5] },
-  { icon: SpeakerLoudIcon, label: 'Auditorium', iconBackgroundColor: theme.colors.orange[4], navBackgroundColor: theme.colors.dark[5] },
-];
 
-
-  const items = data.map((item, index) => (
-    <NavLink
-    /* href="/dashboard" */
-    key={item.label}
-    active={index === active} // Active state logic
-    label={item.label}
-    leftSection={
-      <div
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: '30px',
-        height: '30px',
-        borderRadius: '20%', // rounded corners
-        backgroundColor: item.iconBackgroundColor, // Active background color
-      }}
-    >
-      <item.icon size="1.2rem" stroke={1.5} />
-    </div>}
-    onClick={() => setActive(index)}
-    //this style is from GPT
-    style={{ 
-      backgroundColor: index === active ? item.navBackgroundColor : 'transparent', // Active background color
-      transition: 'background-color 0.3s ease', // Smooth transition for background color
-      color: 'inherit', // Inherit color from parent to avoid default mantine blue for active text/icon
-    }}
-    onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = item.navBackgroundColor)} // Hover background color appears
-    onMouseLeave={(e) => 
-      (e.currentTarget.style.backgroundColor = index === active ? item.navBackgroundColor : 'transparent') // removes hover color
-    }
-    />
-  ));
-  
   return (
-  <Box className={styles.navbar}> {/* Use the navbar style */}
-  <div className={styles.links}>
-    <div className={styles.linksInner}>{items}</div>
+    <Box className={styles.navbar}>
+      <div className={styles.links}>
+        <div className={styles.linksInner}>
+          {routes.map((item) => (
+            <Link
+              key={item.label}
+              to={item.to}
+              /* style={({ isActive }) => ({
+                backgroundColor: isActive ? theme.colors.dark[4] : 'transparent', // Active background color
+                transition: 'background-color 0.3s ease',
+                color: 'inherit', // Inherit color from parent
+                textDecoration: 'none', // Remove underline from active link
+              })} */
+            >
+             <div
+  className={styles.linkbox}
+  style={{
+    display: 'flex',
+    alignItems: 'center',
+    gap: '10px', // Space between icon and label
+    padding: '10px', // Add padding for the hover effect to look clean
+  }}
+>
+  <div
+    style={{
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      width: '30px',
+      height: '30px',
+      borderRadius: '20%',
+      backgroundColor: item.iconBackgroundColor,
+    }}
+  >
+    <item.icon size="1.2rem" stroke={1.5} />
   </div>
-  <div className={styles.footer}>
+  <div>{item.label}</div>
+</div>
 
-  <UserButton active={active} setActive={setActive}/> {/* Render UserButton in the Navbar */}
-  </div>
-  </Box>
+            </Link>
+          ))}
+        </div>
+      </div>
+      <div className={styles.footer}>
+        <UserButton /> {/* Render UserButton in the Navbar */}
+      </div>
+    </Box>
   );
-  }
+}
 
-  NavbarContent.propTypes = {
-    active: PropTypes.number.isRequired,
-    setActive: PropTypes.func.isRequired,
-  };
-
+NavbarContent.propTypes = {
+  active: PropTypes.number.isRequired,
+  setActive: PropTypes.func.isRequired,
+};
 
 export function BasicAppShell() {
   const [active, setActive] = useState(0); // Manage active state of navbar links
@@ -86,4 +89,3 @@ export function BasicAppShell() {
 }
 
 export default BasicAppShell;
-
