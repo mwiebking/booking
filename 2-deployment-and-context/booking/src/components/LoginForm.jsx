@@ -56,7 +56,7 @@ export default function LoginForm() {
       context.setUserInfo(userInfo);
 
       // Redirect to the dashboard using the router's navigate function
-      router.navigate("../dashboard"); // <-- Navigate to the dashboard route
+      router.navigate("/..dashboard"); // <-- Navigate to the dashboard route
     } catch (error) {
       console.error("Unexpected error during login:", error.message);
       setErrorMessage("An unexpected error occurred. Please try again.");
