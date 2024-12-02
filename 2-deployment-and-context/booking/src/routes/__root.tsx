@@ -18,12 +18,18 @@ function RootRouteWithLayout() {
   return (
     <>
       <div>
-        <Link to="/">Home</Link>
-        <Link to="/about">About</Link>
-        <Link to="/login">Login</Link>
-        <Link to="/signup">Signup</Link>
-        <Link to="/forgotpassword">Forgot password</Link>
-        <Link to="/dashboard">Dashboard</Link>
+        <Link to="/">Home </Link>
+        <Link to="/about">About </Link>
+        <Link to="/login">Login </Link>
+        <Link to="/signup">Signup </Link>
+        <Link to="/forgotpassword">Forgot password </Link>
+        <Link to="/dashboard">Dashboard </Link>
+        <Link to="/booklokale">Book lokale </Link>
+        <Link to="/minebookninger">Mine bookninger </Link>
+        <Link to="/oversigt">Lokale oversigt </Link>
+        <Link to="/medialab">Medialab </Link>
+        <Link to="/makerlab">Makerlab </Link>
+        <Link to="/auditorium">Auditorium </Link>
       </div>
       <hr />
       <Outlet />
