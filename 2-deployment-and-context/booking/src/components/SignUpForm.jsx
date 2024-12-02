@@ -1,12 +1,19 @@
-import { TextInput, PasswordInput, Checkbox, Button, Container } from "@mantine/core";
-import styles from "./sign-up-form.module.css";
+import {
+  TextInput,
+  PasswordInput,
+  Checkbox,
+  Container,
+  Anchor,
+} from "@mantine/core";
 import { useState } from "react";
 import { useRouteContext } from "@tanstack/react-router";
+import { useRouter } from "@tanstack/react-router"; // <-- Import useRouter for navigation
 
 export default function SignUpForm() {
   const context = useRouteContext({ from: "/signup" });
-  const [errorMessage, setErrorMessage] = useState(""); // State for errors
-  const [successMessage, setSuccessMessage] = useState(""); // State for success
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+  const router = useRouter();
 
   async function handleSignUp(e) {
     e.preventDefault();
@@ -16,83 +23,159 @@ export default function SignUpForm() {
     const lastName = formData.get("lastName");
     const email = formData.get("email");
     const password = formData.get("password");
-    const phoneNumber = formData.get("phoneNumber"); // Optional
+    const confirmPassword = formData.get("confirmPassword");
     const notifyEmail = formData.get("notifyEmail") === "on";
     const notifyText = formData.get("notifyText") === "on";
 
-    setErrorMessage(""); // Clear any previous error messages
-    setSuccessMessage(""); // Clear any previous success messages
+    setErrorMessage("");
+    setSuccessMessage("");
+
+    if (password !== confirmPassword) {
+      setErrorMessage("Passwords do not match. Please try again.");
+      return;
+    }
 
     try {
-      // Step 1: Check if the email is already registered
-      const { data: existingUser, error: existingUserError } = await context.supabase.from("users").select("email").eq("email", email).single();
-
-      if (existingUserError && existingUserError.code !== "PGRST116") {
-        console.error("Error checking existing user:", existingUserError.message);
-        setErrorMessage("An error occurred while checking user availability. Please try again.");
-        return;
-      }
+      const { data: existingUser, error: existingUserError } = await context.supabase
+        .from("users")
+        .select("email")
+        .eq("email", email)
+        .single();
 
       if (existingUser) {
-        setErrorMessage("This email is already registered. Please log in or use a different email.");
+        setErrorMessage("This email is already registered. Please log in.");
         return;
       }
 
-      // Step 2: Sign up the user in Supabase Auth (password will be automatically hashed)
       const { data: authData, error: authError } = await context.supabase.auth.signUp({
         email,
         password,
       });
 
       if (authError) {
-        console.error("Sign-up error:", authError.message);
         setErrorMessage("Sign-up failed. Please try again.");
         return;
       }
 
-      // Step 3: Insert user details into the `users` table (without password hash)
-      const { data: userData, error: userError } = await context.supabase.from("users").insert({
+      await context.supabase.from("users").insert({
         first_name: firstName,
         last_name: lastName,
         email,
-        phone_number: phoneNumber || null,
-        role: "student", // Default role
+        role: "student",
         email_notifications: notifyEmail,
         sms_notifications: notifyText,
       });
 
-      if (userError) {
-        console.error("Error saving user details:", userError.message);
-        setErrorMessage("Unable to save user details. Please try again.");
-        return;
-      }
-
       setSuccessMessage("Account created successfully! Please log in.");
     } catch (error) {
-      console.error("Unexpected error during sign-up:", error.message);
       setErrorMessage("An unexpected error occurred. Please try again.");
     }
   }
 
   return (
-    <div>
-      <Container className={styles.container}>
-        <form onSubmit={handleSignUp} id="signup-form">
-          <h1 className={styles.title}>Opret Profil</h1>
-          <TextInput classNames={{ input: styles.FornavnInput, label: styles.FornavnLabel }} label="First Name" placeholder="Fornavn" name="firstName" required />
-          <TextInput classNames={{ input: styles.EfternavnInput, label: styles.EfternavnLabel }} label="Last Name" placeholder="Efternavn" name="lastName" required />
-          <TextInput classNames={{ input: styles.EmailInput, label: styles.EmailLabel }} label="Email" placeholder="Email" name="email" required />
-          <PasswordInput classNames={{ input: styles.PasswordInput, label: styles.PasswordLabel }} label="Password" placeholder="Adgangskode" name="password" required />
-          <PasswordInput classNames={{ input: styles.PasswordInput, label: styles.PasswordLabel }} label="PasswordAccept" placeholder="Bekræft adgangskode" name="password" required />
-          <Checkbox className={styles.Checkbox} color="#1098ad" label="Vil gerne modtage notifikationer på SMS'er" name="notifyEmail" />
-          <Checkbox className={styles.Checkbox} color="#1098ad" label="Vil gerne modtage notifikationer på mail" name="notifyText" />
-          {errorMessage && <div style={{ color: "red", marginTop: "10px" }}>{errorMessage}</div>}
-          {successMessage && <div style={{ color: "green", marginTop: "10px" }}>{successMessage}</div>}
-          <Button type="submit" className={styles.button}>
-            OPRET BRUGER
-          </Button>
-        </form>
-      </Container>
-    </div>
+    <Container
+      style={{
+        width: "365px",
+        height: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <form
+        id="signup-form"
+        style={{
+          width: "100%",
+          padding: "1.5rem",
+          border: "1px solid #ddd",
+          borderRadius: "8px",
+          boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+        }}
+        onSubmit={handleSignUp}
+      >
+        <h1 style={{ marginBottom: "20px", textAlign: "center" }}>Opret Profil</h1>
+
+        <TextInput
+          placeholder="Fornavn"
+          name="firstName"
+          required
+          radius="xl"
+          style={{ marginBottom: "20px" }}
+        />
+        <TextInput
+          placeholder="Efternavn"
+          name="lastName"
+          required
+          radius="xl"
+          style={{ marginBottom: "20px" }}
+        />
+        <TextInput
+          placeholder="Email"
+          name="email"
+          required
+          radius="xl"
+          style={{ marginBottom: "20px" }}
+        />
+        <PasswordInput
+          placeholder="Adgangskode"
+          name="password"
+          required
+          radius="xl"
+          style={{ marginBottom: "20px" }}
+        />
+        <PasswordInput
+          placeholder="Bekræft adgangskode"
+          name="confirmPassword"
+          required
+          radius="xl"
+          style={{ marginBottom: "20px" }}
+        />
+        <Checkbox
+          label="Vil gerne modtage notifikationer på SMS"
+          name="notifyText"
+          radius="md"
+          style={{ marginBottom: "20px" }}
+        />
+        <Checkbox
+          label="Vil gerne modtage notifikationer på mail"
+          name="notifyEmail"
+          radius="md"
+          style={{ marginBottom: "20px" }}
+        />
+        {errorMessage && <div style={{ color: "red", marginBottom: "20px" }}>{errorMessage}</div>}
+        {successMessage && (
+          <div style={{ color: "green", marginBottom: "20px" }}>{successMessage}</div>
+        )}
+
+        <button
+          type="submit"
+          style={{
+            display: "block",
+            marginBottom: "20px",
+            width: "100%",
+            backgroundColor: "#1098AD",
+            color: "#fff",
+            padding: "10px 0",
+            border: "none",
+            borderRadius: "16px",
+            cursor: "pointer",
+          }}
+        >
+          OPRET BRUGER
+        </button>
+
+        <Anchor
+          onClick={() => router.navigate("../login")}
+          style={{
+            display: "block",
+            textAlign: "center",
+            color: "#1098AD",
+            marginTop: "10px",
+          }}
+        >
+          Allerede en bruger? Log ind
+        </Anchor>
+      </form>
+    </Container>
   );
 }

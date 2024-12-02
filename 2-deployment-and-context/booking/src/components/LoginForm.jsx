@@ -1,18 +1,12 @@
-import { PasswordInput, Button, Container, TextInput, Checkbox } from "@mantine/core";
+import { PasswordInput, Container, TextInput, Checkbox, Anchor } from "@mantine/core";
 import { useState } from "react";
 import { useRouteContext } from "@tanstack/react-router";
 import { useRouter } from "@tanstack/react-router"; // <-- Import useRouter for navigation
-import styles from "./login-form.module.css";
 
 export default function LoginForm() {
   const context = useRouteContext({ from: "/login" });
   const [errorMessage, setErrorMessage] = useState(""); // State for error messages
   const router = useRouter(); // <-- Initialize useRouter for navigation
-
-  const containerProps = {
-    bg: "var(--mantine-color-blue-light)",
-    mt: "md",
-  };
 
   async function handleLogin(e) {
     e.preventDefault(); // Prevent default form submission
@@ -24,7 +18,6 @@ export default function LoginForm() {
     setErrorMessage(""); // Clear any previous error messages
 
     try {
-      // Authenticate the user
       const { data: authData, error: authError } = await context.supabase.auth.signInWithPassword({
         email,
         password,
@@ -36,8 +29,11 @@ export default function LoginForm() {
         return;
       }
 
-      // Fetch the user's role from the database
-      const { data: userDetails, error: userError } = await context.supabase.from("users").select("first_name, last_name, role").eq("email", email).single();
+      const { data: userDetails, error: userError } = await context.supabase
+        .from("users")
+        .select("first_name, last_name, role")
+        .eq("email", email)
+        .single();
 
       if (userError) {
         console.error("Error fetching user details:", userError.message);
@@ -45,7 +41,6 @@ export default function LoginForm() {
         return;
       }
 
-      // Save user info in router context
       const userInfo = {
         email,
         firstName: userDetails.first_name,
@@ -55,57 +50,95 @@ export default function LoginForm() {
 
       context.setUserInfo(userInfo);
 
-      // Redirect to the dashboard using the router's navigate function
-      router.navigate("/..dashboard"); // <-- Navigate to the dashboard route
+      router.navigate("../booklokale"); // <-- Navigate to the dashboard route
     } catch (error) {
       console.error("Unexpected error during login:", error.message);
       setErrorMessage("An unexpected error occurred. Please try again.");
     }
   }
 
-  function handleCreateProfile() {
-    // Navigate to the login page
-    router.navigate("../login");
-  }
-
-  function handleForgotPassword() {
-    // Navigate to the forgot password page
-    router.navigate("../forgotpassword");
-  }
-  
-  const handleButtonClick = () => {
-    console.log('Button clicked');
-    // Other logic here...
-  };
-  
-
   return (
-    <div>
-      <h1>Log ind</h1>
-      <Container classNames={{ root: styles.container }} {...containerProps}>
-        <form onSubmit={handleLogin} id="login-form">
-          <TextInput label="Email" classNames={{ input: styles.TextWrapper, label: styles.textLabel }} placeholder="Email" name="email" required />
-          <PasswordInput label="Password" placeholder="Adgangskode" classNames={{ input: styles.PasswordInput, label: styles.passwordLabel }} name="password" required />
-          {errorMessage && <div style={{ color: "red", marginTop: "10px" }}>{errorMessage}</div>}
-          
-          <Button type="button" className={styles.forgotButton} onClick={handleForgotPassword}>
-            Glemt adgangskode?
-          </Button>
-          
-          <Checkbox label="Husk mig" color="#1098ad" />
-          
-          <Button type="submit" className={styles.LoginButton}>
-            LOG IND
-          </Button>
-          
-          <Button type="button" className={styles.registerButton} onClick={handleCreateProfile}>
-            OPRET PROFIL
-          </Button>
+    <Container
+      style={{
+        width: "365px", // Set fixed width
+        height: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <form
+        id="login-form"
+        style={{
+          width: "100%",
+          padding: "1.5rem",
+          border: "1px solid #ddd",
+          borderRadius: "8px",
+          boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+        }}
+        onSubmit={handleLogin}
+      >
+        <h1 style={{ marginBottom: "20px", textAlign: "center" }}>Log ind</h1>
 
-          <button onClick={handleButtonClick}>Click me</button>
+        <TextInput
+          placeholder="Email"
+          name="email"
+          required
+          radius="xl"
+          style={{ marginBottom: "20px" }}
+        />
+        <PasswordInput
+          placeholder="Adgangskode"
+          name="password"
+          required
+          radius="xl"
+          style={{ marginBottom: "10px" }}
+        />
+        {errorMessage && <div style={{ color: "red", marginBottom: "20px" }}>{errorMessage}</div>}
 
-        </form>
-      </Container>
-    </div>
+        <Anchor
+          onClick={() => {
+            console.log("Navigating to forgot password..."); // Log navigation
+            router.navigate("./forgotpassword");
+          }}
+          style={{
+            display: "block",
+            marginBottom: "20px",
+            color: "#868E96",
+          }}
+        >
+          Glemt adgangskode?
+        </Anchor>
+
+        <Checkbox label="Husk mig" color="#1098ad" style={{ marginBottom: "20px" }} radius="md" />
+
+        <button
+          type="submit"
+          style={{
+            display: "block",
+            marginBottom: "20px",
+            width: "100%",
+            backgroundColor: "#1098AD",
+            color: "#fff",
+            padding: "10px 0",
+            border: "none",
+            borderRadius: "16px",
+            cursor: "pointer",
+          }}
+        >
+          LOG IND
+        </button>
+
+        <Anchor
+          onClick={() => {
+            console.log("Navigating to /login..."); // Log navigation
+            router.navigate("../login");
+          }}
+          style={{ display: "block", textAlign: "center", color: "#1098AD", marginTop: "10px" }}
+        >
+          OPRET PROFIL
+        </Anchor>
+      </form>
+    </Container>
   );
 }

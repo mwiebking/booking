@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Container, Button, Text, Card, Box } from "@mantine/core";
-import supabase from '../supabase/getSupabaseClient'; // Adjust the path to your Supabase client
+import { useNavigate } from "@tanstack/react-router";
 
 export default function AvailableRooms() {
   const [rooms, setRooms] = useState([]);

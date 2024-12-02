@@ -15,5 +15,3 @@ export function getSupabaseClient() {
 
   return supabaseClientSingletong;
 }
-
-export default getSupabaseClient;

@@ -42,14 +42,14 @@ export function ForgotPassword() {
           </Button>
           <Space h="xs" />
           <Anchor
-  onClick={() => {
-    console.log("Navigating to /login...");  // Log the navigation attempt
-    navigate("/login");
-  }}
-  style={{ display: "block", textAlign: "center", color: "#1098AD" }}
->
-  ANNULLER
-</Anchor>
+            onClick={() => {
+            console.log("Navigating to /login...");  // Log the navigation attempt
+            navigate("/login");
+            }}
+            style={{ display: "block", textAlign: "center", color: "#1098AD" }}
+            >
+            ANNULLER
+          </Anchor>
         </Paper>
       </Center>
     </Container>
