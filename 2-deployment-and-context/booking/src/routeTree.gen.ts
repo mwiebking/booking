@@ -13,6 +13,7 @@ import { createFileRoute } from '@tanstack/react-router'
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as MybookingsImport } from './routes/mybookings'
 import { Route as LoginImport } from './routes/_login'
 import { Route as LayoutImport } from './routes/_layout'
 
@@ -92,6 +93,12 @@ const AuditoriumLazyRoute = AuditoriumLazyImport.update({
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/auditorium.lazy').then((d) => d.Route))
 
+const MybookingsRoute = MybookingsImport.update({
+  id: '/mybookings',
+  path: '/mybookings',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const LoginRoute = LoginImport.update({
   id: '/_login',
   getParentRoute: () => rootRoute,
@@ -153,6 +160,13 @@ declare module '@tanstack/react-router' {
       path: ''
       fullPath: ''
       preLoaderRoute: typeof LoginImport
+      parentRoute: typeof rootRoute
+    }
+    '/mybookings': {
+      id: '/mybookings'
+      path: '/mybookings'
+      fullPath: '/mybookings'
+      preLoaderRoute: typeof MybookingsImport
       parentRoute: typeof rootRoute
     }
     '/auditorium': {
@@ -262,6 +276,7 @@ const LayoutRouteWithChildren =
 export interface FileRoutesByFullPath {
   '/': typeof IndexLazyRoute
   '': typeof LoginRoute
+  '/mybookings': typeof MybookingsRoute
   '/auditorium': typeof AuditoriumLazyRoute
   '/booklokale': typeof BooklokaleLazyRoute
   '/forgotpassword': typeof ForgotpasswordLazyRoute
@@ -279,6 +294,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexLazyRoute
   '': typeof LoginRoute
+  '/mybookings': typeof MybookingsRoute
   '/auditorium': typeof AuditoriumLazyRoute
   '/booklokale': typeof BooklokaleLazyRoute
   '/forgotpassword': typeof ForgotpasswordLazyRoute
@@ -298,6 +314,7 @@ export interface FileRoutesById {
   '/': typeof IndexLazyRoute
   '/_layout': typeof LayoutRouteWithChildren
   '/_login': typeof LoginRoute
+  '/mybookings': typeof MybookingsRoute
   '/auditorium': typeof AuditoriumLazyRoute
   '/booklokale': typeof BooklokaleLazyRoute
   '/forgotpassword': typeof ForgotpasswordLazyRoute
@@ -317,6 +334,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | ''
+    | '/mybookings'
     | '/auditorium'
     | '/booklokale'
     | '/forgotpassword'
@@ -333,6 +351,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | ''
+    | '/mybookings'
     | '/auditorium'
     | '/booklokale'
     | '/forgotpassword'
@@ -350,6 +369,7 @@ export interface FileRouteTypes {
     | '/'
     | '/_layout'
     | '/_login'
+    | '/mybookings'
     | '/auditorium'
     | '/booklokale'
     | '/forgotpassword'
@@ -369,6 +389,7 @@ export interface RootRouteChildren {
   IndexLazyRoute: typeof IndexLazyRoute
   LayoutRoute: typeof LayoutRouteWithChildren
   LoginRoute: typeof LoginRoute
+  MybookingsRoute: typeof MybookingsRoute
   AuditoriumLazyRoute: typeof AuditoriumLazyRoute
   BooklokaleLazyRoute: typeof BooklokaleLazyRoute
   ForgotpasswordLazyRoute: typeof ForgotpasswordLazyRoute
@@ -384,6 +405,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexLazyRoute: IndexLazyRoute,
   LayoutRoute: LayoutRouteWithChildren,
   LoginRoute: LoginRoute,
+  MybookingsRoute: MybookingsRoute,
   AuditoriumLazyRoute: AuditoriumLazyRoute,
   BooklokaleLazyRoute: BooklokaleLazyRoute,
   ForgotpasswordLazyRoute: ForgotpasswordLazyRoute,
@@ -408,6 +430,7 @@ export const routeTree = rootRoute
         "/",
         "/_layout",
         "/_login",
+        "/mybookings",
         "/auditorium",
         "/booklokale",
         "/forgotpassword",
@@ -432,6 +455,9 @@ export const routeTree = rootRoute
     },
     "/_login": {
       "filePath": "_login.jsx"
+    },
+    "/mybookings": {
+      "filePath": "mybookings.jsx"
     },
     "/auditorium": {
       "filePath": "auditorium.lazy.jsx"

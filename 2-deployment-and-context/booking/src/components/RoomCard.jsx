@@ -28,7 +28,7 @@ return (
 
             {/* bottom row with icons and book button */}
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <Group gap="xl" align="center">
+        <Group gap="xl" align="start">
             {/* Number of people */}
             <Group gap="xs" align="center"> {/* Smaller gap between icon and text */}
                 <PersonIcon size={20} />
@@ -47,7 +47,7 @@ return (
                 <Text>Tavle</Text>
             </Group>
         </Group>
-        <Button color="cyan" mt="md" radius="xl" onClick={() => setModalOpened(true)} /* Open modal on click */>
+        <Button color="cyan" mt="40px" radius="xl" onClick={() => setModalOpened(true)} /* Open modal on click */>
             Book 
         </Button>
         </div>
