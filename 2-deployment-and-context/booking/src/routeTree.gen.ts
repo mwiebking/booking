@@ -24,6 +24,9 @@ const LoginLazyImport = createFileRoute('/login')()
 const ForgotpasswordLazyImport = createFileRoute('/forgotpassword')()
 const LayoutIndexLazyImport = createFileRoute('/_layout/')()
 const LayoutProfilepageLazyImport = createFileRoute('/_layout/profilepage')()
+const LayoutMinebookingerLazyImport = createFileRoute(
+  '/_layout/minebookinger',
+)()
 const LayoutMedialabLazyImport = createFileRoute('/_layout/medialab')()
 const LayoutMakerlabLazyImport = createFileRoute('/_layout/makerlab')()
 const LayoutDashboardLazyImport = createFileRoute('/_layout/dashboard')()
@@ -81,6 +84,14 @@ const LayoutProfilepageLazyRoute = LayoutProfilepageLazyImport.update({
   getParentRoute: () => LayoutRoute,
 } as any).lazy(() =>
   import('./routes/_layout.profilepage.lazy').then((d) => d.Route),
+)
+
+const LayoutMinebookingerLazyRoute = LayoutMinebookingerLazyImport.update({
+  id: '/minebookinger',
+  path: '/minebookinger',
+  getParentRoute: () => LayoutRoute,
+} as any).lazy(() =>
+  import('./routes/_layout.minebookinger.lazy').then((d) => d.Route),
 )
 
 const LayoutMedialabLazyRoute = LayoutMedialabLazyImport.update({
@@ -217,6 +228,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutMedialabLazyImport
       parentRoute: typeof LayoutImport
     }
+    '/_layout/minebookinger': {
+      id: '/_layout/minebookinger'
+      path: '/minebookinger'
+      fullPath: '/minebookinger'
+      preLoaderRoute: typeof LayoutMinebookingerLazyImport
+      parentRoute: typeof LayoutImport
+    }
     '/_layout/profilepage': {
       id: '/_layout/profilepage'
       path: '/profilepage'
@@ -243,6 +261,7 @@ interface LayoutRouteChildren {
   LayoutDashboardLazyRoute: typeof LayoutDashboardLazyRoute
   LayoutMakerlabLazyRoute: typeof LayoutMakerlabLazyRoute
   LayoutMedialabLazyRoute: typeof LayoutMedialabLazyRoute
+  LayoutMinebookingerLazyRoute: typeof LayoutMinebookingerLazyRoute
   LayoutProfilepageLazyRoute: typeof LayoutProfilepageLazyRoute
   LayoutIndexLazyRoute: typeof LayoutIndexLazyRoute
 }
@@ -254,6 +273,7 @@ const LayoutRouteChildren: LayoutRouteChildren = {
   LayoutDashboardLazyRoute: LayoutDashboardLazyRoute,
   LayoutMakerlabLazyRoute: LayoutMakerlabLazyRoute,
   LayoutMedialabLazyRoute: LayoutMedialabLazyRoute,
+  LayoutMinebookingerLazyRoute: LayoutMinebookingerLazyRoute,
   LayoutProfilepageLazyRoute: LayoutProfilepageLazyRoute,
   LayoutIndexLazyRoute: LayoutIndexLazyRoute,
 }
@@ -273,6 +293,7 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof LayoutDashboardLazyRoute
   '/makerlab': typeof LayoutMakerlabLazyRoute
   '/medialab': typeof LayoutMedialabLazyRoute
+  '/minebookinger': typeof LayoutMinebookingerLazyRoute
   '/profilepage': typeof LayoutProfilepageLazyRoute
   '/': typeof LayoutIndexLazyRoute
 }
@@ -289,6 +310,7 @@ export interface FileRoutesByTo {
   '/dashboard': typeof LayoutDashboardLazyRoute
   '/makerlab': typeof LayoutMakerlabLazyRoute
   '/medialab': typeof LayoutMedialabLazyRoute
+  '/minebookinger': typeof LayoutMinebookingerLazyRoute
   '/profilepage': typeof LayoutProfilepageLazyRoute
   '/': typeof LayoutIndexLazyRoute
 }
@@ -307,6 +329,7 @@ export interface FileRoutesById {
   '/_layout/dashboard': typeof LayoutDashboardLazyRoute
   '/_layout/makerlab': typeof LayoutMakerlabLazyRoute
   '/_layout/medialab': typeof LayoutMedialabLazyRoute
+  '/_layout/minebookinger': typeof LayoutMinebookingerLazyRoute
   '/_layout/profilepage': typeof LayoutProfilepageLazyRoute
   '/_layout/': typeof LayoutIndexLazyRoute
 }
@@ -325,6 +348,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/makerlab'
     | '/medialab'
+    | '/minebookinger'
     | '/profilepage'
     | '/'
   fileRoutesByTo: FileRoutesByTo
@@ -340,6 +364,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/makerlab'
     | '/medialab'
+    | '/minebookinger'
     | '/profilepage'
     | '/'
   id:
@@ -356,6 +381,7 @@ export interface FileRouteTypes {
     | '/_layout/dashboard'
     | '/_layout/makerlab'
     | '/_layout/medialab'
+    | '/_layout/minebookinger'
     | '/_layout/profilepage'
     | '/_layout/'
   fileRoutesById: FileRoutesById
@@ -406,6 +432,7 @@ export const routeTree = rootRoute
         "/_layout/dashboard",
         "/_layout/makerlab",
         "/_layout/medialab",
+        "/_layout/minebookinger",
         "/_layout/profilepage",
         "/_layout/"
       ]
@@ -447,6 +474,10 @@ export const routeTree = rootRoute
     },
     "/_layout/medialab": {
       "filePath": "_layout.medialab.lazy.jsx",
+      "parent": "/_layout"
+    },
+    "/_layout/minebookinger": {
+      "filePath": "_layout.minebookinger.lazy.jsx",
       "parent": "/_layout"
     },
     "/_layout/profilepage": {

@@ -3,6 +3,7 @@ import { createLazyFileRoute } from '@tanstack/react-router'
 import { Divider } from '@mantine/core'
 import SendRequestForm from '../components/SendRequestForm'
 import AuditoriumInfo from '../components/AuditoriumInfo'
+import RoomBar from '../components/FindRoomBar.jsx'
 
 export const Route = createLazyFileRoute('/_layout/auditorium')({
   component: RouteComponent,
@@ -11,34 +12,37 @@ export const Route = createLazyFileRoute('/_layout/auditorium')({
 function RouteComponent() {
   return (
     <div
-      style={{
-        display: 'flex',
-        maxWidth: '1200px',
-        margin: '0 auto',
-        paddingTop: '2rem',
-      }}
+    style={{
+      maxWidth: '1200px',
+      margin: '0 auto',
+      paddingTop: '2rem',
+    }}
     >
+          <div style={{ flex: 1 }}>
+            <RoomBar />
+          </div>
       {/* Left side */}
       <div
         style={{
           display: 'flex',
-          gap: '0rem',
+          gap: '1rem',
           maxWidth: '1200px',
           margin: '0 auto',
         }}
       >
+
         {/* Medialab Info Component - 66% width */}
-        <div style={{ flex: 3 }}>
+        <div style={{ paddingTop: '5rem' }}>
           <AuditoriumInfo />
         </div>
 
         {/* Vertical Divider */}
-        <Divider orientation="vertical" style={{ height: '100%' }} />
-      </div>
+        <Divider orientation="vertical" style={{ height: 'auto' , marginTop: '6rem' }} />
 
-      {/* Send Request Form Component - 33% width */}
-      <div style={{ flex: 2 }}>
-        <SendRequestForm />
+        {/* Send Request Form Component - 33% width */}
+        <div style={{ flex: 3, paddingTop: '5rem' }}>
+          <SendRequestForm />
+        </div>
       </div>
     </div>
   )
