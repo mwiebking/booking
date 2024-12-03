@@ -15,7 +15,7 @@ function Index() {
           type="submit"
           style={{
             display: "block",
-            margin: "300px",
+            margin: "300px 300px 300px 350px",
             width: "50%",
             backgroundColor: "#1098AD",
             color: "#fff",
