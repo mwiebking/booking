@@ -147,7 +147,7 @@ export default function SignUpForm() {
         }}
         onSubmit={handleSignUp}
       >
-        <h1 style={{ marginBottom: "20px" }}>Opret Profil</h1>
+        <h1 className="start" style={{ marginBottom: "20px", marginTop: "0px" }}>Opret Profil</h1>
 
         <TextInput
           placeholder="Fornavn"

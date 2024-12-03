@@ -28,7 +28,7 @@ export function ForgotPassword() {
     <Container size={460} my={30} style={{ height: "100vh" }}> {/* Set container height to 100vh */}
       <Center style={{ height: "80%" }}> {/* Center content vertically and horizontally */}
         <Paper withBorder shadow="md" p={30} radius="md" mt="xl">
-          <Title textAlign="center">Glemt adgangskode?</Title>
+          <Title className="start">Glemt adgangskode?</Title>
           <Space h="xl" />
           <TextInput
             label=""

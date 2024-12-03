@@ -87,8 +87,8 @@ export default function LoginForm() {
 
   return (
     <div>
-      <h1>Log ind</h1>
       <Container classNames={{ root: styles.container }} {...containerProps}>
+      <h1 className="start" style={{ marginTop: "0px", marginBottom: "10px" }}>Log ind</h1>
         <form onSubmit={handleLogin} id="login-form">
           <TextInput
             label="Email"

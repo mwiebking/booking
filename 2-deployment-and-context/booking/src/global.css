@@ -30,6 +30,7 @@
 .start {
   text-align: start !important;
   color: rgba(0, 0, 0, 0.721);
+  padding: 0;
 }
 
 .pulsate-button {
