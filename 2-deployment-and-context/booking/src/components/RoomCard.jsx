@@ -8,7 +8,7 @@ function RoomCard() {
     return (
         <>
             <Card shadow="sm" padding="lg" radius="lg" withBorder
-                style={{ maxWidth: '600px', margin: '0 auto' }}>
+                style={{ maxWidth: '100%', margin: '0' }}>
                 
                 {/* top row left-side with Lokale name */}
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>

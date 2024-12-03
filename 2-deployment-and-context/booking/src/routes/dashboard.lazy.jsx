@@ -5,6 +5,7 @@ import NavbarNested from '../components/NavbarNested'; // Import the NavbarNeste
 import { Divider } from '@mantine/core'; // Import Divider from Mantine
 import AvailableRooms from '../components/AvaiableRooms';
 import Filtrer from '../components/Filtrer';
+import Mybookingslist from '../components/Mybookingslist.jsx';
 
 export const Route = createLazyFileRoute('/dashboard')({
   component: RouteComponent,
@@ -35,14 +36,8 @@ function RouteComponent() {
 
           {/* Filtrer Component - 33% width */}
           <div style={{ flex: 1 }}>
-            <Filtrer />
+            <Mybookingslist />
           </div>
-        </div>
-
-        {/* Additional content below */}
-        <div style={{ paddingTop: '2rem' }}>
-          <h1>Mine bookings</h1>
-          {/* Add any additional content here */}
         </div>
       </div>
     </div>
