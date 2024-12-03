@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button, Container, Paper, Text, TextInput, Title, Anchor, Space, Center } from "@mantine/core";
-import { useNavigate } from "@tanstack/react-router"; // Import from TanStack
+import { Link, useNavigate } from "@tanstack/react-router"; // Import from TanStack
 
 export function ForgotPassword() {
   const [email, setEmail] = useState(""); // Track email input value
@@ -48,6 +48,7 @@ export function ForgotPassword() {
             SEND E-MAIL
           </Button>
           <Space h="xs" />
+          <Link to="/login">
           <Anchor
             onClick={() => {
               console.log("Navigating to /login...");  // Log the navigation attempt
@@ -57,6 +58,7 @@ export function ForgotPassword() {
           >
             ANNULLER
           </Anchor>
+          </Link>
         </Paper>
       </Center>
     </Container>
