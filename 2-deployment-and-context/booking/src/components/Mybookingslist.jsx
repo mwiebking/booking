@@ -5,7 +5,7 @@ function Mybookingslist() {
 
   return (
     <>
-    <h1>Mine Bookinger</h1>
+    <h1 className="start">Mine Bookinger</h1>
 
 <RoomCardRemove/>
     </>

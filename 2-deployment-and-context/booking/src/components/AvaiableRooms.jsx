@@ -60,7 +60,7 @@ export default function AvailableRooms() {
   }, []); // Fetch once when component mounts
 
   return (
-    <Container style={{ display: "flex", flexDirection: "column", alignItems: "center", marginLeft: "auto", marginRight: "auto" }}>
+    <Container style={{ display: "flex", flexDirection: "column", marginLeft: "auto", marginRight: "auto" }}>
       <h1 className='start' style={{ fontSize: "2rem", marginBottom: "20px" }}>Ledige Lokaler</h1>
 
       {/* Display user info */}

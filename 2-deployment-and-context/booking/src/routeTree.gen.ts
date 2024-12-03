@@ -30,11 +30,7 @@ const ChangepasswordLazyImport = createFileRoute('/changepassword')()
 const BooklokaleLazyImport = createFileRoute('/booklokale')()
 const AuditoriumLazyImport = createFileRoute('/auditorium')()
 const IndexLazyImport = createFileRoute('/')()
-const LayoutMinebookingerLazyImport = createFileRoute(
-  '/_layout/minebookinger',
-)()
 const LayoutDashboardLazyImport = createFileRoute('/_layout/dashboard')()
-const LayoutAboutLazyImport = createFileRoute('/_layout/about')()
 
 // Create/Update Routes
 
@@ -124,27 +120,13 @@ const IndexLazyRoute = IndexLazyImport.update({
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
 
-const LayoutMinebookingerLazyRoute = LayoutMinebookingerLazyImport.update({
-  id: '/minebookinger',
-  path: '/minebookinger',
-  getParentRoute: () => LayoutRoute,
-} as any).lazy(() =>
-  import('./routes/_layout.minebookinger.lazy').then((d) => d.Route),
-)
-
 const LayoutDashboardLazyRoute = LayoutDashboardLazyImport.update({
   id: '/dashboard',
   path: '/dashboard',
   getParentRoute: () => LayoutRoute,
 } as any).lazy(() =>
-  import('./routes/_layout.dashboard.lazy').then((d) => d.Route),
+  import('./routes/dashboard.lazy').then((d) => d.Route),
 )
-
-const LayoutAboutLazyRoute = LayoutAboutLazyImport.update({
-  id: '/about',
-  path: '/about',
-  getParentRoute: () => LayoutRoute,
-} as any).lazy(() => import('./routes/_layout.about.lazy').then((d) => d.Route))
 
 // Populate the FileRoutesByPath interface
 
@@ -248,25 +230,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SignupLazyImport
       parentRoute: typeof rootRoute
     }
-    '/_layout/about': {
-      id: '/_layout/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof LayoutAboutLazyImport
-      parentRoute: typeof LayoutImport
-    }
     '/_layout/dashboard': {
       id: '/_layout/dashboard'
       path: '/dashboard'
       fullPath: '/dashboard'
       preLoaderRoute: typeof LayoutDashboardLazyImport
-      parentRoute: typeof LayoutImport
-    }
-    '/_layout/minebookinger': {
-      id: '/_layout/minebookinger'
-      path: '/minebookinger'
-      fullPath: '/minebookinger'
-      preLoaderRoute: typeof LayoutMinebookingerLazyImport
       parentRoute: typeof LayoutImport
     }
   }
@@ -275,15 +243,11 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 interface LayoutRouteChildren {
-  LayoutAboutLazyRoute: typeof LayoutAboutLazyRoute
   LayoutDashboardLazyRoute: typeof LayoutDashboardLazyRoute
-  LayoutMinebookingerLazyRoute: typeof LayoutMinebookingerLazyRoute
 }
 
 const LayoutRouteChildren: LayoutRouteChildren = {
-  LayoutAboutLazyRoute: LayoutAboutLazyRoute,
   LayoutDashboardLazyRoute: LayoutDashboardLazyRoute,
-  LayoutMinebookingerLazyRoute: LayoutMinebookingerLazyRoute,
 }
 
 const LayoutRouteWithChildren =
@@ -303,9 +267,7 @@ export interface FileRoutesByFullPath {
   '/oversigt': typeof OversigtLazyRoute
   '/profilepage': typeof ProfilepageLazyRoute
   '/signup': typeof SignupLazyRoute
-  '/about': typeof LayoutAboutLazyRoute
   '/dashboard': typeof LayoutDashboardLazyRoute
-  '/minebookinger': typeof LayoutMinebookingerLazyRoute
 }
 
 export interface FileRoutesByTo {
@@ -322,9 +284,7 @@ export interface FileRoutesByTo {
   '/oversigt': typeof OversigtLazyRoute
   '/profilepage': typeof ProfilepageLazyRoute
   '/signup': typeof SignupLazyRoute
-  '/about': typeof LayoutAboutLazyRoute
   '/dashboard': typeof LayoutDashboardLazyRoute
-  '/minebookinger': typeof LayoutMinebookingerLazyRoute
 }
 
 export interface FileRoutesById {
@@ -343,9 +303,7 @@ export interface FileRoutesById {
   '/oversigt': typeof OversigtLazyRoute
   '/profilepage': typeof ProfilepageLazyRoute
   '/signup': typeof SignupLazyRoute
-  '/_layout/about': typeof LayoutAboutLazyRoute
   '/_layout/dashboard': typeof LayoutDashboardLazyRoute
-  '/_layout/minebookinger': typeof LayoutMinebookingerLazyRoute
 }
 
 export interface FileRouteTypes {
@@ -364,9 +322,7 @@ export interface FileRouteTypes {
     | '/oversigt'
     | '/profilepage'
     | '/signup'
-    | '/about'
     | '/dashboard'
-    | '/minebookinger'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -382,9 +338,7 @@ export interface FileRouteTypes {
     | '/oversigt'
     | '/profilepage'
     | '/signup'
-    | '/about'
     | '/dashboard'
-    | '/minebookinger'
   id:
     | '__root__'
     | '/'
@@ -401,9 +355,7 @@ export interface FileRouteTypes {
     | '/oversigt'
     | '/profilepage'
     | '/signup'
-    | '/_layout/about'
     | '/_layout/dashboard'
-    | '/_layout/minebookinger'
   fileRoutesById: FileRoutesById
 }
 
@@ -473,9 +425,7 @@ export const routeTree = rootRoute
     "/_layout": {
       "filePath": "_layout.jsx",
       "children": [
-        "/_layout/about",
-        "/_layout/dashboard",
-        "/_layout/minebookinger"
+        "/_layout/dashboard"
       ]
     },
     "/_login": {
@@ -514,16 +464,8 @@ export const routeTree = rootRoute
     "/signup": {
       "filePath": "signup.lazy.jsx"
     },
-    "/_layout/about": {
-      "filePath": "_layout.about.lazy.jsx",
-      "parent": "/_layout"
-    },
     "/_layout/dashboard": {
       "filePath": "_layout.dashboard.lazy.jsx",
-      "parent": "/_layout"
-    },
-    "/_layout/minebookinger": {
-      "filePath": "_layout.minebookinger.lazy.jsx",
       "parent": "/_layout"
     }
   }

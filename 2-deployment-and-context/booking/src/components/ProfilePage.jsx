@@ -152,12 +152,7 @@ export function ProfileInfo() {
             GEM OPDATERING
           </Button> 
           <Space h="xs" />
-          <Anchor
-            onClick={() => navigate("/dashboard")}
-            style={{ display: "block", textAlign: "center", color: "#1098AD" }}
-          >
-            ANNULLER
-          </Anchor>
+          
         </Paper>
       </Center>
     </Container>

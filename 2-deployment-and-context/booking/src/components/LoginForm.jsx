@@ -7,6 +7,8 @@ import styles from "./login-form.module.css";
 export default function LoginForm() {
   const context = useRouteContext({ from: "/login" });
   const [errorMessage, setErrorMessage] = useState(""); // State for error messages
+  const [emailError, setEmailError] = useState(""); // State for email error
+  const [passwordError, setPasswordError] = useState(""); // State for password error
   const router = useRouter(); // <-- Initialize useRouter for navigation
 
   const containerProps = {
@@ -22,6 +24,26 @@ export default function LoginForm() {
     const password = formData.get("password");
 
     setErrorMessage(""); // Clear any previous error messages
+    setEmailError(""); // Clear email error
+    setPasswordError(""); // Clear password error
+
+    // Reset error state for form validation
+    let isValid = true;
+
+    // Check if email is valid
+    if (!email) {
+      setEmailError("Udfyld venligst din email");
+      isValid = false;
+    } else if (!email.endsWith("@cphbusiness.dk")) {
+      setEmailError("Kun brugere med @cphbusiness.dk kan logge ind");
+      isValid = false;
+    }
+
+    // Check if password is provided
+    if (!password) {
+      setPasswordError("Udfyld venligst din adgangskode");
+      isValid = false;
+    }
 
     try {
       // Authenticate the user
@@ -31,8 +53,8 @@ export default function LoginForm() {
       });
 
       if (authError) {
-        console.error("Login error:", authError.message);
-        setErrorMessage("Login failed. Please check your email and password.");
+        console.error("Fejl ved login:", authError.message);
+        setErrorMessage("Fejl ved login, tjek venligst e-mail og kodeord");
         return;
       }
 
@@ -62,23 +84,35 @@ export default function LoginForm() {
       setErrorMessage("An unexpected error occurred. Please try again.");
     }
   }
-  
 
   return (
     <div>
       <h1>Log ind</h1>
       <Container classNames={{ root: styles.container }} {...containerProps}>
         <form onSubmit={handleLogin} id="login-form">
-          <TextInput label="Email" classNames={{ input: styles.TextWrapper, label: styles.textLabel }} placeholder="Email" name="email" required />
-          <PasswordInput label="Password" placeholder="Adgangskode" classNames={{ input: styles.PasswordInput, label: styles.passwordLabel }} name="password" required />
+          <TextInput
+            label="Email"
+            classNames={{ input: styles.TextWrapper, label: styles.textLabel }}
+            placeholder="Email"
+            name="email"
+            error={emailError} // Show email error
+            onFocus={() => setEmailError("")} // Clear email error when focusing
+          />
+          <PasswordInput
+            label="Password"
+            placeholder="Adgangskode"
+            classNames={{ input: styles.PasswordInput, label: styles.passwordLabel }}
+            name="password"
+            error={passwordError} // Show password error
+            onFocus={() => setPasswordError("")} // Clear password error when focusing
+          />
+          
           {errorMessage && <div style={{ color: "red", marginTop: "10px" }}>{errorMessage}</div>}
-          
-          
 
           <Link className={styles.forgotButton} to="/forgotpassword">
-          <div> <p style={{ fontWeight: "500" }}>Glemt adgangskode?</p></div>
+            <div> <p style={{ fontWeight: "500" }}>Glemt adgangskode?</p></div>
           </Link>
-          
+
           <Checkbox label="Husk mig" color="#1098ad" />
           
           <Link to="/dashboard">
@@ -87,15 +121,9 @@ export default function LoginForm() {
           </Button>
           </Link>
           
-          
-          
           <Link className={styles.registerButton} to="/signup">
-          <div className={styles.registerButton1}> <p style={{ fontWeight: "500" }}>OPRET PROFIL</p></div>
+            <div className={styles.registerButton1}> <p style={{ fontWeight: "500" }}>OPRET PROFIL</p></div>
           </Link>
-          
-
-          
-
         </form>
       </Container>
     </div>
