@@ -1,4 +1,4 @@
-import { createLazyFileRoute, useRouteContext } from '@tanstack/react-router'
+import { createLazyFileRoute, Link, useRouteContext } from '@tanstack/react-router'
 import SearchBar from '../components/SearchBar' // Adjust path accordingly
 
 export const Route = createLazyFileRoute('/')({
@@ -11,11 +11,23 @@ function Index() {
 
   return (
     <div>
-      <div>{context.userInfo?.name ?? 'No name'}</div>
-      <h3>Welcome Home!</h3>
-
-      {/* Add the SearchBar component */}
-      <SearchBar />
+      <Link to="/login"><button className='pulsate-button'
+          type="submit"
+          style={{
+            display: "block",
+            margin: "300px",
+            width: "50%",
+            backgroundColor: "#1098AD",
+            color: "#fff",
+            padding: "10px 0",
+            border: "none",
+            borderRadius: "16px",
+            cursor: "pointer",
+            centered: "center"
+          }}
+        >
+          START PROTOTYPE
+        </button></Link>
     </div>
   )
 }

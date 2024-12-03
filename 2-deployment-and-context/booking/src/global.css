@@ -33,5 +33,52 @@
   color: rgba(0, 0, 0, 0.721);
 }
 
+.pulsate-button {
+  background-color: #007bff; /* Button background color */
+  color: white; /* Button text color */
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer;
+  font-size: 16px;
+  outline: none;
+  position: relative;
+  transition: transform 0.2s ease; /* Smooth scaling */
+}
 
+.pulsate-button:hover {
+  transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+.pulsate-button:active {
+  transform: scale(0.95); /* Slightly shrink on click */
+}
+
+.pulsate-button::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 15px; /* Match button's border radius */
+  background: rgba(0, 123, 255, 0.5); /* Pulsating color */
+  animation: pulsate 1.5s infinite;
+  z-index: -1; /* Behind the button */
+}
+
+@keyframes pulsate {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.3;
+  }
+  100% {
+    transform: scale(1.4);
+    opacity: 0;
+  }
+}
 
