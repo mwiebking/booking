@@ -1,131 +1,107 @@
 import { PasswordInput, Button, Container, TextInput, Checkbox } from "@mantine/core";
 import { useState } from "react";
-import { useRouteContext } from "@tanstack/react-router";
-import { useRouter, Link } from "@tanstack/react-router"; // <-- Import useRouter for navigation
-import styles from "./login-form.module.css";
+import { useRouteContext, useRouter, Link } from "@tanstack/react-router";
 
 export default function LoginForm() {
   const context = useRouteContext({ from: "/login" });
-  const [errorMessage, setErrorMessage] = useState(""); // State for error messages
-  const [emailError, setEmailError] = useState(""); // State for email error
-  const [passwordError, setPasswordError] = useState(""); // State for password error
-  const router = useRouter(); // <-- Initialize useRouter for navigation
-
-  const containerProps = {
-    bg: "var(--mantine-color-blue-light)",
-    mt: "md",
-  };
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const router = useRouter();
 
   async function handleLogin(e) {
-    e.preventDefault(); // Prevent default form submission
+    e.preventDefault();
 
-    const formData = new FormData(document.querySelector("#login-form"));
+    const formData = new FormData(e.target);
     const email = formData.get("email");
     const password = formData.get("password");
 
-    setErrorMessage(""); // Clear any previous error messages
-    setEmailError(""); // Clear email error
-    setPasswordError(""); // Clear password error
+    setEmailError("");
+    setPasswordError("");
+    setErrorMessage("");
 
-    // Reset error state for form validation
-    let isValid = true;
-
-    // Check if email is valid
-    if (!email) {
-      setEmailError("Udfyld venligst din email");
-      isValid = false;
-    } else if (!email.endsWith("@cphbusiness.dk")) {
-      setEmailError("Kun brugere med @cphbusiness.dk kan logge ind");
-      isValid = false;
-    }
-
-    // Check if password is provided
-    if (!password) {
-      setPasswordError("Udfyld venligst din adgangskode");
-      isValid = false;
-    }
-
-    try {
-      // Authenticate the user
-      const { data: authData, error: authError } = await context.supabase.auth.signInWithPassword({
-        email,
-        password,
-      });
-
-      if (authError) {
-        console.error("Fejl ved login:", authError.message);
-        setErrorMessage("Fejl ved login, tjek venligst e-mail og kodeord");
-        return;
-      }
-
-      // Fetch the user's role from the database
-      const { data: userDetails, error: userError } = await context.supabase.from("users").select("first_name, last_name, role").eq("email", email).single();
-
-      if (userError) {
-        console.error("Error fetching user details:", userError.message);
-        setErrorMessage("Unable to fetch user details. Please try again.");
-        return;
-      }
-
-      // Save user info in router context
-      const userInfo = {
-        email,
-        firstName: userDetails.first_name,
-        lastName: userDetails.last_name,
-        role: userDetails.role,
-      };
-
-      context.setUserInfo(userInfo);
-
-      // Redirect to the dashboard using the router's navigate function
-      router.navigate("/..dashboard"); // <-- Navigate to the dashboard route
-    } catch (error) {
-      console.error("Unexpected error during login:", error.message);
-      setErrorMessage("An unexpected error occurred. Please try again.");
-    }
+    if (!email.endsWith("@cphbusiness.dk")) setEmailError("Kun brugere med @cphbusiness.dk kan logge ind");
+    if (!password) setPasswordError("Udfyld venligst din adgangskode");
+    
+    // Login logic here
   }
 
   return (
-    <div>
-      <Container classNames={{ root: styles.container }} {...containerProps}>
-      <h1 className="start" style={{ marginTop: "0px", marginBottom: "10px" }}>Log ind</h1>
-        <form onSubmit={handleLogin} id="login-form">
-          <TextInput
-            label="Email"
-            classNames={{ input: styles.TextWrapper, label: styles.textLabel }}
-            placeholder="Email"
-            name="email"
-            error={emailError} // Show email error
-            onFocus={() => setEmailError("")} // Clear email error when focusing
-          />
-          <PasswordInput
-            label="Password"
-            placeholder="Adgangskode"
-            classNames={{ input: styles.PasswordInput, label: styles.passwordLabel }}
-            name="password"
-            error={passwordError} // Show password error
-            onFocus={() => setPasswordError("")} // Clear password error when focusing
-          />
-          
-          {errorMessage && <div style={{ color: "red", marginTop: "10px" }}>{errorMessage}</div>}
+    <Container
+      style={{
+        width: "365px",
+        height: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <form
+        id="login-form"
+        style={{
+          width: "100%",
+          padding: "1.5rem",
+          border: "1px solid #ddd",
+          borderRadius: "8px",
+          boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+        }}
+        onSubmit={handleLogin}
+      >
+        <h1 style={{ marginBottom: "20px" }}>Log ind</h1>
 
-          <Link className={styles.forgotButton} to="/forgotpassword">
-            <div> <p style={{ fontWeight: "500" }}>Glemt adgangskode?</p></div>
-          </Link>
+        <TextInput
+          label="Email"
+          placeholder="Email"
+          name="email"
+          radius="xl"
+          style={{
+            marginBottom: "10px",
+            borderColor: emailError ? "red" : "#ddd",
+          }}
+          error={emailError}
+        />
 
-          <Checkbox label="Husk mig" color="#1098ad" />
-          
-          <Link to="/dashboard">
-          <Button type="submit" className={styles.LoginButton}>
-            LOG IND
-          </Button>
-          </Link>
-          
-          <Link className={styles.registerButton} to="/signup">
-            <div className={styles.registerButton1}> <p style={{ fontWeight: "500" }}>OPRET PROFIL</p></div>
-          </Link>
-        </form>
-      </Container>
-    </div>
+        <PasswordInput
+          label="Password"
+          placeholder="Adgangskode"
+          name="password"
+          radius="xl"
+          style={{
+            marginBottom: "10px",
+            borderColor: passwordError ? "red" : "#ddd",
+          }}
+          error={passwordError}
+        />
+
+        {errorMessage && <div style={{ color: "red", marginBottom: "20px" }}>{errorMessage}</div>}
+
+        <Checkbox label="Husk mig" radius="md" style={{ marginBottom: "20px" }} />
+
+        <Link to="/dashboard">
+        <Button
+          type="submit"
+          style={{
+            width: "100%",
+            backgroundColor: "#1098AD",
+            color: "#fff",
+            padding: "10px 0",
+            border: "none",
+            borderRadius: "16px",
+            cursor: "pointer",
+          }}
+        >
+          LOG IND
+        </Button>
+        </Link>
+
+        <Link to="/forgotpassword" style={{ color: "#1098AD", textAlign: "center" }}>
+          Glemt adgangskode?
+        </Link>
+
+        <Link to="/signup" style={{ color: "#1098AD", display: "block", marginTop: "20px", textAlign: "center" }}>
+          Opret Profil
+        </Link>
+      </form>
+    </Container>
   );
 }
