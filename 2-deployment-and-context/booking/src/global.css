@@ -81,3 +81,15 @@
   }
 }
 
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+}
+
+
+
