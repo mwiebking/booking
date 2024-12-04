@@ -1,4 +1,4 @@
-import AvailableRooms from '../components/AvaiableRooms';
+import BookingList from '../components/BookingList.jsx';
 import FilterSearch from '../components/Filtrer';
 import { createLazyFileRoute } from '@tanstack/react-router';
 import { Divider } from '@mantine/core';
@@ -43,7 +43,7 @@ function RouteComponent() {
 
           {/* AvailableRooms Component - 33% width */}
           <div style={{ flex: 3 }}>
-            <AvailableRooms />
+            <BookingList />
           </div>
         </div>
       </div>

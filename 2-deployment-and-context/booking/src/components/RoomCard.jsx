@@ -1,60 +1,50 @@
-import React, { useState } from 'react';
-import { Divider, Group, Text, Card, Button, Space, Modal, TextInput } from '@mantine/core';
-import { PersonIcon, DesktopIcon, Pencil2Icon, ClockIcon, CalendarIcon } from '@radix-ui/react-icons';
+// src/components/RoomCard.jsx
 
-function RoomCard() {
-    const [modalOpened, setModalOpened] = useState(false);
+import React, { useState } from "react";
+import { Divider, Group, Text, Card, Button, Space, Modal, TextInput } from "@mantine/core";
+import { PersonIcon, DesktopIcon, Pencil2Icon, ClockIcon, CalendarIcon } from "@radix-ui/react-icons";
 
-    return (
-        <>
-            <Card shadow="sm" padding="lg" radius="lg" withBorder
-                style={{ maxWidth: '100%', margin: '0' }}>
-                
-                {/* top row left-side with Lokale name */}
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <Group justify="left" mb="xs">
-                        <Text fw={600}>Lokale 3.11</Text>
-                    </Group>
-                    {/* top row right-side with time & date + icons */}
-                    <Group justify="right" mb="xs">
-                        <ClockIcon size={20} color={"orange"} />
-                        <Text size='sm'>10:00-11:00</Text>
-                        <CalendarIcon size={20} color={"orange"} />
-                        <Text size='sm'>13 November 2024</Text>
-                    </Group>
-                </div>
+function RoomCard({ roomName, capacity, features, timeSlot, date }) {
+  const [modalOpened, setModalOpened] = useState(false);
 
-                <Space h="xl" />
+  return (
+    <>
+      <Card shadow="sm" padding="lg" radius="lg" withBorder>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <Group justify="left" mb="xs">
+            <Text fw={600}>{roomName}</Text>
+          </Group>
+          <Group justify="right" mb="xs">
+            <ClockIcon size={20} color={"orange"} />
+            <Text size="sm">{timeSlot}</Text>
+            <CalendarIcon size={20} color={"orange"} />
+            <Text size="sm">{date}</Text>
+          </Group>
+        </div>
 
-                {/* bottom row with icons and book button */}
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <Group gap="xl" align="start">
-                        {/* Number of people */}
-                        <Group gap="xs" align="center"> {/* Smaller gap between icon and text */}
-                            <PersonIcon size={20} />
-                            <Text>2-8 pers.</Text>
-                        </Group>
+        <Space h="xl" />
 
-                        {/* Screen */}
-                        <Group gap="xs" align="center"> {/* Smaller gap between icon and text */}
-                            <DesktopIcon size={20} />
-                            <Text>Skærm</Text>
-                        </Group>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <Group gap="xl" align="start">
+            <Group gap="xs" align="center">
+              <PersonIcon size={20} />
+              <Text>{capacity}</Text>
+            </Group>
+            {features.map((feature, index) => (
+              <Group gap="xs" align="center" key={index}>
+                {feature === "Skærm" && <DesktopIcon size={20} />}
+                {feature === "Tavle" && <Pencil2Icon size={20} />}
+                <Text>{feature}</Text>
+              </Group>
+            ))}
+          </Group>
+          <Button color="cyan" mt="40px" radius="xl" onClick={() => setModalOpened(true)}>
+            Book
+          </Button>
+        </div>
+      </Card>
 
-                        {/* Chalkboard */}
-                        <Group gap="xs" align="center"> {/* Smaller gap between icon and text */}
-                            <Pencil2Icon size={20} />
-                            <Text>Tavle</Text>
-                        </Group>
-                    </Group>
-                    <Button color="cyan" mt="40px" radius="xl" onClick={() => setModalOpened(true)} /* Open modal on click */>
-                        Book 
-                    </Button>
-                </div>
-            </Card>
-
-            {/* Modal */}
-            <Modal
+      <Modal
                 opened={modalOpened}
                 onClose={() => setModalOpened(false)}
                 size="lg" // Adjust size of modal
@@ -88,24 +78,13 @@ function RoomCard() {
                         {/* Row: Time and Date */}
                         <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
                             <ClockIcon size={20} color={"orange"} />
-                            <Text size="sm">10:00-11:00</Text>
                             <CalendarIcon size={20} color={"orange"} />
-                            <Text size="sm">13 November 2024</Text>
+                            <Text>Booking for {roomName} at {timeSlot} on {date}</Text>
                         </div>
 
                         <Space h="md" />
                         {/* Horizontal Divider */}
                         <Divider orientation="horizontal" style={{ height: '15px' }} />
-
-                        {/* Row: Additional Details */}
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-                            <PersonIcon size={20} />
-                            <Text size="sm">2-8 pers.</Text>
-                            <DesktopIcon size={20} />
-                            <Text size="sm">Skærm</Text>
-                            <Pencil2Icon size={20} />
-                            <Text size="sm">Tavle</Text>
-                        </div>
                     </div>
 
                     {/* Right side: Input Fields */}
@@ -127,8 +106,8 @@ function RoomCard() {
                     </div>
                 </div>
             </Modal>
-        </>
-    );
+    </>
+  );
 }
 
 export default RoomCard;
