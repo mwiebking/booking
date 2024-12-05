@@ -7,7 +7,7 @@ function BookingList() {
   const [bookings, setBookings] = useState([]);
 
   useEffect(() => {
-    const generatedBookings = generateBookings(new Date(), 3); // Generate 3 months of bookings
+    const generatedBookings = generateBookings(new Date(), 1); // Generate 3 months of bookings
     setBookings(generatedBookings);
   }, []);
 

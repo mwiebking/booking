@@ -1,7 +1,7 @@
 // src/data/generateBookings.js
 import { rooms, timeSlots } from "./roomsAndTimeSlots";
 
-export function generateBookings(startDate = new Date(), monthsAhead = 3) {
+export function generateBookings(startDate = new Date(), monthsAhead = 1) {
   const bookings = [];
   const endDate = new Date(startDate);
   endDate.setMonth(endDate.getMonth() + monthsAhead);

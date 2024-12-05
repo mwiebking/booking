@@ -32,9 +32,9 @@ function RoomCard({ roomName, capacity, features, timeSlot, date }) {
             </Group>
             {features.map((feature, index) => (
               <Group gap="xs" align="center" key={index}>
-                {feature === "Skærm" && <DesktopIcon size={20} />}
-                {feature === "Tavle" && <Pencil2Icon size={20} />}
-                <Text>{feature}</Text>
+                <Text>{features}</Text>  <DesktopIcon size={20} />
+                 <Pencil2Icon size={20} />
+                
               </Group>
             ))}
           </Group>
