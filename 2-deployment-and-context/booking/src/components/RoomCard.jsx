@@ -25,19 +25,20 @@ function RoomCard({ roomName, capacity, features, timeSlot, date }) {
         <Space h="xl" />
 
         <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <Group gap="xl" align="start">
-            <Group gap="xs" align="center">
-              <PersonIcon size={20} />
-              <Text>{capacity}</Text>
-            </Group>
-            {features.map((feature, index) => (
-              <Group gap="xs" align="center" key={index}>
-                <Text>{features}</Text>  <DesktopIcon size={20} />
-                 <Pencil2Icon size={20} />
-                
-              </Group>
-            ))}
-          </Group>
+        <Group gap="xl" align="start">
+  <Group gap="xs" align="center">
+    <PersonIcon size={20} />
+    <Text>{capacity}</Text>
+  </Group>
+  {features?.map((feature, index) => (
+    <Group gap="xs" align="center" key={index}>
+      {feature === "Skærm" && <DesktopIcon size={20} />}
+      {feature === "Projektor" && <DesktopIcon size={20} />}
+      {feature === "Tavle" && <Pencil2Icon size={20} />}
+      <Text>{feature}</Text>
+    </Group>
+  ))}
+</Group>
           <Button color="cyan" mt="40px" radius="xl" onClick={() => setModalOpened(true)}>
             Book
           </Button>
@@ -73,7 +74,7 @@ function RoomCard({ roomName, capacity, features, timeSlot, date }) {
 
                     {/* Row: Lokale name */}
                     <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '5px' }}>
-                        <Text fw={600}>Lokale 3.11</Text>
+                        <Text fw={600}>{roomName}</Text>
 
                         {/* Row: Time and Date */}
                         <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
