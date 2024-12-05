@@ -1,5 +1,6 @@
 import { createLazyFileRoute } from '@tanstack/react-router'
 import LoginForm from '../components/LoginForm'
+import LoginFormMathias from '../components/LoginFormMathias'
 
 export const Route = createLazyFileRoute('/login')({
   component: RouteComponent,
@@ -8,7 +9,7 @@ export const Route = createLazyFileRoute('/login')({
 function RouteComponent() {
   return (
     <div>
-      <LoginForm />
+      <LoginFormMathias />
     </div>
   )
 }

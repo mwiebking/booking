@@ -58,9 +58,9 @@ export function UserButton({ active, setActive }) {
   );
 }
 
-UserButton.propTypes = {
-  active: PropTypes.number.isRequired,
-  setActive: PropTypes.func.isRequired,
-};
+// UserButton.propTypes = {
+//   active: PropTypes.number.isRequired,
+//   setActive: PropTypes.func.isRequired,
+// };
 
 export default UserButton;

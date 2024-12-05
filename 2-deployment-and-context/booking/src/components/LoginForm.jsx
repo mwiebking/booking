@@ -1,14 +1,25 @@
 import { PasswordInput, Button, Container, TextInput, Checkbox } from "@mantine/core";
 import { useState } from "react";
-import { useRouteContext, useRouter, Link } from "@tanstack/react-router";
+import { useRouteContext, useNavigate } from "@tanstack/react-router";
+import { createClient } from "@supabase/supabase-js";
 
 export default function LoginForm() {
   const context = useRouteContext({ from: "/login" });
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const router = useRouter();
+  const navigate = useNavigate();
 
+  const SUPABASE_URL = "https://ixfyejbgmefahxcopxea.supabase.co";
+  const PUBLIC_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml4ZnllamJnbWVmYWh4Y29weGVhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzE5MzQzMTEsImV4cCI6MjA0NzUxMDMxMX0.C4NV6ZDFxDgrH4RSShCLZXonuLjHg_xsilsuYsMkDPQ";
+  
+
+
+  function test(e) {
+    e.preventDefault();
+    context.setUserInfo({test: "test"});
+    navigate({ to: `/profilepage` });
+  }
   async function handleLogin(e) {
     e.preventDefault();
 
@@ -16,14 +27,106 @@ export default function LoginForm() {
     const email = formData.get("email");
     const password = formData.get("password");
 
-    setEmailError("");
-    setPasswordError("");
-    setErrorMessage("");
+    // setEmailError("");
+    // setPasswordError("");
+    // setErrorMessage("");
 
-    if (!email.endsWith("@cphbusiness.dk")) setEmailError("Kun brugere med @cphbusiness.dk kan logge ind");
-    if (!password) setPasswordError("Udfyld venligst din adgangskode");
+    if (!email.endsWith("@cphbusiness.dk")) {
+      setEmailError("Kun brugere med @cphbusiness.dk kan logge ind");
+      return;
+    }
+    if (!password) {
+      setPasswordError("Udfyld venligst din adgangskode");
+      return;
+    }
+
+    const supabase = createClient(SUPABASE_URL, PUBLIC_ANON_KEY);
+    supabase.auth.signInWithPassword({
+      email,
+      password,
+    }).then((data) => {
+      console.log(data);
+      
+      // Fetch additional user data from the database
+    // supabase
+    //   .from("users")
+    //   .select("*")
+    //   .eq("email", email)
+    //   .single().then((userData) => {
+    //     console.log("userData", userData);
+        
+        context.setUserInfo({
+          test: "test2"
+        }
+        //   {
+
+        //   firstName: userData.first_name,
+        //   lastName: userData.last_name,
+        //   email: userData.email,
+        //   phoneNumber: userData.phone_number,
+        //   role: userData.role,
+        //   profilePicture: userData.profile_picture,
+        //   emailNotifications: userData.email_notifications,
+        //   smsNotifications: userData.sms_notifications,
+        //   createdAt: userData.created_at,
+        // }
+      );
+        // Redirect to dashboard
+        navigate({ to: `/profilepage` });
     
-    // Login logic here
+      // });
+
+    });
+
+    
+
+    // if (authError) {
+    //   setErrorMessage(authError.message);
+    //   return;
+    // }
+
+    // const Email = authData.user.email;
+    // console.log("User ID:", Email);
+
+    // Fetch additional user data from the database
+//     const { data: userData, error: userError } = await supabase
+//       .from("users")
+//       .select("*")
+//       .eq("email", Email)
+//       .single();
+
+//       if (authError) {
+//   console.error("Auth Error:", authError);
+//   setErrorMessage(authError.message);
+//   return;
+// }
+
+// if (userError) {
+//   console.error("User Fetch Error:", userError);
+//   setErrorMessage("Failed to fetch user details.");
+//   return;
+// }
+
+    // Save the full user data globally
+    // const userInfo = {
+    //   firstName: "authData.user",
+    //   lastName: userData.last_name,
+    //   email: userData.email,
+    //   phoneNumber: userData.phone_number,
+    //   role: userData.role,
+    //   profilePicture: userData.profile_picture,
+    //   emailNotifications: userData.email_notifications,
+    //   smsNotifications: userData.sms_notifications,
+    //   createdAt: userData.created_at,
+    // };
+
+    // // console.log(userInfo);
+    
+    // context.setUserInfo(userInfo);
+    // // Redirect to dashboard
+    // navigate({ to: `/profilepage` });
+    // // console.log(context.userInfo);
+    
   }
 
   return (
@@ -77,7 +180,6 @@ export default function LoginForm() {
 
         <Checkbox label="Husk mig" radius="md" style={{ marginBottom: "20px" }} />
 
-        <Link to="/dashboard">
         <Button
           type="submit"
           style={{
@@ -92,15 +194,16 @@ export default function LoginForm() {
         >
           LOG IND
         </Button>
-        </Link>
 
-        <Link to="/forgotpassword" style={{ color: "#1098AD", textAlign: "center" }}>
-          Glemt adgangskode?
-        </Link>
-
-        <Link to="/signup" style={{ color: "#1098AD", display: "block", marginTop: "20px", textAlign: "center" }}>
-          Opret Profil
-        </Link>
+        <p style={{ textAlign: "center", marginTop: "20px" }}>
+          <a href="/forgotpassword" style={{ color: "#1098AD" }}>
+            Glemt adgangskode?
+          </a>
+          <br />
+          <a href="/signup" style={{ color: "#1098AD" }}>
+            Opret Profil
+          </a>
+        </p>
       </form>
     </Container>
   );

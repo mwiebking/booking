@@ -70,10 +70,10 @@ function NavbarContent() {
   );
 }
 
-NavbarContent.propTypes = {
-  active: PropTypes.number.isRequired,
-  setActive: PropTypes.func.isRequired,
-};
+// NavbarContent.propTypes = {
+//   active: PropTypes.number.isRequired,
+//   setActive: PropTypes.func.isRequired,
+// };
 
 export function BasicAppShell() {
   const [active, setActive] = useState(0); // Manage active state of navbar links
