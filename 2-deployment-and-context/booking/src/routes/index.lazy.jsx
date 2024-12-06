@@ -11,15 +11,14 @@ function Index() {
   console.log(context)
 
   return (
-    <html className='relative' style={{
+    <div className='relative' style={{
       height: "100vh", // Full viewport height
       width: "100%",   // Full width
       margin: 0,       // Remove default margins
       padding: 0,      // Remove default padding
       boxSizing: "border-box", // Include padding in width/height calculations
     }}>
-    <div
->
+    <div>
   <Link to="/login">
     <button
       className="pulsate-button absolute"
@@ -39,6 +38,6 @@ function Index() {
     </button>
   </Link>
 </div>
-</html>
+</div>
   )
 }

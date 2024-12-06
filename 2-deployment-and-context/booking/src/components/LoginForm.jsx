@@ -44,11 +44,28 @@ export default function LoginForm() {
     });
 
     const userInfo = response.data.user
-    context.setUserInfo(userInfo)
+
+    // call supabase again.
+    const additionalUserInfo = await supabase
+      .from("users")
+      .select("*")
+      .eq("email", email)
+      .single()
+
+    context.setUserInfo({
+      email: userInfo.email,
+      firstName: additionalUserInfo.first_name,
+      lastName: additionalUserInfo.last_name,
+      phoneNumber: additionalUserInfo.phone_number,
+      role: additionalUserInfo.role,
+      profilePicture: additionalUserInfo.profile_picture,
+      emailNotifications: additionalUserInfo.email_notifications,
+      smsNotifications: additionalUserInfo.sms_notifications,
+      createdAt: additionalUserInfo.created_at,
+    })
 
     // Redirect to dashboard
-    navigate({ to: `/profilepage` });
- 
+    navigate({ to: `/dashboard` });
   }
 
   return (
