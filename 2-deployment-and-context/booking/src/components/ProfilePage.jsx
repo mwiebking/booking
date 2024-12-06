@@ -9,7 +9,7 @@ export function ProfileInfo() {
   
 
   // Initialize profile state from userInfo
-  const [profile, setProfile] = useState(() => ({
+  const [profile, setProfile] = useState({
     firstName: context.userInfo?.firstName || "",
     lastName: context.userInfo?.lastName || "",
     email: context.userInfo?.email || "",
@@ -17,7 +17,7 @@ export function ProfileInfo() {
     role: context.userInfo?.role || "",
     avatar: context.userInfo?.profilePicture || null,
     notifications: context.userInfo?.emailNotifications || false,
-  }));
+  });
 
 
   const [isEditing, setIsEditing] = useState(false);

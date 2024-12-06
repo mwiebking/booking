@@ -20,16 +20,13 @@ export default function LoginForm() {
     context.setUserInfo({test: "test"});
     navigate({ to: `/profilepage` });
   }
+
   async function handleLogin(e) {
     e.preventDefault();
 
     const formData = new FormData(e.target);
     const email = formData.get("email");
     const password = formData.get("password");
-
-    // setEmailError("");
-    // setPasswordError("");
-    // setErrorMessage("");
 
     if (!email.endsWith("@cphbusiness.dk")) {
       setEmailError("Kun brugere med @cphbusiness.dk kan logge ind");
@@ -41,92 +38,17 @@ export default function LoginForm() {
     }
 
     const supabase = createClient(SUPABASE_URL, PUBLIC_ANON_KEY);
-    supabase.auth.signInWithPassword({
+    const response = await supabase.auth.signInWithPassword({
       email,
       password,
-    }).then((data) => {
-      console.log(data);
-      
-      // Fetch additional user data from the database
-    // supabase
-    //   .from("users")
-    //   .select("*")
-    //   .eq("email", email)
-    //   .single().then((userData) => {
-    //     console.log("userData", userData);
-        
-        context.setUserInfo({
-          test: "test2"
-        }
-        //   {
-
-        //   firstName: userData.first_name,
-        //   lastName: userData.last_name,
-        //   email: userData.email,
-        //   phoneNumber: userData.phone_number,
-        //   role: userData.role,
-        //   profilePicture: userData.profile_picture,
-        //   emailNotifications: userData.email_notifications,
-        //   smsNotifications: userData.sms_notifications,
-        //   createdAt: userData.created_at,
-        // }
-      );
-        // Redirect to dashboard
-        navigate({ to: `/profilepage` });
-    
-      // });
-
     });
 
-    
+    const userInfo = response.data.user
+    context.setUserInfo(userInfo)
 
-    // if (authError) {
-    //   setErrorMessage(authError.message);
-    //   return;
-    // }
-
-    // const Email = authData.user.email;
-    // console.log("User ID:", Email);
-
-    // Fetch additional user data from the database
-//     const { data: userData, error: userError } = await supabase
-//       .from("users")
-//       .select("*")
-//       .eq("email", Email)
-//       .single();
-
-//       if (authError) {
-//   console.error("Auth Error:", authError);
-//   setErrorMessage(authError.message);
-//   return;
-// }
-
-// if (userError) {
-//   console.error("User Fetch Error:", userError);
-//   setErrorMessage("Failed to fetch user details.");
-//   return;
-// }
-
-    // Save the full user data globally
-    // const userInfo = {
-    //   firstName: "authData.user",
-    //   lastName: userData.last_name,
-    //   email: userData.email,
-    //   phoneNumber: userData.phone_number,
-    //   role: userData.role,
-    //   profilePicture: userData.profile_picture,
-    //   emailNotifications: userData.email_notifications,
-    //   smsNotifications: userData.sms_notifications,
-    //   createdAt: userData.created_at,
-    // };
-
-    // // console.log(userInfo);
-    
-    // context.setUserInfo(userInfo);
-    // // Redirect to dashboard
-    // navigate({ to: `/profilepage` });
-    // // console.log(context.userInfo);
-    
+    // Redirect to dashboard
+    navigate({ to: `/profilepage` });
+ 
   }
 
   return (

@@ -9,7 +9,7 @@ export const Route = createLazyFileRoute('/login')({
 function RouteComponent() {
   return (
     <div>
-      <LoginFormMathias />
+      <LoginForm />
     </div>
   )
 }
