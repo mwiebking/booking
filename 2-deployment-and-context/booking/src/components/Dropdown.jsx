@@ -7,7 +7,7 @@ function Dropdown(props) {
   return (
     <Box
       style={{
-        border: "1px solid black",
+        border: "1px solid #dee2e6",
         borderRadius: "10px",
         width: "100%", // Make the dropdown fill the width of its container
         maxWidth: "none", // Remove the max-width
