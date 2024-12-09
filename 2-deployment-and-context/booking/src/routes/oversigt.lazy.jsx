@@ -34,7 +34,7 @@ function Oversigt() {
           }}
         >
           {/* Title */}
-          <h1 className='start' style={{ marginBottom: '20px' }}>Lokale oversigt</h1>
+          <h1 className='start' style={{ marginBottom: '20px' }}>Kort</h1>
 
           {/* Dropdowns */}
           <Dropdown number={1} image={'public/1sal.png'} />

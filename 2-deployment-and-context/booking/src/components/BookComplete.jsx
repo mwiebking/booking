@@ -31,9 +31,18 @@ function BookComplete({ opened, onClose }) {
 
         {/* Content */}
         <div style={{ textAlign: "center", padding: "20px 0" }}>
+          
+          {/* Imported checkmark jpg */}
+          <img 
+            src="/booking/public/checkmark.jpg" 
+            width={40}
+          />
+          
           <Text fw={600} size="lg" mb="md">
             Booking Bekræftet
           </Text>
+
+
           <Text size="sm" color="dimmed">
             Vi har sendt en bekræftelses mail til dig
           </Text>

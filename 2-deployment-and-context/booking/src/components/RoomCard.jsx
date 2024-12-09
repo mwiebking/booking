@@ -42,19 +42,19 @@ function RoomCard({ roomName, capacity, features, timeSlot, date }) {
 
         <div style={{ display: "flex", justifyContent: "space-between", marginTop: "1.5rem" }}>
         <Group gap="xl" align="start">
-  <Group gap="xs" align="center">
-    <PersonIcon size={20} />
-    <Text>{capacity}</Text>
-  </Group>
-  {features?.map((feature, index) => (
-    <Group gap="xs" align="center" key={index}>
-      {feature === "Skærm" && <DesktopIcon size={20} />}
-      {feature === "Projektor" && <DesktopIcon size={20} />}
-      {feature === "Tavle" && <Pencil2Icon size={20} />}
-      <Text>{feature}</Text>
-    </Group>
-  ))}
-</Group>
+          <Group gap="xs" align="center">
+            <PersonIcon size={20} />
+            <Text>{capacity}</Text>
+          </Group>
+          {features?.map((feature, index) => (
+            <Group gap="xs" align="center" key={index}>
+              {feature === "Skærm" && <DesktopIcon size={20} />}
+              {feature === "Projektor" && <DesktopIcon size={20} />}
+              {feature === "Tavle" && <Pencil2Icon size={20} />}
+              <Text>{feature}</Text>
+            </Group>
+          ))}
+        </Group>
           <Button color="cyan" radius="xl" onClick={() => setModalOpened(true)}>
             Book
           </Button>
@@ -93,15 +93,40 @@ function RoomCard({ roomName, capacity, features, timeSlot, date }) {
                         <Text fw={600}>{roomName}</Text>
 
                         {/* Row: Time and Date */}
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-                            <ClockIcon size={20} color={"orange"} />
-                            <CalendarIcon size={20} color={"orange"} />
-                            <Text>Booking for {roomName} at {timeSlot} on {date}</Text>
+                        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'start', gap: '16px' }}>
+                          
+                          {/* Time Slot with Clock Icon */}
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                            <ClockIcon size={20} color="orange" />
+                            <Text>{timeSlot}</Text>
+                          </div>
+                          
+                          {/* Date with Calendar Icon */}
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                            <CalendarIcon size={20} color="orange" />
+                            <Text>{date}</Text>
+                          </div>
                         </div>
 
                         <Space h="md" />
                         {/* Horizontal Divider */}
                         <Divider orientation="horizontal" style={{ height: '15px' }} />
+
+                        <Group gap="lg" align="start">
+                          <Group gap="xs" align="center">
+                            <PersonIcon size={20} />
+                            <Text>{capacity}</Text>
+                          </Group>
+                          {features?.map((feature, index) => (
+                            <Group gap="xs" align="center" key={index}>
+                              {feature === "Skærm" && <DesktopIcon size={20} />}
+                              {feature === "Projektor" && <DesktopIcon size={20} />}
+                              {feature === "Tavle" && <Pencil2Icon size={20} />}
+                              <Text>{feature}</Text>
+                            </Group>
+                          ))}
+                        </Group>
+                        
                     </div>
 
                     {/* Right side: Input Fields */}
