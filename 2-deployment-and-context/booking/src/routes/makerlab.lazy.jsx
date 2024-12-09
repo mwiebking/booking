@@ -29,7 +29,7 @@ function RouteComponent() {
 
       {/* Right side: Main content */}
       <div style={{ flex: 1, overflowY: 'auto', padding: '2rem' }}>
-        <RoomBar />
+        {/* <RoomBar /> */}
 
         {/* Content layout */}
         <div style={{ display: 'flex', gap: '1rem' }}>

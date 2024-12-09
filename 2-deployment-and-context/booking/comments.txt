@@ -1,0 +1,75 @@
+     
+      // Fetch additional user data from the database
+    // supabase
+    //   .from("users")
+    //   .select("*")
+    //   .eq("email", email)
+    //   .single().then((userData) => {
+    //     console.log("userData", userData);
+        
+        
+        //   {
+
+        //   firstName: userData.first_name,
+        //   lastName: userData.last_name,
+        //   email: userData.email,
+        //   phoneNumber: userData.phone_number,
+        //   role: userData.role,
+        //   profilePicture: userData.profile_picture,
+        //   emailNotifications: userData.email_notifications,
+        //   smsNotifications: userData.sms_notifications,
+        //   createdAt: userData.created_at,
+        // }
+    
+      // });
+
+
+    
+
+    // if (authError) {
+    //   setErrorMessage(authError.message);
+    //   return;
+    // }
+
+    // const Email = authData.user.email;
+    // console.log("User ID:", Email);
+
+    // Fetch additional user data from the database
+//     const { data: userData, error: userError } = await supabase
+//       .from("users")
+//       .select("*")
+//       .eq("email", Email)
+//       .single();
+
+//       if (authError) {
+//   console.error("Auth Error:", authError);
+//   setErrorMessage(authError.message);
+//   return;
+// }
+
+// if (userError) {
+//   console.error("User Fetch Error:", userError);
+//   setErrorMessage("Failed to fetch user details.");
+//   return;
+// }
+
+    // Save the full user data globally
+    // const userInfo = {
+    //   firstName: "authData.user",
+    //   lastName: userData.last_name,
+    //   email: userData.email,
+    //   phoneNumber: userData.phone_number,
+    //   role: userData.role,
+    //   profilePicture: userData.profile_picture,
+    //   emailNotifications: userData.email_notifications,
+    //   smsNotifications: userData.sms_notifications,
+    //   createdAt: userData.created_at,
+    // };
+
+    // // console.log(userInfo);
+    
+    // context.setUserInfo(userInfo);
+    // // Redirect to dashboard
+    // navigate({ to: `/profilepage` });
+    // // console.log(context.userInfo);
+    

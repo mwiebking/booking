@@ -9,6 +9,8 @@ import { BookingProvider } from '../components/BookingContext.jsx';
 
 export interface RouterContext extends Record<any, any> {
   supabase: any;
+  userInfo: any;
+  setUserInfo: any;
 }
 
 export const Route = createRootRouteWithContext<RouterContext>()({
@@ -30,6 +32,7 @@ function RootRouteWithLayout() {
         <Link to="/medialab">Medialab </Link>
         <Link to="/makerlab">Makerlab </Link>
         <Link to="/auditorium">Auditorium </Link>
+        <Link to="/profilepage">Profilepage</Link>
       </div>
       <hr />
       <Outlet />

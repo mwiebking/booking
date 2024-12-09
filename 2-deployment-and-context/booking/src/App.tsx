@@ -12,6 +12,8 @@ export const router = createRouter({
   routeTree,
   context: {
     supabase: undefined!,
+    userInfo: undefined!,
+    setUserInfo: undefined!,
   },
 });
 
@@ -22,7 +24,7 @@ declare module "@tanstack/react-router" {
 }
 
 export default function App() {
-  const [userInfo, setUserInfo] = useState(undefined);
+  const [userInfo, setUserInfo] = useState({});
 
   const context = {
     supabase: getSupabaseClient(),
