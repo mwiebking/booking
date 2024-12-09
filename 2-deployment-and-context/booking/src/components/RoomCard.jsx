@@ -9,7 +9,7 @@ function RoomCard({ roomName, capacity, features, timeSlot, date }) {
 
   return (
     <>
-      <Card shadow="sm" padding="lg" radius="lg" withBorder>
+      <Card  shadow="sm" padding="lg" radius="lg" withBorder>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <Group justify="left" mb="xs">
             <Text fw={600}>{roomName}</Text>
@@ -24,7 +24,7 @@ function RoomCard({ roomName, capacity, features, timeSlot, date }) {
 
         <Space h="xl" />
 
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", marginTop: "1.5rem" }}>
         <Group gap="xl" align="start">
   <Group gap="xs" align="center">
     <PersonIcon size={20} />
@@ -39,7 +39,7 @@ function RoomCard({ roomName, capacity, features, timeSlot, date }) {
     </Group>
   ))}
 </Group>
-          <Button color="cyan" mt="40px" radius="xl" onClick={() => setModalOpened(true)}>
+          <Button color="cyan" radius="xl" onClick={() => setModalOpened(true)}>
             Book
           </Button>
         </div>
