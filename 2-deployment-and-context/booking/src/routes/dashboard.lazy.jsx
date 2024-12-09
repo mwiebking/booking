@@ -28,7 +28,7 @@ function RouteComponent() {
         <div style={{ display: 'flex', gap: '1rem', paddingTop: '2rem' }}>
           {/* AvailableRooms Component - 66% width */}
           <div style={{ flex: 2 }}>
-            <AvailableRooms />
+            {/* <AvailableRooms /> */}
           </div>
 
           {/* Vertical Divider */}

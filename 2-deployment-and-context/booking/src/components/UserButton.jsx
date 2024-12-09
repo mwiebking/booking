@@ -1,10 +1,11 @@
 import { ChevronRightIcon } from '@radix-ui/react-icons';
 import { Avatar, Group, Text, UnstyledButton, Space } from '@mantine/core';
-import { Link, useNavigate } from '@tanstack/react-router';
+import { Link, useNavigate, useRouteContext } from '@tanstack/react-router';
 import PropTypes from 'prop-types';
 
 export function UserButton({ active, setActive }) {
   const navigate = useNavigate();
+  const context = useRouteContext({ from: "" });
 
   const handleClick = () => {
     setActive(-1); // Use a unique value (-1) to represent the UserButton being active
@@ -42,11 +43,11 @@ export function UserButton({ active, setActive }) {
 
         <div style={{ flex: 1 }}>
           <Text size="sm" fw={600}>
-            Henriette Jakobsen
+          {context.userInfo.firstName} {context.userInfo.lastName}
           </Text>
 
           <Text c="dimmed" size="xs">
-            hrjakobsen@cphbusiness.dk
+          {context.userInfo.email}
           </Text>
         </div>
 

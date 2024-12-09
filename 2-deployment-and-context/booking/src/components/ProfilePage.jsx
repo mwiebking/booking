@@ -1,16 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NavbarNested from "./NavbarNested"; // Import Navbar
 import { Button, Container, Paper, TextInput, Title, Space, Center, Checkbox, Avatar, Group, FileInput, Anchor,} from "@mantine/core";
 import { useRouteContext } from "@tanstack/react-router";
 
 export function ProfileInfo() {
   const context = useRouteContext({ from: "/profilepage" });
-  console.log(context);
+
+  useEffect(() => {
+    console.log(context);
+  }, [context]);
   
 
   // Initialize profile state from userInfo
   const [profile, setProfile] = useState({
-    firstName: context.userInfo?.firstName || "",
+    firstName: context.userInfo?.first_name || "",
     lastName: context.userInfo?.lastName || "",
     email: context.userInfo?.email || "",
     phone: context.userInfo?.phoneNumber || "",
@@ -42,14 +45,13 @@ export function ProfileInfo() {
       return;
     }
 
-    // Update global userInfo with new data
-    setUserInfo({
+    context.setUserInfo({
       ...context.userInfo,
       firstName: profile.firstName,
       lastName: profile.lastName,
       phoneNumber: profile.phone,
-      emailNotifications: profile.notifications,
     });
+
 
     alert("Dine nye profiloplysninger er blevet gemt!");
     setIsEditing(false); // Exit editing mode
@@ -59,6 +61,8 @@ export function ProfileInfo() {
   const handleChange = (field) => (e) => {
     setProfile({ ...profile, [field]: e.target.value });
   };
+
+
 
   return (
     <Container size="lg" style={{ height: "100vh", display: "flex" }}>
@@ -92,7 +96,7 @@ export function ProfileInfo() {
 
           <TextInput
             label="Navn"
-            value={profile.firstName}
+            value={context.userInfo.firstName}
             onChange={handleChange("firstName")}
             radius="xl"
             disabled={!isEditing} // Disable if not in editing mode
@@ -100,7 +104,7 @@ export function ProfileInfo() {
           <Space h="sm" />
           <TextInput
             label="Efternavn"
-            value={profile.lastName}
+            value={context.userInfo.lastName}
             onChange={handleChange("lastName")}
             radius="xl"
             disabled={!isEditing} // Disable if not in editing mode
@@ -108,7 +112,7 @@ export function ProfileInfo() {
           <Space h="sm" />
           <TextInput
             label="Telefon nr."
-            value={profile.phone}
+            value={context.userInfo.phoneNumber}
             onChange={handleChange("phone")}
             radius="xl"
             disabled={!isEditing} // Disable if not in editing mode
@@ -116,14 +120,14 @@ export function ProfileInfo() {
           <Space h="sm" />
           <TextInput
             label="Email"
-            value={profile.email}
+            value={context.userInfo.email}
             disabled // Always non-editable
             radius="xl"
           />
           <Space h="sm" />
           <TextInput
             label="Studerende, eller underviser"
-            value={profile.role}
+            value={context.userInfo.role}
             disabled // Always non-editable
             radius="xl"
           />

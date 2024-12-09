@@ -15,11 +15,11 @@ export default function LoginForm() {
   
 
 
-  function test(e) {
-    e.preventDefault();
-    context.setUserInfo({test: "test"});
-    navigate({ to: `/profilepage` });
-  }
+  // function test(e) {
+  //   e.preventDefault();
+  //   context.setUserInfo({test: "test"});
+  //   navigate({ to: `/profilepage` });
+  // }
 
   async function handleLogin(e) {
     e.preventDefault();
@@ -52,17 +52,21 @@ export default function LoginForm() {
       .eq("email", email)
       .single()
 
+      console.log(additionalUserInfo);
+
     context.setUserInfo({
       email: userInfo.email,
-      firstName: additionalUserInfo.first_name,
-      lastName: additionalUserInfo.last_name,
-      phoneNumber: additionalUserInfo.phone_number,
-      role: additionalUserInfo.role,
-      profilePicture: additionalUserInfo.profile_picture,
-      emailNotifications: additionalUserInfo.email_notifications,
-      smsNotifications: additionalUserInfo.sms_notifications,
-      createdAt: additionalUserInfo.created_at,
+      firstName: additionalUserInfo.data.first_name,
+      lastName: additionalUserInfo.data.last_name,
+      phoneNumber: additionalUserInfo.data.phone_number,
+      role: additionalUserInfo.data.role,
+      profilePicture: additionalUserInfo.data.profile_picture,
+      emailNotifications: additionalUserInfo.data.email_notifications,
+      smsNotifications: additionalUserInfo.data.sms_notifications,
+      createdAt: additionalUserInfo.data.created_at,
+      authUserId: additionalUserInfo.authuserid
     })
+
 
     // Redirect to dashboard
     navigate({ to: `/dashboard` });
