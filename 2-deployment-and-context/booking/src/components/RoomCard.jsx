@@ -3,9 +3,25 @@
 import React, { useState } from "react";
 import { Divider, Group, Text, Card, Button, Space, Modal, TextInput } from "@mantine/core";
 import { PersonIcon, DesktopIcon, Pencil2Icon, ClockIcon, CalendarIcon } from "@radix-ui/react-icons";
+import BookComplete from "./BookComplete";
 
 function RoomCard({ roomName, capacity, features, timeSlot, date }) {
   const [modalOpened, setModalOpened] = useState(false);
+  const [isBookCompleteModalOpened, setBookCompleteModalOpened] = useState(false);
+  
+  const handleBookNowClick = () => {
+    // Close the main modal and open the BookComplete modal
+    
+    setBookCompleteModalOpened(true);
+  };
+
+  const handleBookCompleteClose = () => {
+    // Close the BookComplete modal
+    setModalOpened(false);
+    setBookCompleteModalOpened(false);
+  };
+
+
 
   return (
     <>
@@ -94,18 +110,25 @@ function RoomCard({ roomName, capacity, features, timeSlot, date }) {
                         <TextInput placeholder="Email" mb="md" radius="xl" />
                         <TextInput placeholder="Tlf" mb="md" radius="xl" />
                         <Button
-                            fullWidth
-                            color="cyan"
-                            mt="lg"
-                            radius="xl"
-                            style={{ float: 'right' }}
-                            onClick={() => alert('Du Har Booket!')} // Example submission handler
+                          fullWidth
+                          color="cyan"
+                          mt="lg"
+                          radius="xl"
+                          onClick={handleBookNowClick} // Call the handler
                         >
                             BOOK NU
                         </Button>
                     </div>
-                </div>
+              </div>
+              
+        {/* BookComplete Modal - Nested inside the main modal */}
+        <BookComplete
+        opened={isBookCompleteModalOpened}
+        onClose={handleBookCompleteClose} // Explicitly handle closing the BookComplete modal
+      />
+        
             </Modal>
+
     </>
   );
 }
