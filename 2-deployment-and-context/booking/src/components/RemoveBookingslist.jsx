@@ -1,4 +1,5 @@
-import RoomCardRemove from "../components/RoomCardRemove";
+import RoomCardRemove from "./RoomCardRemove";
+import { useBookingContext } from "./BookingContext";
 
 
 function Mybookingslist() {

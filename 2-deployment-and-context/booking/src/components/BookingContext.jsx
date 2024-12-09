@@ -22,3 +22,5 @@ export function BookingProvider({ children }) {
 export function useBookingContext() {
   return useContext(BookingContext);
 }
+
+export default BookingContext

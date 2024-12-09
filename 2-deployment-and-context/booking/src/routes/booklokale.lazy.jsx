@@ -4,6 +4,7 @@ import { createLazyFileRoute } from '@tanstack/react-router';
 import { Divider } from '@mantine/core';
 import NavbarNested from '../components/NavbarNested';
 import RoomBar from '../components/FindRoomBar.jsx';
+import BookingContext from '../components/BookingContext.jsx';
 
 export const Route = createLazyFileRoute('/booklokale')({
   component: RouteComponent,

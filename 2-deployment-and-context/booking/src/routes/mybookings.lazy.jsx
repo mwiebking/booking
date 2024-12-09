@@ -1,7 +1,8 @@
 import { createLazyFileRoute } from '@tanstack/react-router'
 import NavbarNested from '../components/NavbarNested'
 import FindRoomBar from '../components/FindRoomBar'
-import Mybookingslist from '../components/mybookingslist'
+import Mybookingslist from '../components/RemoveBookingslist'
+import { useBookingContext } from '../components/BookingContext'
 
 export const Route = createLazyFileRoute('/mybookings')({
   component: mybookings,
