@@ -4,16 +4,54 @@ import React, { useState } from "react";
 import { Divider, Group, Text, Card, Button, Space, Modal, TextInput } from "@mantine/core";
 import { PersonIcon, DesktopIcon, Pencil2Icon, ClockIcon, CalendarIcon } from "@radix-ui/react-icons";
 import BookComplete from "./BookComplete";
+import { getSupabaseClient } from '../supabase/getSupabaseClient';
+
 
 function RoomCard({ roomName, capacity, features, timeSlot, date }) {
   const [modalOpened, setModalOpened] = useState(false);
   const [isBookCompleteModalOpened, setBookCompleteModalOpened] = useState(false);
-  
-  const handleBookNowClick = () => {
-    // Close the main modal and open the BookComplete modal
-    
-    setBookCompleteModalOpened(true);
+
+const [name, setName] = useState('');
+const [email, setEmail] = useState('');
+const [phoneNumber, setPhoneNumber] = useState('');
+
+const supabase = getSupabaseClient();
+
+
+const handleBookNowClick = async () => {
+  if (!name || !email || !phoneNumber) {
+    alert("Please fill in all fields.");
+    return;
+  }
+
+  const tosend = {
+    room_name: roomName, // Predefined from the card
+    capacity: capacity, // Predefined from the card
+    features: features, // Predefined from the card
+    time_slot: timeSlot, // Predefined from the card
+    date: date, // Predefined from the card
+    email: email, // From the modal input
+    first_name: name, // From the modal input
+    phone_number: phoneNumber, // From the modal input
   };
+
+  try {
+    const { data, error } = await supabase.from('bookings').insert([tosend]);
+
+    if (error) {
+      console.error("Error booking:", error.message);
+      alert("Failed to book the room. Please try again.");
+    } else {
+      setBookCompleteModalOpened(true);
+    }
+  } catch (err) {
+    console.error("Unexpected error:", err);
+    alert("An unexpected error occurred. Please try again.");
+  }
+};
+
+  
+ 
 
   const handleBookCompleteClose = () => {
     // Close the BookComplete modal
@@ -132,12 +170,33 @@ function RoomCard({ roomName, capacity, features, timeSlot, date }) {
 
                     {/* Right side: Input Fields */}
                     <div style={{ flex: 1 }}>
-                        <label>Navn - Booking ansvarlig</label>
-                        <TextInput placeholder="Navn" mb="md" radius="xl" />
-                        <label>E-mail - Booking ansvarlig</label>
-                        <TextInput placeholder="Email" mb="md" radius="xl" />
-                        <label>Tlf - Booking ansvarlig</label>
-                        <TextInput placeholder="Tlf" mb="md" radius="xl" />
+                    <label>Navn - Booking ansvarlig</label>
+<TextInput 
+  placeholder="Navn" 
+  mb="md" 
+  radius="xl" 
+  value={name} 
+  onChange={(e) => setName(e.target.value)} 
+/>
+
+<label>E-mail - Booking ansvarlig</label>
+<TextInput 
+  placeholder="Email" 
+  mb="md" 
+  radius="xl" 
+  value={email} 
+  onChange={(e) => setEmail(e.target.value)} 
+/>
+
+<label>Tlf - Booking ansvarlig</label>
+<TextInput 
+  placeholder="Tlf" 
+  mb="md" 
+  radius="xl" 
+  value={phoneNumber} 
+  onChange={(e) => setPhoneNumber(e.target.value)} 
+/>
+
                         <Button
                           fullWidth
                           color="cyan"
