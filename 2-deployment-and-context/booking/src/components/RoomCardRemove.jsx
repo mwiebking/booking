@@ -1,123 +1,157 @@
-import React, { useState } from 'react';
-import { Divider, Group, Text, Card, Button, Space, Modal } from '@mantine/core';
-import { PersonIcon, DesktopIcon, Pencil2Icon, ClockIcon, CalendarIcon } from '@radix-ui/react-icons';
-import { useRouteContext } from '@tanstack/react-router';
+import React, { useState, useEffect } from "react";
+import { Divider, Group, Text, Card, Button, Space, Modal } from "@mantine/core";
+import { PersonIcon, DesktopIcon, Pencil2Icon, ClockIcon, CalendarIcon } from "@radix-ui/react-icons";
+import { getSupabaseClient } from "../supabase/getSupabaseClient";
 
 function RoomCardRemove() {
-    const [modalOpened, setModalOpened] = useState(false);
+  const [modalOpened, setModalOpened] = useState(false);
+  const [bookings, setBookings] = useState([]);
+  const [selectedBooking, setSelectedBooking] = useState(null);
 
-return (
+  const supabase = getSupabaseClient();
+
+// Fetch bookings data
+useEffect(() => {
+    const fetchBookings = async () => {
+      try {
+        const { data, error } = await supabase
+          .from("bookings")
+          .select("*"); // Removed the .eq("email", userInfo.email) filter
+  
+        if (error) {
+          console.error("Error fetching bookings:", error.message);
+          alert("Failed to fetch bookings. Please try again.");
+        } else {
+          setBookings(data);
+        }
+      } catch (err) {
+        console.error("Unexpected error:", err);
+        alert("An unexpected error occurred. Please try again.");
+      }
+    };
+  
+    fetchBookings();
+  }, [supabase]); // Removed userInfo.email from the dependency array
+
+  const handleCancelBooking = async (bookingId) => {
+    try {
+      const { error } = await supabase.from("bookings").delete().eq("id", bookingId);
+
+      if (error) {
+        console.error("Error canceling booking:", error.message);
+        alert("Failed to cancel the booking. Please try again.");
+      } else {
+        setBookings((prev) => prev.filter((booking) => booking.id !== bookingId));
+        setModalOpened(false);
+        alert("Booking successfully canceled.");
+      }
+    } catch (err) {
+      console.error("Unexpected error:", err);
+      alert("An unexpected error occurred. Please try again.");
+    }
+  };
+
+  return (
     <>
-    <Card shadow="sm" padding="lg" radius="lg" withBorder
-    style={{ maxWidth: '95%', margin: '0' }}>
-    
-        {/* top row left-side with Lokale name */}
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <Group justify="left" mb="xs">
-                <Text fw={600}>Lokale 3.11</Text>
-            </Group>
-        {/* top row right-side with time & date + icons */}
-            <Group justify="right" mb="xs">
+      {bookings.length > 0 ? (
+        bookings.map((booking) => (
+          <Card key={booking.id} shadow="sm" padding="lg" radius="lg" withBorder>
+            {/* Top row */}
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <Group justify="left" mb="xs">
+                <Text fw={600}>{booking.room_name}</Text>
+              </Group>
+              <Group justify="right" mb="xs">
                 <ClockIcon size={20} color={"orange"} />
-                <Text size='sm'>10:00-11:00</Text>
+                <Text size="sm">{booking.time_slot}</Text>
                 <CalendarIcon size={20} color={"orange"} />
-                <Text size='sm'>13 November 2024</Text>
-            </Group>
-        </div>
+                <Text size="sm">{booking.date}</Text>
+              </Group>
+            </div>
 
             <Space h="xl" />
 
-            {/* bottom row with icons and book button */}
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <Group gap="xl" align="start">
-            {/* Number of people */}
-            <Group gap="xs" align="center"> {/* Smaller gap between icon and text */}
-                <PersonIcon size={20} />
-                <Text>2-8 pers.</Text>
-            </Group>
+            {/* Bottom row */}
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <Group gap="xl" align="start">
+                <Group gap="xs" align="center">
+                  <PersonIcon size={20} />
+                  <Text>{booking.capacity}</Text>
+                </Group>
+                {booking.features?.split(",").map((feature, index) => (
+                  <Group gap="xs" align="center" key={index}>
+                    {feature === "Skærm" && <DesktopIcon size={20} />}
+                    {feature === "Projektor" && <DesktopIcon size={20} />}
+                    {feature === "Tavle" && <Pencil2Icon size={20} />}
+                    <Text>{feature}</Text>
+                  </Group>
+                ))}
+              </Group>
+              <Button
+                color="#373A40"
+                radius="xl"
+                onClick={() => {
+                  setSelectedBooking(booking);
+                  setModalOpened(true);
+                }}
+              >
+                Aflys
+              </Button>
+            </div>
+          </Card>
+        ))
+      ) : (
+        <Text>No bookings found.</Text>
+      )}
 
-            {/* Screen */}
-            <Group gap="xs" align="center"> {/* Smaller gap between icon and text */}
-                <DesktopIcon size={20} />
-                <Text>Skærm</Text>
-            </Group>
-
-            {/* Chalkboard */}
-            <Group gap="xs" align="center"> {/* Smaller gap between icon and text */}
-                <Pencil2Icon size={20} />
-                <Text>Tavle</Text>
-            </Group>
-        </Group>
-        <Button color="#373A40" mt="40px" radius="xl" onClick={() => setModalOpened(true)} /* Open modal on click */>
-            Aflys
-        </Button>
-        </div>
-    </Card>
-
-    {/* Modal */}
-    <Modal
+      {/* Modal */}
+      <Modal
         opened={modalOpened}
         onClose={() => setModalOpened(false)}
-        size="lg" // Adjust size of modal
-        radius={"lg"}
-        styles={{
-            close: {
-              position: 'absolute',
-              top: '5px', // Adjust as needed
-              right: '5px', // Adjust as needed
-              zIndex: 10,
-            },
-        }}
-    >
-        <div style={{ display: 'flex', gap: '20px', flexDirection: 'column', alignItems: 'start' }}>
-
-          {/* Row: Lokale name */}
-            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '5px' }}>
-            <Text fw={600}>Lokale 3.11</Text>
-
-            {/* Row: Time and Date */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+        size="lg"
+        radius="lg"
+        centered
+      >
+        {selectedBooking && (
+          <>
+            <div>
+              <Text fw={600}>{selectedBooking.room_name}</Text>
+              <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
                 <ClockIcon size={20} color={"orange"} />
-                <Text size="sm">10:00-11:00</Text>
+                <Text size="sm">{selectedBooking.time_slot}</Text>
                 <CalendarIcon size={20} color={"orange"} />
-                <Text size="sm">13 November 2024</Text>
+                <Text size="sm">{selectedBooking.date}</Text>
+              </div>
             </div>
-
             <Space h="md" />
-                {/* Horizontal Divider */}
-            <Divider orientation="horizontal" style={{ height: '15px' }} />
-
-            {/* Row: Additional Details */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-                <PersonIcon size={20} />
-                <Text size="sm">2-8 pers.</Text>
-                <DesktopIcon size={20} />
-                <Text size="sm">Skærm</Text>
-                <Pencil2Icon size={20} />
-                <Text size="sm">Tavle</Text>
+            <Divider orientation="horizontal" />
+            <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+              <PersonIcon size={20} />
+              <Text size="sm">{selectedBooking.capacity}</Text>
+              {selectedBooking.features?.split(",").map((feature, index) => (
+                <Group gap="xs" align="center" key={index}>
+                  {feature === "Skærm" && <DesktopIcon size={20} />}
+                  {feature === "Projektor" && <DesktopIcon size={20} />}
+                  {feature === "Tavle" && <Pencil2Icon size={20} />}
+                  <Text>{feature}</Text>
+                </Group>
+              ))}
             </div>
-            </div>
-
-          {/* Right side: Input Fields */}
-            <div style={{ flex: 1, }}>
-            
+            <Space h="md" />
             <Button
-                fullWidth
-                color="#373A40"
-                mt="lg"
-                radius="xl"
-                style={{ float: 'right', maxWidth: '200px' }}
-              onClick={() => alert('Din booking er nu aflyst')} // Example submission handler
+              fullWidth
+              color="#373A40"
+              mt="lg"
+              radius="xl"
+              onClick={() => handleCancelBooking(selectedBooking.id)}
             >
-                Aflys booking
+              Aflys booking
             </Button>
-            </div>
-        </div>
-
-    </Modal>
+          </>
+        )}
+      </Modal>
     </>
-
-);
+  );
 }
 
 export default RoomCardRemove;
