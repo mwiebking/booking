@@ -22,15 +22,16 @@ function RouteComponent() {
       </div>
 
       {/* Right side: Main content */}
-      <div style={{ flex: 1, overflowY: 'auto', padding: '2rem' }}>
+      <div style={{ flex: 1, overflowY: 'auto', }}>
         {/* Wrap RoomBar and Bookingslist in BookingProvider */}
         <BookingProvider>
           <RoomBar />
           
           {/* Content layout */}
-          <div style={{ display: 'flex', gap: '1rem', paddingTop: '2rem' }}>
+          <div style={{ display: 'flex', gap: '1rem', paddingTop: '5rem' }}>
             {/* Bookingslist - 66% width */}
             <div style={{ flex: 2 }}>
+              <h1 className="start">Ledige lokaler</h1>
               <Bookingslist />
             </div>
 

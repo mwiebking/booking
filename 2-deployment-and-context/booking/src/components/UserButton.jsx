@@ -53,7 +53,7 @@ export function UserButton({ active, setActive }) {
 
         <ChevronRightIcon size={16} stroke={2} />
       </Group>
-      <Space h="xl" /> {/* space for userbutton to be pushed above tanstack button, to be removed */}
+      {/* <Space h="xl" /> */} {/* space for userbutton to be pushed above tanstack button, to be removed */}
     </UnstyledButton>
     </Link>
   );

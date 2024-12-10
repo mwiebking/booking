@@ -90,7 +90,7 @@ function RoomCard({ roomName, capacity, features, timeSlot, date }) {
 
                     {/* Row: Lokale name */}
                     <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '5px' }}>
-                        <Text fw={600}>{roomName}</Text>
+                        <Text size="lg" fw={600}>{roomName}</Text>
 
                         {/* Row: Time and Date */}
                         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'start', gap: '16px' }}>
@@ -131,9 +131,11 @@ function RoomCard({ roomName, capacity, features, timeSlot, date }) {
 
                     {/* Right side: Input Fields */}
                     <div style={{ flex: 1 }}>
+                        <label>Navn - Booking ansvarlig</label>
                         <TextInput placeholder="Navn" mb="md" radius="xl" />
-                        <TextInput placeholder="Ansvarlig for booking" mb="md" radius="xl" />
+                        <label>E-mail - Booking ansvarlig</label>
                         <TextInput placeholder="Email" mb="md" radius="xl" />
+                        <label>Tlf - Booking ansvarlig</label>
                         <TextInput placeholder="Tlf" mb="md" radius="xl" />
                         <Button
                           fullWidth
