@@ -1,5 +1,5 @@
 import { useBookingContext } from "../components/BookingContext";
-import { Container, Center, Paper, Title, Space, Checkbox, Group } from "@mantine/core";
+import { Container, Paper, Title, Space, Checkbox, Group } from "@mantine/core";
 
 const FilterSearch = () => {
   const { filters, setFilters } = useBookingContext();
@@ -49,7 +49,7 @@ const FilterSearch = () => {
         >
 
           <div>
-            <Title order={4}>Room type</Title>
+            <Title order={4}>Lokale type</Title>
             <Group mt="xs" spacing="xs">
               {availableFilters.selectedCapacity.map((capacity) => (
                 <Checkbox
@@ -65,7 +65,7 @@ const FilterSearch = () => {
           
           {/* Time Slots */}
           <div>
-            <Title order={4}>Time Slots</Title>
+            <Title order={4}>Tidsrum</Title>
             <Group mt="xs" spacing="xs">
               {availableFilters.selectedTimeSlots.map((time) => (
                 <Checkbox
@@ -82,7 +82,7 @@ const FilterSearch = () => {
 
           {/* Features */}
           <div>
-            <Title order={4}>Features</Title>
+            <Title order={4}>Udstyr</Title>
             <Group mt="xs" spacing="xs">
               {availableFilters.selectedFeatures.map((feature) => (
                 <Checkbox

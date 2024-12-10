@@ -15,12 +15,12 @@ export function ForgotPassword() {
       setFormError("Udfyld venligst din email"); // Show error if the input is empty
     } else if (!/\S+@\S+\.\S+/.test(email)) {
       // Check for valid email format
-      setFormError("Indtast venligst en gyldig emailadresse");
+      setFormError("Indtast venligst en gyldig email adresse");
     } else {
       // Clear error if input is valid
       setFormError("");
       // Add your password reset logic here
-      console.log("Password reset link sent to:", email);
+      console.log("Glemt password link sendt til:", email);
     }
   };
 

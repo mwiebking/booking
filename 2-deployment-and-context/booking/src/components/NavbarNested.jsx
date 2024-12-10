@@ -4,7 +4,7 @@ import { AppShell, Box, useMantineTheme } from '@mantine/core';
 import { HomeIcon, BookmarkIcon, CalendarIcon, SewingPinFilledIcon, CameraIcon, CubeIcon, SpeakerLoudIcon } from '@radix-ui/react-icons';
 import UserButton from './UserButton';
 import styles from './NavbarNested.module.css';
-import PropTypes from 'prop-types';
+/* import PropTypes from 'prop-types'; */
 
 function NavbarContent() {
   const theme = useMantineTheme();
@@ -34,7 +34,7 @@ function NavbarContent() {
                 textDecoration: 'none', // Remove underline from active link
               })} */
             >
-             <div
+            <div
   className={styles.linkbox}
   style={{
     display: 'flex',

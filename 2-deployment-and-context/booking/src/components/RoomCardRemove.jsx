@@ -104,7 +104,7 @@ useEffect(() => {
           </Card>
         ))
       ) : (
-        <Text>No bookings found.</Text>
+        <Text>Ingen Bookinger fundet</Text>
       )}
 
       {/* Modal */}

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import NavbarNested from "./NavbarNested"; // Import Navbar
-import { Button, Container, Paper, TextInput, Title, Space, Center, Checkbox, Avatar, Group, FileInput, Anchor,} from "@mantine/core";
+import { Button, Container, Paper, TextInput, Space, Center, Checkbox, Avatar, Group, FileInput, Anchor,} from "@mantine/core";
 import { useRouteContext } from "@tanstack/react-router";
 
 export function ProfileInfo() {
@@ -24,8 +24,6 @@ export function ProfileInfo() {
 
 
   const [isEditing, setIsEditing] = useState(false);
-
-  const [isHovered, setIsHovered] = useState(false);
 
   // Handle saving the updated profile
   const handleSave = async () => {
