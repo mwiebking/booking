@@ -1,6 +1,6 @@
 import BookingList from '../components/BookingList.jsx';
 import FilterSearch from '../components/Filtrer';
-import { createLazyFileRoute } from '@tanstack/react-router';
+import { createLazyFileRoute, useRouteContext } from '@tanstack/react-router';
 import { Divider } from '@mantine/core';
 import NavbarNested from '../components/NavbarNested';
 import RoomBar from '../components/FindRoomBar.jsx';
@@ -11,6 +11,8 @@ export const Route = createLazyFileRoute('/booklokale')({
 });
 
 function RouteComponent() {
+  const context = useRouteContext({ from: '/booklokale' });
+  
   return (
     <div style={{ display: 'flex', height: '100vh', width: '100%' }}>
       {/* Left side: Navbar */}
@@ -44,7 +46,7 @@ function RouteComponent() {
 
           {/* AvailableRooms Component - 33% width */}
           <div style={{ flex: 3 }}>
-            <BookingList />
+            <BookingList context={context}/>
           </div>
         </div>
       </div>

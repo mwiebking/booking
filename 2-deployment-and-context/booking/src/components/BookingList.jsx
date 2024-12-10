@@ -3,7 +3,7 @@ import { generateBookings } from '../data/generateBookings';
 import RoomCard from './RoomCard';
 import { useBookingContext } from '../components/BookingContext';
 
-function BookingList() {
+function BookingList({context}) {
   const { filters } = useBookingContext();
   const [bookings, setBookings] = useState([]);
   const [filteredBookings, setFilteredBookings] = useState([]);
@@ -38,7 +38,7 @@ function BookingList() {
   return (
     <div style={{ display: 'grid', gap: '20px' }}>
       {filteredBookings.map((booking, index) => (
-        <RoomCard
+        <RoomCard context={context}
           key={index}
           roomName={booking.roomName}
           capacity={booking.capacity}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { createLazyFileRoute } from '@tanstack/react-router';
+import { createLazyFileRoute, useRouteContext } from '@tanstack/react-router';
 import RoomBar from '../components/FindRoomBar.jsx';
 import NavbarNested from '../components/NavbarNested'; // Import the NavbarNested component
 import { Divider } from '@mantine/core'; // Import Divider from Mantine
@@ -10,10 +10,13 @@ import Bookingslist from '../components/BookingList.jsx';
 import { BookingProvider } from '../components/BookingContext.jsx';
 
 export const Route = createLazyFileRoute('/dashboard')({
-  component: RouteComponent,
+  component: RouteComponentDashboard,
 });
 
-function RouteComponent() {
+function RouteComponentDashboard() {
+  const context = useRouteContext({ from: '/dashboard' })
+  
+  
   return (
     <div style={{ display: 'flex', height: '100vh', width: '100%' }}>
       {/* Left side: Navbar */}
@@ -31,7 +34,7 @@ function RouteComponent() {
           <div style={{ display: 'flex', gap: '1rem', paddingTop: '2rem' }}>
             {/* Bookingslist - 66% width */}
             <div style={{ flex: 2 }}>
-              <Bookingslist />
+              <Bookingslist context={context} />
             </div>
 
             {/* Vertical Divider */}

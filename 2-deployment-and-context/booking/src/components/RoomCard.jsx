@@ -5,9 +5,21 @@ import { Divider, Group, Text, Card, Button, Space, Modal, TextInput } from "@ma
 import { PersonIcon, DesktopIcon, Pencil2Icon, ClockIcon, CalendarIcon } from "@radix-ui/react-icons";
 import BookComplete from "./BookComplete";
 
-function RoomCard({ roomName, capacity, features, timeSlot, date }) {
+function RoomCard({ roomName, capacity, features, timeSlot, date, context }) {
   const [modalOpened, setModalOpened] = useState(false);
   const [isBookCompleteModalOpened, setBookCompleteModalOpened] = useState(false);
+
+  //   const tosend = {
+  //   room_name: roomName,
+  //   capacity: capacity,
+  //   features: features,
+  //   time_slot: timeSlot,
+  //   date: date,
+  //   email: context.userInfo.email,
+  //   firstName: context.userInfo.first_name,
+  //   lastName: context.userInfo.last_name,
+  //   phoneNumber: context.userInfo.phone_number
+  // };
   
   const handleBookNowClick = () => {
     // Close the main modal and open the BookComplete modal
@@ -131,10 +143,9 @@ function RoomCard({ roomName, capacity, features, timeSlot, date }) {
 
                     {/* Right side: Input Fields */}
                     <div style={{ flex: 1 }}>
-                        <TextInput placeholder="Navn" mb="md" radius="xl" />
-                        <TextInput placeholder="Ansvarlig for booking" mb="md" radius="xl" />
-                        <TextInput placeholder="Email" mb="md" radius="xl" />
-                        <TextInput placeholder="Tlf" mb="md" radius="xl" />
+                        <TextInput placeholder="Navn" mb="md" radius="xl" value={context.userInfo.firstName + " " + context.userInfo.lastName} disabled />
+                        <TextInput placeholder="Email" mb="md" radius="xl" value={context.userInfo.email} disabled />
+                        <TextInput placeholder="Tlf" mb="md" radius="xl" value={context.userInfo.phone_number} disabled />
                         <Button
                           fullWidth
                           color="cyan"
