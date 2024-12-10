@@ -9,6 +9,7 @@ export function BookingProvider({ children }) {
     selectedDate: null,
     selectedTimeSlots: [],
     selectedFeatures: [],
+    selectedCapacity: [],
   });
 
   return (

@@ -4,7 +4,7 @@ import RoomBar from '../components/FindRoomBar.jsx';
 import NavbarNested from '../components/NavbarNested'; // Import the NavbarNested component
 import { Divider } from '@mantine/core'; // Import Divider from Mantine
 import AvailableRooms from '../components/AvaiableRooms';
-import Filtrer from '../components/Filtrer';
+import Filtrer from '../components/FilterSearch.jsx';
 import Mybookingslist from '../components/RemoveBookingslist.jsx';
 import Bookingslist from '../components/BookingList.jsx';
 import { BookingProvider } from '../components/BookingContext.jsx';

@@ -17,7 +17,7 @@ function BookingList() {
 
   // Filter bookings when filters or bookings change
   useEffect(() => {
-    const { selectedDate, selectedTimeSlots, selectedFeatures } = filters;
+    const { selectedDate, selectedTimeSlots, selectedFeatures, selectedCapacity } = filters;
 
     const filtered = bookings.filter((booking) => {
       const dateMatch =
@@ -28,8 +28,10 @@ function BookingList() {
       const featuresMatch =
         selectedFeatures.length === 0 ||
         selectedFeatures.every((feature) => booking.features.includes(feature));
+      const capacityMatch =
+        selectedCapacity.length === 0 || selectedCapacity.includes(booking.capacity);
 
-      return dateMatch && timeSlotMatch && featuresMatch;
+      return dateMatch && timeSlotMatch && featuresMatch && capacityMatch;
     });
 
     setFilteredBookings(filtered);

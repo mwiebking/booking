@@ -10,12 +10,15 @@ function FindRoomBar() {
   const [date, setDate] = useState(null);
   const [timeSlots, setTimeSlots] = useState([]);
   const [features, setFeatures] = useState([]);
+  const [capacity, setCapacity] = useState([]);
+  
 
   const handleSearch = () => {
     setFilters({
       selectedDate: date,
       selectedTimeSlots: timeSlots,
       selectedFeatures: features,
+      selectedCapacity: capacity,
     });
   };
 

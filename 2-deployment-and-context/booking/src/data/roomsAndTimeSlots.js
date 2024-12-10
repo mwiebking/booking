@@ -4,13 +4,13 @@ export const rooms = [
     {
       id: 1,
       name: "Lokale 3.11",
-      capacity: "2-8 pers.",
-      features: ["Skærm", "Tavle"],
+      capacity: "2-8 pers",
+      features: ["Lille Skærm", "Tavle"],
     },
     {
       id: 2,
       name: "Lokale 3.12",
-      capacity: "1-4 pers.",
+      capacity: "1-4 pers",
       features: ["Projektor", "Tavle"],
     },
     // Add more rooms as needed

@@ -15,7 +15,7 @@ import { BookingProvider } from "./components/BookingContext";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BookingProvider>
-    <App />
+      <App />
     </BookingProvider>
   </StrictMode>
 );
