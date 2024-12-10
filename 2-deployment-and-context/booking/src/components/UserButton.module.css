@@ -6,11 +6,11 @@
   
    /* Hover effect */
   &:hover {
-    background-color: light-dark(var(--mantine-color-dark-4), var(--mantine-color-gray-8));
+    background-color: #2d3748;
   }
 
   /* Active effect */
   &.active, &:active {
-    background-color: light-dark(var(--mantine-color-dark-4), var(--mantine-color-gray-8));
+    background-color: #2d3748;
   }
 }

@@ -25,6 +25,8 @@ export function ProfileInfo() {
 
   const [isEditing, setIsEditing] = useState(false);
 
+  const [isHovered, setIsHovered] = useState(false);
+
   // Handle saving the updated profile
   const handleSave = async () => {
     const { supabase, setUserInfo } = context;
@@ -91,7 +93,7 @@ export function ProfileInfo() {
             justifyContent: "center",
           }}
         >
-          <Title align="left">Profil Info</Title>
+          <h1 className="start">Profil Info</h1>
           <Space h="md" />
 
           <TextInput

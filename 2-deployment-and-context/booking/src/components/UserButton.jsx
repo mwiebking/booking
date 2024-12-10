@@ -1,5 +1,5 @@
 import { ChevronRightIcon } from '@radix-ui/react-icons';
-import { Avatar, Group, Text, UnstyledButton, Space } from '@mantine/core';
+import { Avatar, Group, Text, UnstyledButton, } from '@mantine/core';
 import { Link, useNavigate, useRouteContext } from '@tanstack/react-router';
 import PropTypes from 'prop-types';
 

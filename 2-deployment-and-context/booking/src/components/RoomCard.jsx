@@ -48,7 +48,8 @@ function RoomCard({ roomName, capacity, features, timeSlot, date }) {
           </Group>
           {features?.map((feature, index) => (
             <Group gap="xs" align="center" key={index}>
-              {feature === "Skærm" && <DesktopIcon size={20} />}
+              {feature === "Stor Skærm" && <DesktopIcon size={20} />}
+              {feature === "Lille Skærm" && <DesktopIcon size={20} />}
               {feature === "Projektor" && <DesktopIcon size={20} />}
               {feature === "Tavle" && <Pencil2Icon size={20} />}
               <Text>{feature}</Text>
@@ -119,8 +120,8 @@ function RoomCard({ roomName, capacity, features, timeSlot, date }) {
                           </Group>
                           {features?.map((feature, index) => (
                             <Group gap="xs" align="center" key={index}>
-                              {feature === "Skærm" && <DesktopIcon size={20} />}
-                              {feature === "Projektor" && <DesktopIcon size={20} />}
+                              {feature === "Lille Skærm" && <DesktopIcon size={20} />}
+                              {feature === "Stor Skærm" && <DesktopIcon size={20} />}
                               {feature === "Tavle" && <Pencil2Icon size={20} />}
                               <Text>{feature}</Text>
                             </Group>

@@ -33,17 +33,18 @@ function RouteComponent() {
         <RoomBar />
 
         {/* Content layout */}
-        <div style={{ display: 'flex', gap: '1rem', paddingTop: '2rem' }}>
-          {/* FilterSearch Component - 66% width */}
-          <div style={{ flex: 2 }}>
+        <div style={{ display: 'flex', gap: '1rem', paddingTop: '5rem' }}>
+          {/* FilterSearch Component - 33%% width */}
+          <div style={{ flex: 1 }}>
             <FilterSearch />
           </div>
 
           {/* Vertical Divider */}
           <Divider orientation="vertical" style={{ height: 'auto' }} />
 
-          {/* AvailableRooms Component - 33% width */}
-          <div style={{ flex: 3 }}>
+          {/* AvailableRooms Component - 66% width */}
+          <div style={{ flex: 2 }}>
+            <h1 className="start" style={{ marginTop: '-10px' }}>Ledige Lokaler</h1>
             <BookingList />
           </div>
         </div>

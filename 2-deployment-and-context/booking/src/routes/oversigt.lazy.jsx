@@ -30,7 +30,7 @@ function Oversigt() {
           style={{
             flex: 1,
             overflowY: 'auto',
-            padding: '20px',
+            padding: '10px 30px',
           }}
         >
           {/* Title */}
@@ -39,11 +39,11 @@ function Oversigt() {
           {/* Dropdowns */}
           <Dropdown number={1} image={'public/1sal.png'} />
           <Space h="md" />
-          <Dropdown number={2} image={'public/1sal.png'} />
+          <Dropdown number={2} image={'public/Sal2.png'} />
           <Space h="md" />
-          <Dropdown number={3} image={'public/1sal.png'} />
+          <Dropdown number={3} image={'public/sal3.png'} />
           <Space h="md" />
-          <Dropdown number={4} image={'public/1sal.png'} />
+          <Dropdown number={4} image={'public/sal4.png'} />
         </div>
       </div>    
     </>

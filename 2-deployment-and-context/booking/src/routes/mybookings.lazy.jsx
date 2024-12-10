@@ -33,7 +33,7 @@ function mybookings() {
         {/* Content layout */}
         <div style={{ display: 'flex', gap: '1rem' }}>
           {/* Medialab Info Component - 66% width */}
-          <div style={{ flex: 2, paddingTop: '5rem' }}>
+          <div style={{ flex: 1, paddingTop: '5rem' }}>
             <Mybookingslist />
           </div>
         </div>

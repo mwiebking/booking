@@ -27,12 +27,15 @@ const FilterSearch = () => {
       "16:00-17:00",
     ],
     selectedFeatures: ["Lille Skærm", "Stor Skærm", "Tavle"],
-    selectedCapacity: ["2-8 pers", "4-8 pers", "8-16 pers"],
+    selectedCapacity: ["2-8 pers", "8-10 pers"],
   };
 
   return (
-    <Container size="lg" style={{ height: "100vh" }}>
-      <Center style={{ flex: 0 }}>
+    <Container size="lg" style={{ height: "100vh", margin: "0 -20px" }}>
+      <div>
+          <h1 className="start" style={{ marginTop: '-10px' }}>
+            Filtrer Din Søgning
+          </h1>
         <Paper
           withBorder
           shadow="md"
@@ -44,9 +47,6 @@ const FilterSearch = () => {
             flexDirection: "column",
           }}
         >
-          <Title align="left" mb="sm">
-            Filter Search
-          </Title>
 
           <div>
             <Title order={4}>Room type</Title>
@@ -95,7 +95,7 @@ const FilterSearch = () => {
             </Group>
           </div>
         </Paper>
-      </Center>
+      </div>
     </Container>
   );
 };

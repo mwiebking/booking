@@ -22,7 +22,7 @@ function RouteComponent() {
       </div>
 
       {/* Right side: Main content */}
-      <div style={{ flex: 1, overflowY: 'auto', }}>
+      <div style={{ flex: 1, overflowY: 'auto', padding: '0.75rem 0.75rem' }}>
         {/* Wrap RoomBar and Bookingslist in BookingProvider */}
         <BookingProvider>
           <RoomBar />
@@ -31,12 +31,12 @@ function RouteComponent() {
           <div style={{ display: 'flex', gap: '1rem', paddingTop: '5rem' }}>
             {/* Bookingslist - 66% width */}
             <div style={{ flex: 2 }}>
-              <h1 className="start">Ledige lokaler</h1>
+              <h1 className="start" style={{ marginTop: '-10px' }}>Ledige Lokaler</h1>
               <Bookingslist />
             </div>
 
             {/* Vertical Divider */}
-            <Divider orientation="vertical" style={{ height: 'auto' }} />
+            <Divider orientation="vertical" style={{ height: 'auto',  }} />
 
             {/* Mybookingslist - 33% width */}
             <div style={{ flex: 1 }}>

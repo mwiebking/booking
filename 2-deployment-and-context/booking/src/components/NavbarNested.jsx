@@ -11,7 +11,7 @@ function NavbarContent() {
   const routes = [
     { icon: HomeIcon, label: 'Dashboard', to: '/dashboard', iconBackgroundColor: theme.colors.green[4] },
     { icon: BookmarkIcon, label: 'Book lokale', to: '/booklokale', iconBackgroundColor: theme.colors.pink[4] },
-    { icon: CalendarIcon, label: 'Mine bookninger', to: '/mybookings', iconBackgroundColor: theme.colors.teal[4] },
+    { icon: CalendarIcon, label: 'Mine bookinger', to: '/mybookings', iconBackgroundColor: theme.colors.teal[4] },
     { icon: SewingPinFilledIcon, label: 'Kort', to: '/oversigt', iconBackgroundColor: theme.colors.cyan[4] },
     { icon: CameraIcon, label: 'Medialab', to: '/medialab', iconBackgroundColor: theme.colors.grape[4] },
     { icon: CubeIcon, label: 'Makerlab', to: '/makerlab', iconBackgroundColor: theme.colors.blue[4] },

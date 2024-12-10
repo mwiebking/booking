@@ -93,7 +93,7 @@ export default function LoginForm() {
         }}
         onSubmit={handleLogin}
       >
-        <h1 style={{ marginBottom: "20px" }}>Log ind</h1>
+        <h1 className="start" style={{ marginBottom: "20px" }}>Log ind</h1>
 
         <TextInput
           label="Email"

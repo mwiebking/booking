@@ -6,7 +6,7 @@ function Mybookingslist() {
 
   return (
     <>
-    <h1 className="start">Mine Bookinger</h1>
+    <h1 className="start" style={{ marginTop: '-10px' }}>Mine Bookinger</h1>
 
 <RoomCardRemove/>
     </>
