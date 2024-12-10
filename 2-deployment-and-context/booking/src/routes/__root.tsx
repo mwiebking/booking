@@ -5,7 +5,7 @@ import {
   Outlet,
 } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/router-devtools";
-import { BookingProvider } from '../components/BookingContext.jsx';
+
 
 export interface RouterContext extends Record<any, any> {
   supabase: any;
