@@ -42,7 +42,7 @@ const SendRequestForm = () => {
     }
 
     emailjs
-      .sendForm('service_3s435am', 'template_2rlphcp', form.current, 'cfybL9CgdNoqUBI0-')
+      .sendForm('service_3s435am', 'template_hpf5ept', form.current, 'cfybL9CgdNoqUBI0-')
       .then(
         () => {
           console.log('SUCCESS!');
