@@ -88,7 +88,6 @@ const handleBookNowClick = async () => {
             <Group gap="xs" align="center" key={index}>
               {feature === "Stor Skærm" && <DesktopIcon size={20} />}
               {feature === "Lille Skærm" && <DesktopIcon size={20} />}
-              {feature === "Projektor" && <DesktopIcon size={20} />}
               {feature === "Tavle" && <Pencil2Icon size={20} />}
               <Text>{feature}</Text>
             </Group>
