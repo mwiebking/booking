@@ -58,7 +58,8 @@ useEffect(() => {
     <>
       {bookings.length > 0 ? (
         bookings.map((booking) => (
-          <Card key={booking.id} shadow="sm" padding="lg" radius="lg" withBorder>
+          <Card key={booking.id} shadow="sm" padding="lg" radius="lg" withBorder
+          style={{ marginBottom: "20px" }}>
             {/* Top row */}
             <div style={{ display: "flex", justifyContent: "space-between" }}>
               <Group justify="left" mb="xs">

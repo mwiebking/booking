@@ -63,7 +63,7 @@ const handleBookNowClick = async () => {
 
   return (
     <>
-      <Card  shadow="sm" padding="lg" radius="lg" withBorder>
+      <Card style={{ minHeight: '170px', minWidth: '500px'}}  shadow="sm" padding="lg" radius="lg" withBorder>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <Group justify="left" mb="xs">
             <Text fw={600}>{roomName}</Text>
