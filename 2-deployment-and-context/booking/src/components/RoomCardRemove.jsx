@@ -11,7 +11,6 @@ function RoomCardRemove() {
   const supabase = getSupabaseClient();
 
   const user = supabase.auth.getUser();
-    console.log("Logged in user email:", user?.email);
 
 // Fetch bookings data
 useEffect(() => {

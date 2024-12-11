@@ -1,12 +1,6 @@
-import {
-  PasswordInput,
-  Button,
-  Container,
-  TextInput,
-  Checkbox,
-} from "@mantine/core";
+import { PasswordInput, Button, Container, TextInput, Checkbox, Anchor } from "@mantine/core";
 import { useState } from "react";
-import { useRouteContext, useNavigate } from "@tanstack/react-router";
+import { useRouteContext, useNavigate, Link } from "@tanstack/react-router";
 import { createClient } from "@supabase/supabase-js";
 
 export default function LoginForm() {
@@ -18,6 +12,14 @@ export default function LoginForm() {
 
   const SUPABASE_URL = "https://ixfyejbgmefahxcopxea.supabase.co";
   const PUBLIC_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml4ZnllamJnbWVmYWh4Y29weGVhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzE5MzQzMTEsImV4cCI6MjA0NzUxMDMxMX0.C4NV6ZDFxDgrH4RSShCLZXonuLjHg_xsilsuYsMkDPQ";
+  
+
+
+  // function test(e) {
+  //   e.preventDefault();
+  //   context.setUserInfo({test: "test"});
+  //   navigate({ to: `/profilepage` });
+  // }
 
   async function handleLogin(e) {
     e.preventDefault();
@@ -41,17 +43,16 @@ export default function LoginForm() {
       password,
     });
 
-    if (response.error) {
-      setErrorMessage("Fejl ved login. Tjek venligst dine oplysninger.");
-      return;
-    }
+    const userInfo = response.data.user
 
-    const userInfo = response.data.user;
+    // call supabase again.
     const additionalUserInfo = await supabase
       .from("users")
       .select("*")
       .eq("email", email)
-      .single();
+      .single()
+
+      console.log(additionalUserInfo);
 
     context.setUserInfo({
       email: userInfo.email,
@@ -63,9 +64,11 @@ export default function LoginForm() {
       emailNotifications: additionalUserInfo.data.email_notifications,
       smsNotifications: additionalUserInfo.data.sms_notifications,
       createdAt: additionalUserInfo.data.created_at,
-      authUserId: additionalUserInfo.authuserid,
-    });
+      authUserId: additionalUserInfo.authuserid
+    })
 
+
+    // Redirect to dashboard
     navigate({ to: `/dashboard` });
   }
 
@@ -90,9 +93,7 @@ export default function LoginForm() {
         }}
         onSubmit={handleLogin}
       >
-        <h1 className="start" style={{ marginBottom: "20px" }}>
-          Log ind
-        </h1>
+        <h1 className="start" style={{ marginBottom: "20px" }}>Log ind</h1>
 
         <TextInput
           label="Email"
@@ -118,11 +119,7 @@ export default function LoginForm() {
           error={passwordError}
         />
 
-        {errorMessage && (
-          <div style={{ color: "red", marginBottom: "20px" }}>
-            {errorMessage}
-          </div>
-        )}
+        {errorMessage && <div style={{ color: "red", marginBottom: "20px" }}>{errorMessage}</div>}
 
         <Checkbox label="Husk mig" radius="md" style={{ marginBottom: "20px" }} />
 
@@ -142,21 +139,38 @@ export default function LoginForm() {
         </Button>
 
         <p style={{ textAlign: "center", marginTop: "20px" }}>
-          <span
-            onClick={() => navigate({ to: "/forgotpassword" })}
-            style={{ color: "#1098AD", cursor: "pointer" }}
-          >
-            Glemt adgangskode?
-          </span>
-          <br />
-          <span
-            onClick={() => navigate({ to: "/signup" })}
-            style={{ color: "#1098AD", cursor: "pointer" }}
-          >
-            Opret Profil
-          </span>
+          <Link to="/forgotpassword">
+            <Anchor
+              style={{
+                display: "block",
+                textAlign: "center",
+                color: "#1098AD",
+                marginTop: "10px",
+              }}
+            >
+              Glemt adgangskode?
+            </Anchor>
+          </Link>
+
+          <Link to="/signup">
+            <Anchor
+              style={{
+                display: "block",
+                textAlign: "center",
+                color: "#1098AD",
+                marginTop: "10px",
+              }}
+            >
+              Opret Profil
+            </Anchor>
+          </Link>
         </p>
       </form>
     </Container>
   );
 }
+
+
+
+
+const PUBLIC_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml4ZnllamJnbWVmYWh4Y29weGVhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzE5MzQzMTEsImV4cCI6MjA0NzUxMDMxMX0.C4NV6ZDFxDgrH4RSShCLZXonuLjHg_xsilsuYsMkDPQ";
