@@ -43,7 +43,7 @@ function FindRoomBar() {
           <MultiSelect
             styles={{ input: { borderRadius: '32px', width: '300px' } }}
             placeholder="Lokale type"
-            data={['Stort mødelokale', 'Lille mødelokale', 'Storskærm', 'Lille skærm']}
+            data={['Stor Skærm', 'Lille Skærm', 'Tavle']}
             value={features}
             onChange={setFeatures}
           />
