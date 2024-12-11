@@ -37,7 +37,7 @@ function Oversigt() {
           <h1 className='start' style={{ marginBottom: '20px' }}>Kort</h1>
 
           {/* Dropdowns */}
-          <Dropdown number={1} image={'./1sal.png'} />
+          <Dropdown number={1} image={'./sal1.png'} />
           <Space h="md" />
           <Dropdown number={2} image={'./Sal2.png'} />
           <Space h="md" />

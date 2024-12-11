@@ -102,9 +102,9 @@ const handleBookNowClick = async () => {
       <Modal
                 opened={modalOpened}
                 onClose={() => setModalOpened(false)}
-                size="lg" // Adjust size of modal
+                size="lg" //  size of modal
                 radius={"lg"}
-                centered // This centers the modal
+                centered //  centers the modal
                 padding={"xl"}
                 withCloseButton={false} // Disable default close button in header
             >
@@ -211,7 +211,7 @@ const handleBookNowClick = async () => {
         {/* BookComplete Modal - Nested inside the main modal */}
         <BookComplete
         opened={isBookCompleteModalOpened}
-        onClose={handleBookCompleteClose} // Explicitly handle closing the BookComplete modal
+        onClose={handleBookCompleteClose} //  handle closing the BookComplete modal
       />
         
             </Modal>

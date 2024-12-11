@@ -1,11 +1,11 @@
 .navbar {
-  width: 270px; /* Adjust as necessary */
-  height: 100%; /* Use 100% to occupy the full height of the parent container */
+  width: 270px; 
+  height: 100%; 
   padding: var(--mantine-spacing-xs);
   padding-bottom: 0;
   display: flex;
   flex-direction: column;
-  box-sizing: border-box; /* Ensure padding and borders are included in width */
+  box-sizing: border-box; 
 }
 
   
@@ -28,16 +28,16 @@
   /* Navbar inline styles */
 
   a {
-    color: inherit; /* Inherit text color from parent */
-    text-decoration: none; /* Remove underline from links */
+    color: inherit; 
+    text-decoration: none; 
     
   }
   
   .linkbox:hover {
-    background-color: #2d3748; /* Example hover background color (adjust to your theme) */
+    background-color: #2d3748; 
   }
   
   /* Apply active state styles */
   .linkbox:active {
-    background-color: #2d3748; /* Example active background color (adjust to your theme) */
+    background-color: #2d3748; 
   }
