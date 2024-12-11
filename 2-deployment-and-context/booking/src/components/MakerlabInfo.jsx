@@ -1,6 +1,6 @@
 import React from 'react';
-import { Title, Text, Stack } from '@mantine/core';
-import RoomInfoIcons from './RoomInfoIcons';
+import { Title, Text, Stack, List } from '@mantine/core';
+import RoomInfoIconsMakerlab from './RoomInfoIconsMakerlab';
 
 const MakerlabInfo = () => {
   return (
@@ -12,26 +12,22 @@ const MakerlabInfo = () => {
       
       {/* Icons Section */}
       <div style={{ marginBottom: '1rem' }}>
-        <RoomInfoIcons />
+        <RoomInfoIconsMakerlab />
       </div>
       
       {/* Text Section */}
       <Stack spacing="md">
         <Text>
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-          standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
-          make a type specimen book. It has survived not only five centuries, but also the leap into electronic
-          typesetting, remaining essentially unchanged.
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-          standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
-          make a type specimen book. It has survived not only five centuries, but also the leap into electronic
-          typesetting, remaining essentially unchanged.
+        Makerlab på CPH Business er et kreativt værksted og innovativt læringsmiljø, hvor studerende får mulighed for at udforske deres teknologiske og kreative kompetencer. Her kan du arbejde med moderne teknologier som 3D-print, laserskæring, vinylskæring og meget mere. Makerlab er designet til at inspirere og støtte studerende i deres projekter, hvor de kan omsætte idéer til fysiske prototyper og produkter.
         </Text>
+        <List>
+        <List.Item style={{ paddingLeft: '2rem' }}>3D-print: Design og print alt fra prototyper til detaljerede figurer. </List.Item>
+        <List.Item style={{ paddingLeft: '2rem' }}>Laserskæring: Skær og gravér i materialer som træ og akryl. </List.Item>
+        <List.Item style={{ paddingLeft: '2rem' }}>Vinylskæring: Lav klistermærker og tekstiltryk til dine projekter. </List.Item>  
+        <List.Item style={{ paddingLeft: '2rem' }}>Elektronik: Eksperimentér med Arduino, sensorer og kredsløb. </List.Item>
+        </List>
         <Text>
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-          standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
-          make a type specimen book. It has survived not only five centuries, but also the leap into electronic
-          typesetting, remaining essentially unchanged.
+        Når du booker tid i Makerlab, er det vigtigt at kende den ansvarlige kontaktperson. Det sikrer, at du får den nødvendige support, og at udstyret anvendes korrekt. Makerlab er stedet, hvor du kan eksperimentere og bringe dine idéer til live.
         </Text>
       </Stack>
     </div>

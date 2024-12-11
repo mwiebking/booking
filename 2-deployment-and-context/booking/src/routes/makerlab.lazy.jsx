@@ -3,7 +3,6 @@ import { createLazyFileRoute } from '@tanstack/react-router'
 import { Divider } from '@mantine/core'
 import SendRequestForm from '../components/SendRequestForm'
 import MakerlabInfo from '../components/MakerlabInfo'
-import RoomBar from '../components/FindRoomBar.jsx'
 import NavbarNested from '../components/NavbarNested'
 
 export const Route = createLazyFileRoute('/makerlab')({

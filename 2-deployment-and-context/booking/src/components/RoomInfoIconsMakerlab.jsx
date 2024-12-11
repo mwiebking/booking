@@ -2,7 +2,7 @@ import React from 'react';
 import { Group, Text } from '@mantine/core';
 import { PersonIcon, DesktopIcon, Pencil2Icon } from '@radix-ui/react-icons';
 
-const RoomIfnoIcons = () => {
+const RoomInfoIconsMakerlab = () => {
   return (
     <div
       style={{
@@ -17,10 +17,10 @@ const RoomIfnoIcons = () => {
     >
       <Group gap="xl" align="center">
         {/* Number of people */}
-        <Group gap="xs" align="center"> {/* Smaller gap between icon and text */}
+        {/* <Group gap="xs" align="center">
           <PersonIcon size={20} />
-          <Text>2-8 pers.</Text>
-        </Group>
+          <Text>60+ pers.</Text>
+        </Group> */}
 
         {/* Screen */}
         <Group gap="xs" align="center"> {/* Smaller gap between icon and text */}
@@ -38,4 +38,4 @@ const RoomIfnoIcons = () => {
   );
 };
 
-export default RoomIfnoIcons;
+export default RoomInfoIconsMakerlab;
