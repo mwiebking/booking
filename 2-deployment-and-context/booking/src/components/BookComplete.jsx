@@ -34,7 +34,7 @@ function BookComplete({ opened, onClose }) {
           
           {/* Imported checkmark jpg */}
           <img 
-            src="/booking/public/checkmark.jpg" 
+            src="./checkmark.jpg" 
             width={40}
           />
           

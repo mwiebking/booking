@@ -180,7 +180,7 @@ const SendRequestForm = () => {
       >
       <div style={{ textAlign: 'center' }}>
         <img 
-          src="/booking/public/checkmark.jpg" 
+          src="./checkmark.jpg" 
           width={40}
         />
         <Title order={3} style={{ marginBottom: '1rem' }}>

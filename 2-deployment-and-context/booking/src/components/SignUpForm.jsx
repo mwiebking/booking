@@ -263,7 +263,7 @@ export default function SignUpForm() {
         </button>
        <Link to="/login">
         <Anchor
-          onClick={() => router.navigate("../login")}
+          onClick={() => router.navigate("./login")}
           style={{
             display: "block",
             textAlign: "center",

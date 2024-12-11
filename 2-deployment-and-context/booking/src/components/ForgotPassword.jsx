@@ -52,7 +52,7 @@ export function ForgotPassword() {
           <Anchor
             onClick={() => {
               console.log("Navigating to /login...");  // Log the navigation attempt
-              navigate("/login");
+              navigate("./login");
             }}
             style={{ display: "block", textAlign: "center", color: "#1098AD" }}
           >

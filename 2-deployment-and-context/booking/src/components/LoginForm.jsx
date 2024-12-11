@@ -139,11 +139,11 @@ export default function LoginForm() {
         </Button>
 
         <p style={{ textAlign: "center", marginTop: "20px" }}>
-          <a href="/forgotpassword" style={{ color: "#1098AD" }}>
+          <a href="./forgotpassword" style={{ color: "#1098AD" }}>
             Glemt adgangskode?
           </a>
           <br />
-          <a href="/signup" style={{ color: "#1098AD" }}>
+          <a href="./signup" style={{ color: "#1098AD" }}>
             Opret Profil
           </a>
         </p>

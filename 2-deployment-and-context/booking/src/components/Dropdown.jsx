@@ -25,7 +25,7 @@ function Dropdown(props) {
             justifyContent: "end",
           }}
         >
-          <img style={{ width: "20px", height: "20px" }} src={"public/down-arrow.png"} alt="Toggle Dropdown" />
+          <img style={{ width: "20px", height: "20px" }} src={"./down-arrow.png"} alt="Toggle Dropdown" />
         </Button>
       </Group>
 
