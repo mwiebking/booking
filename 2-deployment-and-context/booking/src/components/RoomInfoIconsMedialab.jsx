@@ -17,10 +17,10 @@ const RoomInfoIconsMedialab = () => {
     >
       <Group gap="xl" align="center">
         {/* Number of people */}
-        <Group gap="xs" align="center"> {/* Smaller gap between icon and text */}
+        {/* <Group gap="xs" align="center">
           <PersonIcon size={20} />
           <Text>60+ pers.</Text>
-        </Group>
+        </Group> */}
 
         {/* Screen */}
         <Group gap="xs" align="center"> {/* Smaller gap between icon and text */}

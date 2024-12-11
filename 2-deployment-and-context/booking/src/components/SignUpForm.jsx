@@ -14,6 +14,7 @@ export default function SignUpForm() {
   const [formErrors, setFormErrors] = useState({
     firstName: "",
     lastName: "",
+    phoneNumber: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -27,6 +28,7 @@ export default function SignUpForm() {
     const formData = new FormData(document.querySelector("#signup-form"));
     const firstName = formData.get("firstName");
     const lastName = formData.get("lastName");
+    const phoneNumber = formData.get("phoneNumber");
     const email = formData.get("email");
     const password = formData.get("password");
     const confirmPassword = formData.get("confirmPassword");
@@ -37,6 +39,7 @@ export default function SignUpForm() {
     setFormErrors({
       firstName: "",
       lastName: "",
+      phoneNumber: "",
       email: "",
       password: "",
       confirmPassword: "",
@@ -54,6 +57,11 @@ export default function SignUpForm() {
 
     if (!lastName) {
       errors.lastName = "Udfyld venligst dit efternavn";
+      isValid = false;
+    }
+
+    if (!phoneNumber) {
+      errors.phoneNumber = "Udfyld venligst dit telefonnummer";
       isValid = false;
     }
 
@@ -103,20 +111,21 @@ export default function SignUpForm() {
       });
 
       if (authError) {
-        setFormErrors({ ...errors, password: "Sign-up failed. Please try again." });
+        setFormErrors({ ...errors, password: "Sign-up failed. User already exists." });
         return;
       }
 
       await context.supabase.from("users").insert({
         first_name: firstName,
         last_name: lastName,
+        phone_number: phoneNumber,
         email,
         role: "student",
         email_notifications: notifyEmail,
         sms_notifications: notifyText,
       });
 
-      setSuccessMessage("Account created successfully! Please log in.");
+      setSuccessMessage("Bruger Oprettet! Gå venligst til login siden.");
     } catch (error) {
       setFormErrors({ ...errors, general: "An unexpected error occurred. Please try again." });
     }
@@ -177,6 +186,21 @@ export default function SignUpForm() {
         />
         {formErrors.lastName && (
           <div style={{ color: "red", marginBottom: "20px" }}>{formErrors.lastName}</div>
+        )}
+
+        <TextInput
+          placeholder="Telefonnummer"
+          name="phoneNumber"
+          radius="xl"
+          style={{
+            marginBottom: "10px",
+            borderColor: formErrors.phoneNumber ? "red" : "#ddd",
+            borderWidth: formErrors.phoneNumber ? "2px" : "1px",
+          }}
+          onChange={() => handleInputChange("phoneNumber")}
+        />
+        {formErrors.phoneNumber && (
+          <div style={{ color: "red", marginBottom: "20px" }}>{formErrors.phoneNumber}</div>
         )}
 
         <TextInput
