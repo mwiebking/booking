@@ -42,11 +42,11 @@ useEffect(() => {
 
       if (error) {
         console.error("Error canceling booking:", error.message);
-        alert("Failed to cancel the booking. Please try again.");
+        alert("Booking fejlede, prøv igen.");
       } else {
         setBookings((prev) => prev.filter((booking) => booking.id !== bookingId));
         setModalOpened(false);
-        alert("Booking successfully canceled.");
+        alert("Booking er nu aflyst.");
       }
     } catch (err) {
       console.error("Unexpected error:", err);
