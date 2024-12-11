@@ -38,7 +38,7 @@ function BookingList() {
   }, [filters, bookings]);
 
   return (
-    <div style={{ display: 'grid', gap: '20px' }}>
+    <div style={{ display: 'grid', gap: '20px', height: '100vh', overflowY: 'auto' }}>
       {filteredBookings.map((booking, index) => (
         <RoomCard
           key={index}
