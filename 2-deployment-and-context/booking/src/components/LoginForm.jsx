@@ -1,4 +1,10 @@
-import { PasswordInput, Button, Container, TextInput, Checkbox } from "@mantine/core";
+import {
+  PasswordInput,
+  Button,
+  Container,
+  TextInput,
+  Checkbox,
+} from "@mantine/core";
 import { useState } from "react";
 import { useRouteContext, useNavigate } from "@tanstack/react-router";
 import { createClient } from "@supabase/supabase-js";
@@ -11,15 +17,7 @@ export default function LoginForm() {
   const navigate = useNavigate();
 
   const SUPABASE_URL = "https://ixfyejbgmefahxcopxea.supabase.co";
-  const PUBLIC_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml4ZnllamJnbWVmYWh4Y29weGVhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzE5MzQzMTEsImV4cCI6MjA0NzUxMDMxMX0.C4NV6ZDFxDgrH4RSShCLZXonuLjHg_xsilsuYsMkDPQ";
-  
-
-
-  // function test(e) {
-  //   e.preventDefault();
-  //   context.setUserInfo({test: "test"});
-  //   navigate({ to: `/profilepage` });
-  // }
+  const PUBLIC_ANON_KEY = "your-public-anon-key";
 
   async function handleLogin(e) {
     e.preventDefault();
@@ -43,16 +41,17 @@ export default function LoginForm() {
       password,
     });
 
-    const userInfo = response.data.user
+    if (response.error) {
+      setErrorMessage("Fejl ved login. Tjek venligst dine oplysninger.");
+      return;
+    }
 
-    // call supabase again.
+    const userInfo = response.data.user;
     const additionalUserInfo = await supabase
       .from("users")
       .select("*")
       .eq("email", email)
-      .single()
-
-      console.log(additionalUserInfo);
+      .single();
 
     context.setUserInfo({
       email: userInfo.email,
@@ -64,11 +63,9 @@ export default function LoginForm() {
       emailNotifications: additionalUserInfo.data.email_notifications,
       smsNotifications: additionalUserInfo.data.sms_notifications,
       createdAt: additionalUserInfo.data.created_at,
-      authUserId: additionalUserInfo.authuserid
-    })
+      authUserId: additionalUserInfo.authuserid,
+    });
 
-
-    // Redirect to dashboard
     navigate({ to: `/dashboard` });
   }
 
@@ -93,7 +90,9 @@ export default function LoginForm() {
         }}
         onSubmit={handleLogin}
       >
-        <h1 className="start" style={{ marginBottom: "20px" }}>Log ind</h1>
+        <h1 className="start" style={{ marginBottom: "20px" }}>
+          Log ind
+        </h1>
 
         <TextInput
           label="Email"
@@ -119,7 +118,11 @@ export default function LoginForm() {
           error={passwordError}
         />
 
-        {errorMessage && <div style={{ color: "red", marginBottom: "20px" }}>{errorMessage}</div>}
+        {errorMessage && (
+          <div style={{ color: "red", marginBottom: "20px" }}>
+            {errorMessage}
+          </div>
+        )}
 
         <Checkbox label="Husk mig" radius="md" style={{ marginBottom: "20px" }} />
 
@@ -139,13 +142,19 @@ export default function LoginForm() {
         </Button>
 
         <p style={{ textAlign: "center", marginTop: "20px" }}>
-          <a href="./forgotpassword" style={{ color: "#1098AD" }}>
+          <span
+            onClick={() => navigate({ to: "/forgotpassword" })}
+            style={{ color: "#1098AD", cursor: "pointer" }}
+          >
             Glemt adgangskode?
-          </a>
+          </span>
           <br />
-          <a href="./signup" style={{ color: "#1098AD" }}>
+          <span
+            onClick={() => navigate({ to: "/signup" })}
+            style={{ color: "#1098AD", cursor: "pointer" }}
+          >
             Opret Profil
-          </a>
+          </span>
         </p>
       </form>
     </Container>
