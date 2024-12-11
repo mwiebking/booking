@@ -42,10 +42,6 @@ function BookComplete({ opened, onClose }) {
             Booking Bekræftet
           </Text>
 
-
-          <Text size="sm" color="dimmed">
-            Vi har sendt en bekræftelses mail til dig
-          </Text>
           <Button
             mt="lg"
             color="cyan"
