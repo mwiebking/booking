@@ -7,7 +7,7 @@ import {
 } from "@mantine/core";
 import { useState } from "react";
 import { Link, useRouteContext } from "@tanstack/react-router";
-import { useRouter } from "@tanstack/react-router"; // <-- Import useRouter for navigation
+import { useRouter } from "@tanstack/react-router"; 
 
 export default function SignUpForm() {
   const context = useRouteContext({ from: "/signup" });

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import NavbarNested from "./NavbarNested"; // Import Navbar
+import NavbarNested from "./NavbarNested"; 
 import { Button, Container, Paper, TextInput, Space, Center, Checkbox, Avatar, Group, FileInput, Anchor,} from "@mantine/core";
 import { useRouteContext } from "@tanstack/react-router";
 
@@ -73,9 +73,9 @@ export function ProfileInfo() {
       <Center
         style={{
           flex: 1,
-          height: "80%", // Set the height to 80%
-          justifyContent: "center", // Vertically center the content
-          paddingTop: "2rem", // Add padding to move it up if needed
+          height: "80%", 
+          justifyContent: "center", 
+          paddingTop: "2rem", 
         }}
       >
         <Paper

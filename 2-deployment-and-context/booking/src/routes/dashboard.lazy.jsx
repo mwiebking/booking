@@ -1,8 +1,8 @@
 import React from 'react';
 import { createLazyFileRoute } from '@tanstack/react-router';
 import RoomBar from '../components/FindRoomBar.jsx';
-import NavbarNested from '../components/NavbarNested'; // Import the NavbarNested component
-import { Divider } from '@mantine/core'; // Import Divider from Mantine
+import NavbarNested from '../components/NavbarNested'; 
+import { Divider } from '@mantine/core'; 
 import AvailableRooms from '../components/AvaiableRooms';
 import Filtrer from '../components/FilterSearch.jsx';
 import Mybookingslist from '../components/RemoveBookingslist.jsx';

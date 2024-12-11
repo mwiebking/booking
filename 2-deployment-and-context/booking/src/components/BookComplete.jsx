@@ -4,12 +4,12 @@ function BookComplete({ opened, onClose }) {
   return (
     <Modal
       opened={opened}
-      onClose={onClose} // Triggered when the user clicks the close button
+      onClose={onClose} // Triggered 
       size="lg"
       radius="lg"
       centered
       padding="xl"
-      withCloseButton={false} // Disable default close button in header
+      withCloseButton={false} // close button in header
     >
       <div style={{ position: "relative" }}>
         {/* Close Button in Top Right */}
@@ -24,7 +24,7 @@ function BookComplete({ opened, onClose }) {
           }}
           variant="subtle"
           color="gray"
-          onClick={onClose} // Explicit user interaction to close the modal
+          onClick={onClose} // close the modal
         >
           X
         </Button>

@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { createLazyFileRoute } from '@tanstack/react-router'
-import { ProfileInfo } from '../components/ProfilePage' // Import the ProfileInfo component
-import NavbarNested from '../components/NavbarNested' // Import the Navbar component
+import { ProfileInfo } from '../components/ProfilePage' 
+import NavbarNested from '../components/NavbarNested' 
 
 export const Route = createLazyFileRoute('/profilepage')({
   component: RouteComponent,

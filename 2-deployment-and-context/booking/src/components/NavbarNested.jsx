@@ -1,4 +1,4 @@
-import { Link } from '@tanstack/react-router'; // Import Link from TanStack Router
+import { Link } from '@tanstack/react-router'; 
 import { useState } from 'react';
 import { AppShell, Box, useMantineTheme } from '@mantine/core';
 import { HomeIcon, BookmarkIcon, CalendarIcon, SewingPinFilledIcon, CameraIcon, CubeIcon, SpeakerLoudIcon } from '@radix-ui/react-icons';
@@ -40,7 +40,7 @@ function NavbarContent() {
     display: 'flex',
     alignItems: 'center',
     gap: '10px', // Space between icon and label
-    padding: '10px', // Add padding for the hover effect to look clean
+    padding: '10px', // padding for the hover effect 
   }}
 >
   <div

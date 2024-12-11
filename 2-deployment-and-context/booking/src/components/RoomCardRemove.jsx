@@ -19,7 +19,7 @@ useEffect(() => {
       try {
         const { data, error } = await supabase
           .from("bookings")
-          .select("*"); // Removed the .eq("email", userInfo.email) filter
+          .select("*"); 
   
         if (error) {
           console.error("Error fetching bookings:", error.message);
@@ -34,7 +34,7 @@ useEffect(() => {
     };
   
     fetchBookings();
-  }, [supabase]); // Removed userInfo.email from the dependency array
+  }, [supabase]); 
 
   const handleCancelBooking = async (bookingId) => {
     try {

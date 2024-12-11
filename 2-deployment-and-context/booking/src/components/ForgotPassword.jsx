@@ -25,8 +25,8 @@ export function ForgotPassword() {
   };
 
   return (
-    <Container size={460} my={30} style={{ height: "100vh" }}> {/* Set container height to 100vh */}
-      <Center style={{ height: "80%" }}> {/* Center content vertically and horizontally */}
+    <Container size={460} my={30} style={{ height: "100vh" }}> 
+      <Center style={{ height: "80%" }}> 
         <Paper withBorder shadow="md" p={30} radius="md" mt="xl">
           <Title className="start">Glemt adgangskode?</Title>
           <Space h="xl" />
