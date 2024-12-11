@@ -48,7 +48,7 @@ function RouteComponent() {
             <Divider orientation="vertical" style={{ height: 'auto',  }} />
 
             {/* Mybookingslist - 33% width */}
-            <div style={{ flex: 2 }}>
+            <div style={{ flex: 1 }}>
               <Mybookingslist />
             </div>
           </div>
