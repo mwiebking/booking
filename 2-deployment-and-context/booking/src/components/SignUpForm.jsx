@@ -7,6 +7,11 @@ export default function SignUpForm() {
   const context = useRouteContext({ from: "/signup" });
   const [errorMessage, setErrorMessage] = useState(""); // State for errors
   const [successMessage, setSuccessMessage] = useState(""); // State for success
+  const [errorFirstName, setErrorFirstName] = useState("");
+  const [errorLastName, setErrorLastName] = useState("");
+  const [errorEmail, setErrorEmail] = useState("");
+  const [errorPassword, setErrorPassword] = useState("");
+  const [errorPasswordAccept, setErrorPasswordAccept] = useState("");
 
   async function handleSignUp(e) {
     e.preventDefault();
@@ -74,21 +79,78 @@ export default function SignUpForm() {
     }
   }
 
+  function checkInput() {
+    const firstName = document.querySelector("#Fornavn").value;
+    const lastName = document.querySelector("#Efternavn").value;
+    const email = document.querySelector("#Email").value;
+    const password = document.querySelector("#Password").value;
+    const passwordAccept = document.querySelector("#PasswordAccept").value;
+
+    if (firstName === "") {
+      setErrorFirstName("Vær venlig at indsætte fornavn");
+    }
+
+    if (lastName === "") {
+      setErrorLastName("Vær venlig at indsætte efternavn");
+    }
+
+    if (email === "" || !email.startsWith("cph")) {
+      setErrorEmail("Vær venlig at indsætte email");
+    }
+
+    if (password === "") {
+      setErrorPassword("Vær venlig at indsætte adgangskode");
+    }
+
+    if (passwordAccept === "") {
+      setErrorPasswordAccept("Vær venlig at indsætte bekræft adgangskode");
+    }
+
+    if (password !== passwordAccept) {
+      setErrorPassword("Adgangskoderne er ikke ens");
+      setErrorPasswordAccept("Adgangskoderne er ikke ens");
+    }
+  }
+
   return (
     <div>
       <Container className={styles.container}>
         <form onSubmit={handleSignUp} id="signup-form">
           <h1 className={styles.title}>Opret Profil</h1>
-          <TextInput classNames={{ input: styles.FornavnInput, label: styles.FornavnLabel }} label="First Name" placeholder="Fornavn" name="firstName" required />
-          <TextInput classNames={{ input: styles.EfternavnInput, label: styles.EfternavnLabel }} label="Last Name" placeholder="Efternavn" name="lastName" required />
-          <TextInput classNames={{ input: styles.EmailInput, label: styles.EmailLabel }} label="Email" placeholder="Email" name="email" required />
-          <PasswordInput classNames={{ input: styles.PasswordInput, label: styles.PasswordLabel }} label="Password" placeholder="Adgangskode" name="password" required />
-          <PasswordInput classNames={{ input: styles.PasswordInput, label: styles.PasswordLabel }} label="PasswordAccept" placeholder="Bekræft adgangskode" name="password" required />
+          <TextInput id="Fornavn" classNames={{ input: styles.FornavnInput, label: styles.FornavnLabel }} label="First Name" placeholder="Fornavn" name="firstName" error={errorFirstName} required />
+          <TextInput
+            id="Efternavn"
+            classNames={{ input: styles.EfternavnInput, label: styles.EfternavnLabel }}
+            label="Last Name"
+            placeholder="Efternavn"
+            name="lastName"
+            error={errorLastName}
+            required
+          />
+          <TextInput id="Email" classNames={{ input: styles.EmailInput, label: styles.EmailLabel }} label="Email" placeholder="Email" name="email" error={errorEmail} required />
+          <PasswordInput
+            id="Password"
+            classNames={{ input: styles.PasswordInput, label: styles.PasswordLabel }}
+            label="Password"
+            placeholder="Adgangskode"
+            name="password"
+            error={errorPassword}
+            required
+          />
+          <PasswordInput
+            id="PasswordAccept"
+            classNames={{ input: styles.PasswordInput, label: styles.PasswordLabel }}
+            label="PasswordAccept"
+            placeholder="Bekræft adgangskode"
+            name="password"
+            error={errorPasswordAccept}
+            required
+          />
           <Checkbox className={styles.Checkbox} color="#1098ad" label="Vil gerne modtage notifikationer på SMS'er" name="notifyEmail" />
           <Checkbox className={styles.Checkbox} color="#1098ad" label="Vil gerne modtage notifikationer på mail" name="notifyText" />
           {errorMessage && <div style={{ color: "red", marginTop: "10px" }}>{errorMessage}</div>}
           {successMessage && <div style={{ color: "green", marginTop: "10px" }}>{successMessage}</div>}
-          <Button type="submit" className={styles.button}>
+          <Button type="submit" onClick={checkInput} className={styles.button}>
             OPRET BRUGER
           </Button>
         </form>
